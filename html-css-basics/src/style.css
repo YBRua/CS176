@@ -143,6 +143,37 @@ header {
   align-items: center;
 }
 
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 4;
+
+  margin-top: 5rem;
+}
+
+.dyna-button {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+
+  border: 1px solid #f1f1f1;
+  border-radius: 25px;
+
+  transition-property: color,background,border-radius,background-size;
+  transition-timing-function: cubic-bezier(1,1,0,0);
+  transition-duration: 0.25s;
+}
+
+.dyna-button:hover {
+  background-color: #f1f1f1;
+  color: #010101;
+  border-radius: 10px;
+}
+
+/* from loading.io */
 .lds-circle {
   display: inline-block;
   transform: translateZ(1px);
@@ -157,7 +188,8 @@ header {
   animation: lds-circle 10s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
 @keyframes lds-circle {
-  0%, 100% {
+  0%,
+  100% {
     animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
   }
   0% {
@@ -171,4 +203,3 @@ header {
     transform: rotateY(3600deg);
   }
 }
-
