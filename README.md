@@ -5,6 +5,7 @@ Homework and Project repository for *CS176 Modern Frontend Application Developme
 ## Assignments
 
 - **Lecture 01 HTML and CSS Basics**: [Link (index.html)](html-css-basics/index.html)
+- **Lecture 02 JavaScript Basics**: Implement a basic game. [Link (index.html)](js-basics/index.html)
 
 ## Project
 
