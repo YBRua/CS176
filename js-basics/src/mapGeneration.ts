@@ -1,4 +1,4 @@
-enum CellType {
+export enum CellType {
   normal,
   bonus,
 }
@@ -6,6 +6,7 @@ enum CellType {
 interface Cell {
   type: CellType;
   bonus: number;
+  div: HTMLDivElement | null;
 }
 
 export interface Shape {
@@ -37,7 +38,7 @@ function addBonusCells(
       // do not place bonus cell at the starting point
       continue;
     } else {
-      map[row][col] = { type: CellType.bonus, bonus: score };
+      map[row][col] = { type: CellType.bonus, bonus: score, div: null };
       validTreasureCount += 1;
     }
   }
@@ -56,7 +57,7 @@ export function genMap(size: Shape, numBonus: number, score: number): MapGrid {
   for (let row = 0; row < size.height; ++row) {
     let rowCells: Array<Cell> = new Array();
     for (let col = 0; col < size.width; ++col) {
-      rowCells.push({ type: CellType.normal, bonus: 0 });
+      rowCells.push({ type: CellType.normal, bonus: 0, div: null });
     }
     map.push(rowCells);
   }

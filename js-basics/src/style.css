@@ -2,12 +2,18 @@
   text-align: center;
   font-variant: small-caps;
   font-size: xx-large;
+
+  padding-top: 2rem;
+  padding-bottom: 0;
 }
 
 .control-container {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  padding-top: 2rem;
+  padding-bottom: 2em;
 }
 
 .variable-button {
@@ -30,8 +36,8 @@
   align-items: center;
   justify-content: center;
 
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .checkboard-row {
@@ -39,7 +45,10 @@
 }
 
 .checkboard-cell {
-  display: inline-block;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
 
   height: 2rem;
   width: 2rem;
