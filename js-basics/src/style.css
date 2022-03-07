@@ -1,0 +1,48 @@
+.title {
+  text-align: center;
+  font-variant: small-caps;
+  font-size: xx-large;
+}
+
+.control-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.variable-button {
+  padding: 0.75rem 2rem 0.75rem 2rem;
+  border: 2px solid black;
+  border-radius: 25px;
+
+  transition-duration: 0.5s;
+  cursor: pointer;
+}
+
+.variable-button:hover {
+  border-radius: 10px;
+}
+
+.checkboard-container {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.checkboard-row {
+  display: flex;
+}
+
+.checkboard-cell {
+  display: inline-block;
+
+  height: 2rem;
+  width: 2rem;
+
+  border: 1px solid black;
+}
