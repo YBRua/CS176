@@ -2,7 +2,7 @@ import { refreshGame } from "../main";
 
 // gameplay variables
 let timeRemain: number = 20;
-let timeElement = document.getElementById("countdown-var")!;
+const timeElement = document.getElementById("countdown-var")!;
 let timerDescriptor: number = -1;
 
 export function resetTimer(t: number) {

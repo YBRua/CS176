@@ -1,9 +1,21 @@
-import { SIZE } from "../common";
-import { redrawPlayer } from "../mapRender";
+import { SCORE_PER_CELL, SIZE } from "../common";
+import { CellType } from "../mapGeneration";
+import { getCurrentMap, redrawPlayer } from "../mapRender";
+import { updateScore } from "./scoreboard";
 
-// initial player position
+// player position
 let pRow: number = 0;
 let pCol: number = 0;
+
+function checkCellEvent() {
+  const map = getCurrentMap();
+  const cell = map[pRow][pCol];
+  switch (cell.type) {
+    case CellType.bonus:
+      updateScore(SCORE_PER_CELL);
+      break;
+  }
+}
 
 function updatePlayerPos(rowOffset: number, colOffset: number) {
   let newRow: number;
@@ -40,6 +52,8 @@ export function keydownEvtHandler(evt: KeyboardEvent) {
       updatePlayerPos(0, 1);
       break;
   }
+
+  checkCellEvent();
 }
 
 export function getPlayerPosition() {
