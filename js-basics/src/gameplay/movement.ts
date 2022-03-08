@@ -45,3 +45,8 @@ export function keydownEvtHandler(evt: KeyboardEvent) {
 export function getPlayerPosition() {
   return [pRow, pCol];
 }
+
+export function setPlayerPos(row: number = 0, col: number = 0) {
+  pRow = row;
+  pCol = col;
+}

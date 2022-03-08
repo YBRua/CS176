@@ -1,17 +1,29 @@
+import { refreshGame } from "../main";
+
 // gameplay variables
-let time: number = 20;
+let timeRemain: number = 20;
 let timeElement = document.getElementById("countdown-var")!;
+let timerDescriptor: number = -1;
 
 export function resetTimer(t: number) {
-  time = t;
-  timeElement.innerText = time.toString();
+  if (timerDescriptor >= 0) {
+    clearInterval(timerDescriptor);
+  }
+
+  timeRemain = t;
+  timeElement.innerText = timeRemain.toString();
+  timerDescriptor = setInterval(decreTime, 1000);
 }
 
 export function decreTime() {
-  time -= 1;
-  timeElement.innerText = time.toString();
+  timeRemain -= 1;
+  timeElement.innerText = timeRemain.toString();
+  if (timeRemain == 0) {
+    alert("Time's up!");
+    refreshGame();
+  }
 }
 
 export function getRemainingTime(): number {
-  return time;
+  return timeRemain;
 }
