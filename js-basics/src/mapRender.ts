@@ -1,7 +1,13 @@
+import { getPlayerPosition } from "./gameplay/movement";
 import { MapGrid, CellType, Shape } from "./mapGeneration";
 import { BONUS_ICON, PLAYER_ICON } from "./svgs";
 
-export function initMapRendering(map: MapGrid, size: Shape): MapGrid {
+let map: MapGrid;
+
+export function initMapRendering(m: MapGrid, size: Shape) {
+  // render a grid of HTMLDivElements according to given MapGrid
+  map = m;
+
   const container = document.getElementById("checkboard-container")!;
   container.innerHTML = "";
 
@@ -23,10 +29,20 @@ export function initMapRendering(map: MapGrid, size: Shape): MapGrid {
 
     container.appendChild(row);
   }
-
-  return map;
 }
 
-export function drawPlayer(row: number, col: number, map: MapGrid) {
+export function drawPlayer(row: number, col: number) {
   map[row][col].div!.innerHTML = PLAYER_ICON;
+}
+
+export function redrawPlayer(row: number, col: number) {
+  // remove old player icon and draw a new one at [row, col]
+  const [oldRow, oldCol] = getPlayerPosition();
+  map[oldRow][oldCol].div!.innerHTML = "";
+
+  map[row][col].div!.innerHTML = PLAYER_ICON;
+}
+
+export function getCurrentMap(): MapGrid {
+  return map;
 }
