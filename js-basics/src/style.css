@@ -21,7 +21,7 @@
 .score-board {
   display: flex;
   gap: 2rem;
-  
+
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
@@ -61,4 +61,59 @@
   width: 2rem;
 
   border: 1px solid black;
+}
+
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(16, 16, 16, 0.5);
+}
+
+.modal-container h2 {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.modal-container h3 {
+  text-align: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.modal-endgame {
+  display: flex;
+  flex-direction: column;
+
+  width: 25rem;
+  height: 25rem;
+  border-radius: 1rem;
+
+  box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+  background-color: white;
+}
+
+#score-display {
+  text-align: center;
+  font-size: 6rem;
+}
+
+.endgame-btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
