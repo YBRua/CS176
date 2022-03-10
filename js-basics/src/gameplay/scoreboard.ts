@@ -14,3 +14,13 @@ export function setScore(s: number) {
 export function refreshScore() {
   scoreboard.innerText = score.toString();
 }
+
+export function getScore() {
+  return score;
+}
+
+export function displayScore() {
+  const score = getScore();
+  const scoreDisplay = document.getElementById("score-display")!;
+  scoreDisplay.innerText = score.toString();
+}

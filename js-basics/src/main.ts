@@ -7,13 +7,26 @@ import { drawPlayer, initMapRendering } from "./mapRender";
 
 const endgameModal = document.getElementById("modal-endgame")!;
 const modalBG = document.getElementById("modal-container")!;
+export let isFrozen: boolean = false;
 
-function showEndgameModal() {
+export function isGameFrozen() {
+  return isFrozen;
+}
+
+export function freezeGame() {
+  isFrozen = true;
+}
+
+export function unfreezeGame() {
+  isFrozen = false;
+}
+
+export function showEndgameModal() {
   modalBG.classList.remove("hidden");
   endgameModal.classList.remove("hidden");
 }
 
-function hideEndgameModal() {
+export function hideEndgameModal() {
   modalBG.classList.add("hidden");
   endgameModal.classList.add("hidden");
 }
@@ -35,8 +48,10 @@ export function refreshGame() {
   resetTimer(INITIAL_TIME);
 
   document.getElementById("btn-start-game")!.innerText = "Restart Game";
+
+  unfreezeGame();
 }
 
 document.getElementById("btn-start-game")!.onclick = refreshGame;
 document.addEventListener("keydown", keydownEvtHandler);
-document.getElementById('endgame-btn')!.onclick = endgameBtnOnClickHandler;
+document.getElementById("endgame-btn")!.onclick = endgameBtnOnClickHandler;

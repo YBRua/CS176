@@ -15,6 +15,9 @@ function clearCell(row: number, col: number) {
 
 function checkCellEvent() {
   const map = getCurrentMap();
+  if (!map) {
+    return;
+  }
   const cell = map[pRow][pCol];
   switch (cell.type) {
     case CellType.bonus:

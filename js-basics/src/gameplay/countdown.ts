@@ -1,7 +1,14 @@
-import { refreshGame } from "../main";
+import { INITIAL_TIME } from "../common";
+import {
+  freezeGame,
+  isGameFrozen,
+  showEndgameModal,
+} from "../main";
+import { displayScore } from "./scoreboard";
 
 // gameplay variables
-let timeRemain: number = 20;
+let timeRemain: number = INITIAL_TIME;
+
 const timeElement = document.getElementById("countdown-var")!;
 let timerDescriptor: number = -1;
 
@@ -16,14 +23,21 @@ export function resetTimer(t: number) {
 }
 
 export function decreTime() {
-  timeRemain -= 1;
-  timeElement.innerText = timeRemain.toString();
-  if (timeRemain == 0) {
-    alert("Time's up!");
-    refreshGame();
+  if (!isGameFrozen()) {
+    timeRemain -= 1;
+    timeElement.innerText = timeRemain.toString();
+    if (timeRemain == 0) {
+      endGame();
+    }
   }
 }
 
 export function getRemainingTime(): number {
   return timeRemain;
+}
+
+function endGame() {
+  displayScore();
+  showEndgameModal();
+  freezeGame();
 }
