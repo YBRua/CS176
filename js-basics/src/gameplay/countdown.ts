@@ -1,9 +1,5 @@
 import { INITIAL_TIME } from "../common";
-import {
-  freezeGame,
-  isGameFrozen,
-  showEndgameModal,
-} from "../main";
+import { freezeGame, isGameFrozen, showEndgameModal } from "../main";
 import { displayScore } from "./scoreboard";
 
 // gameplay variables
@@ -30,6 +26,10 @@ export function decreTime() {
       endGame();
     }
   }
+}
+
+export function increTime(delta: number) {
+  timeRemain += delta;
 }
 
 export function getRemainingTime(): number {

@@ -1,7 +1,15 @@
 const scoreboard = document.getElementById("score-var")!;
 let score: number = 0;
+let modifier: number = 1;
+
+export function setScoreModifier(m: number) {
+  modifier = m;
+}
 
 export function updateScore(delta: number) {
+  if (delta > 0) {
+    delta *= modifier;
+  }
   score += delta;
   refreshScore();
 }
