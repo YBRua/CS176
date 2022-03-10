@@ -18,6 +18,11 @@
   padding-bottom: 1.5em;
 }
 
+.control-btns-container {
+  display: flex;
+  gap: 1rem;
+}
+
 .score-board {
   display: flex;
   gap: 2rem;
@@ -70,6 +75,7 @@
   z-index: 50;
 
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 
@@ -88,9 +94,15 @@
 }
 
 .hidden {
-  display: none !important;
+  display: none;
 }
 
+.help-text-container li {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.modal-help,
 .modal-endgame {
   display: flex;
   flex-direction: column;
@@ -109,6 +121,7 @@
   font-size: 6rem;
 }
 
+.help-btn-container,
 .endgame-btn-container {
   display: flex;
   align-items: center;

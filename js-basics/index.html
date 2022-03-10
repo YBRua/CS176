@@ -11,17 +11,21 @@
     <div class="main-container">
       <h1 class="title">A Game that Somehow Renders</h1>
       <div class="control-container">
-        <div class="variable-button" id="btn-start-game">Start Game</div>
+        <div class="control-btns-container">
+          <div class="variable-button" id="btn-start-game">Start Game</div>
+          <div class="variable-button" id="btn-show-help">Show Help</div>
+        </div>
+
         <div class="score-board">
           <div class="countdown">Time: <span id="countdown-var">0</span>s</div>
           <div class="score">Score: <span id="score-var">0</span></div>
         </div>
       </div>
       <div id="checkboard-container" class="checkboard-container">
-        Click the 'Start' button
+        Click the [Start Game] button
       </div>
     </div>
-    <div id="modal-container" class="modal-container hidden">
+    <div id="endgame-modal-container" class="modal-container hidden">
       <div id="modal-endgame" class="modal-endgame">
         <h2>Game Ended</h2>
         <h3>Your Score</h3>
@@ -30,7 +34,158 @@
           <div id="endgame-btn" class="variable-button">Restart</div>
         </div>
       </div>
-      <div class="modal-help"></div>
+    </div>
+    <div id="help-modal-container" class="modal-container hidden">
+      <div id="modal-help" class="modal-help">
+        <h2>Help</h2>
+        <ul class="help-text-container">
+          <li>Use <strong>arrow keys</strong> to move around</li>
+          <li>
+            Collect
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              aria-hidden="true"
+              role="img"
+              class="iconify iconify--twemoji"
+              width="16"
+              height="16"
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 36 36"
+            >
+              <circle cx="18" cy="19" r="17" fill="#F4900C"></circle>
+              <circle cx="18" cy="17" r="17" fill="#FFCC4D"></circle>
+              <circle cx="18" cy="18" r="14" fill="#FFE8B6"></circle>
+              <circle cx="18" cy="17" r="14" fill="#FFAC33"></circle>
+              <path
+                fill="#FFE8B6"
+                d="M9.543 10.856c0-.545.535-.763.535-.763l7.878-3.7l7.953 3.7s.548.122.548.767v.641H9.543v-.645z"
+              ></path>
+              <path
+                fill="#F4900C"
+                d="M25.929 12.836c0-.584-.505-1.057-1.127-1.057H11.129c-.623 0-1.057.473-1.057 1.057c0 .397.204.739.529.92v.666h2.114v-.529h2.114v.529h2.114v-.529h2.114v.529h2.114v-.529h2.114v.529H25.4v-.693c.317-.188.529-.517.529-.893zM27.514 24a.793.793 0 0 1-.793.793H9.279a.793.793 0 1 1 0-1.586h17.443c.437 0 .792.355.792.793z"
+              ></path>
+              <path
+                fill="#F4900C"
+                d="M26.457 12.2a.529.529 0 0 1-.529.529H10.071a.53.53 0 0 1 0-1.058l15.857.003a.527.527 0 0 1 .529.526zm-14.271.614h11.629V14H12.186z"
+              ></path>
+              <path
+                fill="#FFD983"
+                d="M12.714 20.829c0 .584-.316 1.057-.705 1.057h-.705c-.389 0-.705-.473-.705-1.057v-8.014c0-.584.316-1.057.705-1.057h.705c.389 0 .705.473.705 1.057v8.014zm12.686 0c0 .584-.315 1.057-.705 1.057h-.705c-.389 0-.705-.473-.705-1.057v-8.014c0-.584.315-1.057.705-1.057h.705c.389 0 .705.473.705 1.057v8.014zm-8.457 0c0 .584-.316 1.057-.705 1.057h-.705c-.389 0-.705-.473-.705-1.057v-8.014c0-.584.316-1.057.705-1.057h.705c.389 0 .705.473.705 1.057v8.014zm4.228 0c0 .584-.316 1.057-.705 1.057h-.704c-.389 0-.705-.473-.705-1.057v-8.014c0-.584.316-1.057.705-1.057h.704c.389 0 .705.473.705 1.057v8.014z"
+              ></path>
+              <path
+                fill="#FFCC4D"
+                d="M25.929 21.357c0 .584-.473 1.057-1.057 1.057H11.129a1.057 1.057 0 1 1 0-2.114h13.743c.583 0 1.057.473 1.057 1.057z"
+              ></path>
+              <path
+                fill="#FFD983"
+                d="M26.986 22.414c0 .584-.473 1.057-1.057 1.057H10.071a1.057 1.057 0 1 1 0-2.114h15.857c.584 0 1.058.473 1.058 1.057z"
+              ></path>
+              <path
+                fill="#FFD983"
+                d="M27.514 23.207a.793.793 0 0 1-.793.793H9.279a.793.793 0 1 1 0-1.586h17.443c.437 0 .792.355.792.793z"
+              ></path>
+              <path
+                fill="#FFCC4D"
+                d="M25.929 12.286c0-.584-.505-1.057-1.127-1.057H11.129c-.623 0-1.057.473-1.057 1.057c0 .397.204.739.529.92v.666h2.114v-.529h2.114v.529h2.114v-.529h2.114v.529h2.114v-.529h2.114v.529H25.4v-.693c.317-.188.529-.517.529-.893z"
+              ></path>
+              <path
+                fill="#FFD983"
+                d="M9.543 11.463c0-.545.535-.763.535-.763L17.956 7l7.953 3.7s.548.122.548.767v.291H9.543v-.295z"
+              ></path>
+              <path
+                fill="#FFAC33"
+                d="M18 8.343s-5.455 2.571-5.999 2.803c-.545.231-.363.611.001.611h11.97c.562 0 .429-.429-.017-.661C23.509 10.865 18 8.343 18 8.343z"
+              ></path>
+              <path
+                fill="#FFD983"
+                d="M26.457 11.757a.529.529 0 0 1-.529.529H10.071a.53.53 0 0 1 0-1.058l15.857.003a.527.527 0 0 1 .529.526z"
+              ></path>
+            </svg>
+            <strong>coins</strong> to get scores
+          </li>
+          <li>
+            Collect
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              aria-hidden="true"
+              role="img"
+              class="iconify iconify--twemoji"
+              width="16"
+              height="16"
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 36 36"
+            >
+              <path
+                fill="#3B88C3"
+                d="M36 32a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4h28a4 4 0 0 1 4 4v28z"
+              ></path>
+              <path
+                fill="#FFF"
+                d="M18 6L7 18h9.166L7 28h22l-9.167-10H29z"
+              ></path>
+            </svg>
+            <strong>buffs</strong> to boost scores
+          </li>
+          <li>
+            Collect
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              aria-hidden="true"
+              role="img"
+              class="iconify iconify--twemoji"
+              width="16"
+              height="16"
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 36 36"
+            >
+              <circle cx="18" cy="18" r="18" fill="#99AAB5"></circle>
+              <circle cx="18" cy="18" r="14" fill="#E1E8ED"></circle>
+              <path
+                fill="#66757F"
+                d="M19 18a1 1 0 1 1-2 0V7a1 1 0 0 1 2 0v11z"
+              ></path>
+              <path
+                fill="#66757F"
+                d="M26.661 13a1 1 0 0 1-.366 1.366l-7.795 4.5a1 1 0 0 1-1-1.732l7.795-4.5a1 1 0 0 1 1.366.366z"
+              ></path>
+            </svg>
+            <strong>time</strong> to get extra time
+          </li>
+          <li>
+            Avoid
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              aria-hidden="true"
+              role="img"
+              class="iconify iconify--twemoji"
+              width="16"
+              height="16"
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 36 36"
+            >
+              <path
+                fill="#CCD6DD"
+                d="m24.187 9.657l5.658-5.654L32 6.16l-5.658 5.655z"
+              ></path>
+              <circle cx="14" cy="22" r="14" fill="#31373D"></circle>
+              <path
+                fill="#31373D"
+                d="m19 11.342l5.658-5.657l5.657 5.658L24.657 17z"
+              ></path>
+              <circle cx="32" cy="4" r="4" fill="#F18F26"></circle>
+              <circle cx="32" cy="4" r="2" fill="#FDCB58"></circle>
+            </svg>
+            <strong>bombs</strong> or you will get penalties
+          </li>
+        </ul>
+        <div class="help-btn-container">
+          <div id="btn-hide-help" class="variable-button">Got it!</div>
+        </div>
+      </div>
     </div>
   </body>
   <script type="module" src="./src/main.ts"></script>

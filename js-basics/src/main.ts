@@ -5,8 +5,8 @@ import { setScore, setScoreModifier } from "./gameplay/scoreboard";
 import { genMap } from "./mapGeneration";
 import { drawPlayer, initMapRendering } from "./mapRender";
 
-const endgameModal = document.getElementById("modal-endgame")!;
-const modalBG = document.getElementById("modal-container")!;
+const endgameModal = document.getElementById("endgame-modal-container")!;
+const helpModal = document.getElementById("help-modal-container")!;
 export let isFrozen: boolean = false;
 
 export function isGameFrozen() {
@@ -21,13 +21,19 @@ export function unfreezeGame() {
   isFrozen = false;
 }
 
+function showHelpModal() {
+  helpModal.classList.remove("hidden");
+}
+
 export function showEndgameModal() {
-  modalBG.classList.remove("hidden");
   endgameModal.classList.remove("hidden");
 }
 
+function hideHelpModal() {
+  helpModal.classList.add("hidden");
+}
+
 export function hideEndgameModal() {
-  modalBG.classList.add("hidden");
   endgameModal.classList.add("hidden");
 }
 
@@ -56,3 +62,5 @@ export function refreshGame() {
 document.getElementById("btn-start-game")!.onclick = refreshGame;
 document.addEventListener("keydown", keydownEvtHandler);
 document.getElementById("endgame-btn")!.onclick = endgameBtnOnClickHandler;
+document.getElementById("btn-show-help")!.onclick = showHelpModal;
+document.getElementById("btn-hide-help")!.onclick = hideHelpModal;
