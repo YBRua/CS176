@@ -30,6 +30,7 @@ export function decreTime() {
 
 export function increTime(delta: number) {
   timeRemain += delta;
+  timeElement.innerText = timeRemain.toString();
 }
 
 export function getRemainingTime(): number {
