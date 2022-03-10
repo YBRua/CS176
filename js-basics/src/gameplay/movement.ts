@@ -7,12 +7,19 @@ import { updateScore } from "./scoreboard";
 let pRow: number = 0;
 let pCol: number = 0;
 
+function clearCell(row: number, col: number) {
+  const map = getCurrentMap();
+  map[row][col].type = CellType.normal;
+  map[row][col].bonus = 0;
+}
+
 function checkCellEvent() {
   const map = getCurrentMap();
   const cell = map[pRow][pCol];
   switch (cell.type) {
     case CellType.bonus:
       updateScore(SCORE_PER_CELL);
+      clearCell(pRow, pCol);
       break;
   }
 }
