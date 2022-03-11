@@ -1,4 +1,5 @@
 import { SIZE } from "../common";
+import { isFrozen, isGameFrozen } from "../main";
 import { CellType } from "../mapGeneration";
 import { getCurrentMap, redrawPlayer } from "../mapRender";
 import { increTime } from "./countdown";
@@ -36,6 +37,9 @@ function checkCellEvent() {
 }
 
 function updatePlayerPos(rowOffset: number, colOffset: number) {
+  if (isGameFrozen()) {
+    return;
+  }
   let newRow: number;
   let newCol: number;
   if (pRow + rowOffset < 0 || pRow + rowOffset >= SIZE.height) {
