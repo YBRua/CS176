@@ -1,6 +1,12 @@
 import { getPlayerPosition } from "./gameplay/movement";
 import { MapGrid, CellType, Shape } from "./mapGeneration";
-import { BONUS_ICON, PLAYER_ICON } from "./svgs";
+import {
+  ICON_BOMB,
+  ICON_BONUS,
+  ICON_BUFF,
+  ICON_PLAYER,
+  ICON_TIME,
+} from "./svgs";
 
 let map: MapGrid;
 
@@ -19,8 +25,19 @@ export function initMapRendering(m: MapGrid, size: Shape) {
       let cell = document.createElement("div");
       cell.classList.add("checkboard-cell");
 
-      if (map[i][j].type === CellType.bonus) {
-        cell.innerHTML = BONUS_ICON;
+      switch (map[i][j].type) {
+        case CellType.bonus:
+          cell.innerHTML = ICON_BONUS;
+          break;
+        case CellType.bomb:
+          cell.innerHTML = ICON_BOMB;
+          break;
+        case CellType.time:
+          cell.innerHTML = ICON_TIME;
+          break;
+        case CellType.buff:
+          cell.innerHTML = ICON_BUFF;
+          break;
       }
 
       row.appendChild(cell);
@@ -32,7 +49,7 @@ export function initMapRendering(m: MapGrid, size: Shape) {
 }
 
 export function drawPlayer(row: number, col: number) {
-  map[row][col].div!.innerHTML = PLAYER_ICON;
+  map[row][col].div!.innerHTML = ICON_PLAYER;
 }
 
 export function redrawPlayer(row: number, col: number) {
@@ -40,7 +57,7 @@ export function redrawPlayer(row: number, col: number) {
   const [oldRow, oldCol] = getPlayerPosition();
   map[oldRow][oldCol].div!.innerHTML = "";
 
-  map[row][col].div!.innerHTML = PLAYER_ICON;
+  map[row][col].div!.innerHTML = ICON_PLAYER;
 }
 
 export function getCurrentMap(): MapGrid {

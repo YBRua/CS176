@@ -1,7 +1,9 @@
-import { SCORE_PER_CELL, SIZE } from "../common";
+import { SIZE } from "../common";
+import { isFrozen, isGameFrozen } from "../main";
 import { CellType } from "../mapGeneration";
 import { getCurrentMap, redrawPlayer } from "../mapRender";
-import { updateScore } from "./scoreboard";
+import { increTime } from "./countdown";
+import { setScoreModifier, updateScore } from "./scoreboard";
 
 // player position
 let pRow: number = 0;
@@ -10,21 +12,34 @@ let pCol: number = 0;
 function clearCell(row: number, col: number) {
   const map = getCurrentMap();
   map[row][col].type = CellType.normal;
-  map[row][col].bonus = 0;
+  map[row][col].value = 0;
 }
 
 function checkCellEvent() {
   const map = getCurrentMap();
+  if (!map) {
+    return;
+  }
   const cell = map[pRow][pCol];
   switch (cell.type) {
     case CellType.bonus:
-      updateScore(SCORE_PER_CELL);
-      clearCell(pRow, pCol);
+    case CellType.bomb:
+      updateScore(cell.value);
+      break;
+    case CellType.time:
+      increTime(cell.value);
+      break;
+    case CellType.buff:
+      setScoreModifier(cell.value);
       break;
   }
+  clearCell(pRow, pCol);
 }
 
 function updatePlayerPos(rowOffset: number, colOffset: number) {
+  if (isGameFrozen()) {
+    return;
+  }
   let newRow: number;
   let newCol: number;
   if (pRow + rowOffset < 0 || pRow + rowOffset >= SIZE.height) {
