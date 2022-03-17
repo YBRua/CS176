@@ -1,6 +1,6 @@
 import { Todo } from '../todo';
 import { Footer } from '../components/Footer';
-import { getId } from '../utils';
+import { getId, loadTodos, saveTodos } from '../utils';
 import { TodoItem } from '../components/TodoItem';
 
 import { SHOWMODE_ACTIVE, SHOWMODE_ALL, SHOWMODE_COMPLETED } from '../App';
@@ -22,7 +22,7 @@ export function TodoList(props) {
   const [showMode, setShowMode] = useState(SHOWMODE_ALL);
   const [editorText, setEditorText] = useState('');
   const [currentEditing, setCurrentEditing] = useState(null);
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(loadTodos());
   const { filter } = useParams();
 
   useEffect(() => {
@@ -35,10 +35,11 @@ export function TodoList(props) {
     }
 
     if (editorText) {
-      let todosCopy = Array.from(todos);
-      todosCopy.push(new Todo(getId(), editorText));
-      setTodos(todosCopy);
+      let newTodos = Array.from(todos);
+      newTodos.push(new Todo(getId(), editorText));
+      setTodos(newTodos);
       setEditorText('');
+      saveTodos(newTodos);
     }
   }
 
@@ -48,35 +49,41 @@ export function TodoList(props) {
 
   function toggleAll(event) {
     let mode = event.target.checked;
-    let todosCopy = [];
+    let newTodos = [];
     for (const todo of todos) {
-      todosCopy.push(new Todo(todo.id, todo.content, mode));
+      newTodos.push(new Todo(todo.id, todo.content, mode));
     }
-    setTodos(todosCopy);
+    setTodos(newTodos);
+
+    saveTodos(newTodos);
   }
 
   function toggleCompleted(todo) {
-    setTodos(
-      todos.map(td => {
-        return todo === td ? new Todo(td.id, td.content, !td.completed) : td;
-      }),
-    );
+    let newTodos = todos.map(td => {
+      return todo === td ? new Todo(td.id, td.content, !td.completed) : td;
+    });
+    setTodos(newTodos);
+
+    saveTodos(newTodos);
   }
 
   function deleteTodo(todo) {
-    setTodos(
-      todos.filter(td => {
-        return td.id !== todo.id;
-      }),
-    );
+    let newTodos = todos.filter(td => {
+      return td.id !== todo.id;
+    });
+    setTodos(newTodos);
+
+    saveTodos(newTodos);
   }
 
   function updateTodo(todo, content) {
-    let newtodos = todos.map(td =>
+    let newTodos = todos.map(td =>
       td.id === todo.id ? new Todo(td.id, content, td.completed) : td,
     );
-    setTodos(newtodos);
+    setTodos(newTodos);
     setCurrentEditing(null);
+
+    saveTodos(newTodos);
   }
 
   function clearCompleted() {

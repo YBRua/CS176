@@ -11,9 +11,9 @@ export function TodoItem(props) {
     setEditing(props.editing);
 
     // dumb solution to auto-focusing after double-click
-    console.log(props.editing);
+    // console.log(props.editing);
     if (props.editing) {
-      console.log('Yo');
+      // console.log('Yo');
       let liElement = document.getElementById(`li-${props.todo.id}`);
       let inputElement = document.getElementById(`edit-${props.todo.id}`);
       liElement.classList.add('editing');
