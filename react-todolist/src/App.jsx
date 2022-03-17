@@ -5,13 +5,14 @@ import { TodoItem } from './components/TodoItem';
 import { Main } from './components/Main';
 import { TodoManager } from './todoManager';
 import { Todo } from './todo';
+import { Footer } from './components/Footer';
 import { getId } from './utils';
 
 import './App.css';
 
-const SHOWMODE_ALL = 0;
-const SHOWMODE_ACTIVE = 1;
-const SHOWMODE_COMPLETED = 2;
+export const SHOWMODE_ALL = 0;
+export const SHOWMODE_ACTIVE = 1;
+export const SHOWMODE_COMPLETED = 2;
 
 export function App(props) {
   const [showMode, setShowMode] = useState(SHOWMODE_ALL);
@@ -69,6 +70,10 @@ export function App(props) {
     setCurrentEditing(null);
   }
 
+  function clearCompleted() {
+    setTodos(todos.filter(td => !td.completed));
+  }
+
   function enableEdit(todo) {
     setCurrentEditing(todo.id);
   }
@@ -119,9 +124,30 @@ export function App(props) {
     );
   }
 
+  let numActive = 0;
+  let numCompleted = 0;
+
+  numActive = todos.reduce((tot, todo) => {
+    return todo.completed ? tot : tot + 1;
+  }, 0);
+
+  numCompleted = todos.length - numActive;
+
+  let footer;
+  if (numActive || numCompleted) {
+    footer = (
+      <Footer
+        numTodos={todos.length}
+        numCompleted={numCompleted}
+        showMode={showMode}
+        clearCompleted={clearCompleted}
+      ></Footer>
+    );
+  }
+
   return (
     <Switch>
-      <Route exact={true} path="/">
+      <Route exact={true} path="/:filter?">
         <div>
           <div className="todoapp">
             <header className="header">
@@ -136,6 +162,7 @@ export function App(props) {
               />
             </header>
             {main}
+            {footer}
           </div>
           <footer className="info">
             <p>Double-click to edit a todo</p>
@@ -147,7 +174,7 @@ export function App(props) {
         </div>
       </Route>
       <Route path="*">
-        <div>404</div>
+        <h1>404 Not Found</h1>
       </Route>
     </Switch>
   );
