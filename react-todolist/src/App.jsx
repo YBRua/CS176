@@ -16,6 +16,7 @@ const SHOWMODE_COMPLETED = 2;
 export function App(props) {
   const [showMode, setShowMode] = useState(SHOWMODE_ALL);
   const [editorText, setEditorText] = useState('');
+  const [currentEditing, setCurrentEditing] = useState(null);
   const [todos, setTodos] = useState([]);
 
   function onUserKeyDown(event) {
@@ -44,6 +45,38 @@ export function App(props) {
     setTodos(todosCopy);
   }
 
+  function toggleCompleted(todo) {
+    setTodos(
+      todos.map(td => {
+        return todo === td ? new Todo(td.id, td.content, !td.completed) : td;
+      }),
+    );
+  }
+
+  function deleteTodo(todo) {
+    setTodos(
+      todos.filter(td => {
+        return td.id !== todo.id;
+      }),
+    );
+  }
+
+  function updateTodo(todo, content) {
+    let newtodos = todos.map(td =>
+      td.id === todo.id ? new Todo(td.id, content, td.completed) : td,
+    );
+    setTodos(newtodos);
+    setCurrentEditing(null);
+  }
+
+  function enableEdit(todo) {
+    setCurrentEditing(todo.id);
+  }
+
+  function disableEdit(todo) {
+    setCurrentEditing(null);
+  }
+
   let todosToRender = todos.filter(function (todo) {
     switch (showMode) {
       case SHOWMODE_ALL:
@@ -53,12 +86,22 @@ export function App(props) {
       case SHOWMODE_COMPLETED:
         return todo.completed;
     }
-  }, this);
+  });
 
-  let todoItems = todosToRender.map(
-    todo => <TodoItem key={todo.id} todo={todo} editing={false} />,
-    this,
-  );
+  let todoItems = todosToRender.map(todo => {
+    return (
+      <TodoItem
+        key={todo.id}
+        todo={todo}
+        editing={todo.id === currentEditing}
+        onToggle={toggleCompleted.bind(this, todo)}
+        onDelete={deleteTodo.bind(this, todo)}
+        onEnableEdit={enableEdit.bind(this, todo)}
+        onSave={updateTodo.bind(this, todo)}
+        onDisableEdit={disableEdit.bind(this)}
+      />
+    );
+  });
 
   let main;
   if (todos.length) {
