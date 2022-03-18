@@ -1,27 +1,20 @@
-# Your MWA
+# CS176 Assignment 3 Todo-List with React and Modern.js
 
-## Prerequisites
+## Setting Up
 
-1. [Node.js LTS](https://github.com/nodejs/Release)
-    * [Automatically call nvm use](https://github.com/nvm-sh/nvm#deeper-shell-integration)
+This project is built with `pnpm`, `modern.js` and `react.js`.
 
-## Get Started
+After cloning the repository, use
 
-按开发环境的要求，运行和调试项目
-
-```
-pnpm run dev
+```sh
+pnpm install
+pnpm dev
 ```
 
-继续创建更多项目要素，比如应用入口
+to start development mode of the application.
 
-```
-pnpm run new
-```
+## Footer
 
-其他
-
-```
-pnpm run build        # 按产品环境的要求，构建项目
-pnpm run start        # 按产品环境的要求，运行项目
-```
+- [TodoMVC](https://todomvc.com/)
+  - [Github](https://github.com/tastejs/todomvc)
+  - [(A Rather Old) React Reference Implementation](https://github.com/tastejs/todomvc/tree/master/examples/react)
