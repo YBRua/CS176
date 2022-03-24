@@ -1,4 +1,4 @@
-export const CHECKSUM_LEN = 4;
+export const CHECKSUM_LEN = 8;
 
 export interface ChitHeader {
   payloadLength: number;

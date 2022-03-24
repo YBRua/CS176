@@ -8,7 +8,7 @@ enum HandlerMode {
   PAYLOAD,
 }
 
-export class ChitChatAgent {
+export default class ChitChatAgent {
   _socket: Socket;
 
   _buffer: Buffer;
@@ -16,9 +16,9 @@ export class ChitChatAgent {
   _payloadLength: number;
 
   _mode: HandlerMode;
-  _cb: Function | undefined;
+  _cb: ((msg: string) => void) | undefined;
 
-  constructor(socket: Socket, onData?: Function) {
+  constructor(socket: Socket, onData?: (msg: string) => void) {
     this._socket = socket;
 
     this._buffer = Buffer.alloc(0);
@@ -46,7 +46,7 @@ export class ChitChatAgent {
 
   _readUint16LE() {
     const res = this._buffer.readUInt16LE(this._cursor);
-    this._cursor += 1;
+    this._cursor += 2;
     return res;
   }
 
@@ -86,9 +86,9 @@ export class ChitChatAgent {
         case HandlerMode.HEADER:
           const header = this._readHeader();
           if (!this._isHeaderValid(header)) {
-            console.error("Invalid Header. Ignoring.");
+            console.error("Invalid header. Ignoring.");
           } else {
-            console.log("Incoming Payload:", header.payloadLength);
+            console.log("Incoming payload of length:", header.payloadLength);
             this._payloadLength = header.payloadLength;
             this._mode = HandlerMode.PAYLOAD;
           }
@@ -119,6 +119,7 @@ export class ChitChatAgent {
   }
 
   close() {
-    this._socket.end("Connection Closed.");
+    console.log("Connection closed");
+    this._socket.end();
   }
 }
