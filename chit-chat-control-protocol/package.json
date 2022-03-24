@@ -1,0 +1,12 @@
+{
+  "name": "chit-chat-control-protocol",
+  "version": "1.0.0",
+  "description": "Simple application-layer protocol based on Nodejs TCP Apis",
+  "main": "src/app.ts",
+  "author": "YBRua",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^17.0.23",
+    "typescript": "^4.6.2"
+  }
+}

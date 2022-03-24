@@ -1,0 +1,9 @@
+{
+  "name": "chit-chat-control-protocol",
+  "version": "1.0.0",
+  "description": "Simple chat protocol based on Node.js TCP APIs",
+  "main": "index.js",
+  "repository": "git@github.com:YBRua/CS176.git",
+  "author": "YBRua <YBiuR0929@163.com>",
+  "license": "MIT"
+}
