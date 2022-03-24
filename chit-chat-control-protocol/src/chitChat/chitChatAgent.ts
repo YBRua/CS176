@@ -18,6 +18,15 @@ export default class ChitChatAgent {
   _mode: HandlerMode;
   _cb: ((msg: string) => void) | undefined;
 
+  /**
+   * Creates a ChitChatAgent.
+   * The agent encapsulates a TCP socket,
+   * and handles data using the `onData` callback.
+   *
+   * @param {Socket} socket A TCP socket connection.
+   * @param onData Data handler that takes a `string` as input.
+   * Will be called whenever a packet is received.
+   */
   constructor(socket: Socket, onData?: (msg: string) => void) {
     this._socket = socket;
 
@@ -40,6 +49,7 @@ export default class ChitChatAgent {
   }
 
   _sliceBuffer(start: number) {
+    // remove read buffer and reset cursor
     this._buffer = this._buffer.subarray(start);
     this._cursor = 0;
   }
@@ -85,6 +95,7 @@ export default class ChitChatAgent {
       switch (this._mode) {
         case HandlerMode.HEADER:
           const header = this._readHeader();
+
           if (!this._isHeaderValid(header)) {
             console.error("Invalid header. Ignoring.");
           } else {
@@ -92,14 +103,17 @@ export default class ChitChatAgent {
             this._payloadLength = header.payloadLength;
             this._mode = HandlerMode.PAYLOAD;
           }
+
           break;
 
         case HandlerMode.PAYLOAD:
           const payload = this._readPayload(this._payloadLength);
           this._payloadLength = 0;
+
           if (this._cb) {
             this._cb(payload);
           }
+
           break;
       }
     }
@@ -112,7 +126,7 @@ export default class ChitChatAgent {
 
     const headerBuffer = Buffer.allocUnsafe(2 + CHECKSUM_LEN);
     headerBuffer.writeUInt16LE(payloadLength); // header.payloadLength
-    headerBuffer.write(checksum, 2);
+    headerBuffer.write(checksum, 2); // header.checksum
 
     this._socket.write(headerBuffer);
     this._socket.write(payload);
