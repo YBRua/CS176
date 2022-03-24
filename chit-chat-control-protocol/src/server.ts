@@ -7,18 +7,10 @@ let server = net.createServer();
 server.on("connection", (socket) => {
   console.log("Client connected");
 
-  let agent = new ChitChatAgent(socket, (data: string) => {
-    console.log("Server received:", data.toString());
+  let agent = new ChitChatAgent(socket, (msg) => {
+    console.log("Server received:", msg);
   });
-  agent.send("Hello, client. -- From server");
-});
-
-server.on("close", () => {
-  console.log("Closed");
-});
-
-server.on("error", (e) => {
-  console.log(e);
+  agent.send("Hello, client. -- From server.");
 });
 
 server.listen(8000);

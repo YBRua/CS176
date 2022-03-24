@@ -7,8 +7,8 @@ let socket = net.createConnection({
   host: "localhost",
 });
 socket.on("connect", () => {
-  let chitchatter = new ChitChatAgent(socket, (msg: string) => {
-    console.log("Client received:", msg.toString());
+  let chitchatter = new ChitChatAgent(socket, (msg) => {
+    console.log("Client received:", msg);
   });
   chitchatter.send("Hello, server! -- From client side.");
   chitchatter.close();
