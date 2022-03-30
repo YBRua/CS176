@@ -185,6 +185,9 @@ body {
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: flex-start;
+
+  border-top: rgba(46, 232, 246, 0.3) solid 1px;
+  border-bottom: rgba(46, 232, 246, 0.3) solid 1px;
 }
 
 .swiper-inner {
@@ -199,6 +202,18 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  height: 56px;
+  font-size: 1.2rem;
+
+  &:hover {
+    cursor: pointer;
+    background: linear-gradient(
+      0,
+      rgba(46, 232, 246, 0.3),
+      rgba(0, 238, 255, 0)
+    );
+  }
 }
 
 /* tablets */
