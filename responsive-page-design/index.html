@@ -10,6 +10,17 @@
     <nav class="navbar">
       <div class="navbar-inner">
         <div class="navbar-links">
+          <div class="navbar-links--icon show-unless-large">
+            <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true">
+              <path
+                stroke="white"
+                stroke-linecap="round"
+                stroke-miterlimit="10"
+                stroke-width="2"
+                d="M4 7h22M4 15h22M4 23h22"
+              ></path>
+            </svg>
+          </div>
           <a class="navbar-links--brand" href="" id="navlink-brand"
             ><img
               src="https://lf-cdn-tos.bytescm.com/obj/static/webinfra/modern-js-website/assets/images/images/modernjs-logo.svg"
@@ -41,8 +52,58 @@
             >社区</a
           >
         </div>
-        <div class="navbar-search"></div>
+        <div class="navbar-search">
+          <a
+            href="https://github.com/modern-js-dev/modern.js"
+            class="navbar-links--item navbar-links--github hide-unless-large"
+          >
+          </a>
+          <input type="text" class="navbar-links--input" placeholder="搜索" />
+        </div>
       </div>
     </nav>
+    <header class="header-container">
+      <svg
+        width="675"
+        height="59"
+        viewBox="0 0 675 59"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="header-logo"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M0 1.165h.184L46.118 38.34 92.052 1.165h.184v12.258l-45.75 38.432L9.951 22.066H9.77v34.999H.245L0 1.165zm82.681 55.961h9.739V28.87h-9.401l-.338 28.256zM158.163 1.993c10.443 0 20.885 6.956 20.885 17.714v5.945h-9.769v-5.945c0-3.463-3.919-7.938-11.116-7.938h-33.348c-7.196 0-11.116 4.475-11.116 7.938v5.945h-9.768v-5.945c0-10.758 10.442-17.714 20.884-17.714h33.348zm20.885 33.436v3.493c0 10.727-10.442 17.684-20.885 17.684h-33.348c-10.442 0-20.884-6.957-20.884-17.684V35.43h9.921v3.493c0 3.433 3.92 7.908 11.116 7.908h33.349c7.196 0 11.116-4.475 11.116-7.907v-3.494h9.615zM269.425 38.922V19.707c0-10.758-10.443-17.715-21.007-17.224h-54.111v9.531h.031v19.829h10.933V12.014h43.147c7.196 0 11.146 4.475 11.146 7.938v19.216c0 3.432-3.95 7.907-11.146 7.907h-54.111v9.53h54.233c10.442 0 20.885-6.956 20.885-17.683zM294.45 24.366h43.913v9.53h-53.651V2.147h76.557v9.532h-66.972l.153 12.688zm-9.769 32.18h76.557v-9.563h-76.557v9.562zM444.264 56.758v.184h-11.422l-16.965-26.02v-.184h14.607c5.757 0 8.544-3.524 8.544-5.822v-7.233c0-2.299-2.787-5.854-8.544-5.854h-55.366V2.298h55.366c9.003 0 18.374 6.13 18.374 15.63v7.233c0 8.428-7.197 14.128-15.067 15.323v.154l10.473 16.12z"
+          fill="#4ECAFF"
+        ></path>
+        <path
+          d="M384.459 55.653h-9.401v-28.84h9.401v28.84zM404.088 40.36l-.151-9.743 18.381.153.151 9.59h-18.381z"
+          fill="#4ECAFF"
+        ></path>
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M466.222 0h.183l54.662 38.738V1.41h9.769v55.962h-.184L466.13 11.4 466.222 0zm0 55.747h9.493v-26.97h-9.187l-.306 26.97z"
+          fill="#4ECAFF"
+        ></path>
+        <path
+          d="M560.327 49.614h-9.038v9.02h9.038v-9.02z"
+          fill="#4ECAFF"
+        ></path>
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M662.724 52.407c3.545 0 5.295-2.29 5.295-3.772v-.944a4.487 4.487 0 00-4.219-3.683v-6.511a10.768 10.768 0 017.161 3.083 10.785 10.785 0 013.206 7.111v.944a10.919 10.919 0 01-3.617 7.476 10.899 10.899 0 01-7.826 2.763H626.06v-6.467h36.664zM629.677 41.38a10.919 10.919 0 01-3.617-7.476v-.898a10.872 10.872 0 013.605-7.49 10.853 10.853 0 017.839-2.75h36.663v6.422h-36.663c-3.546 0-5.296 2.335-5.296 3.818v.898c0 1.482 1.75 3.772 5.296 3.772h18.354v6.468h-18.364a10.897 10.897 0 01-7.817-2.764zm-14.117-18.3h-6.777v20.75h.046v4.714c0 1.841-2.738 4.49-7.674 4.49h-22.438a.357.357 0 00-.314.36v5.12a.357.357 0 00.314.36h22.438c7.18 0 14.405-4.133 14.405-10.555V23.081z"
+          fill="#4ECAFF"
+        ></path>
+      </svg>
+      <h1>现代 Web 工程体系</h1>
+      <div class="header-buttons">
+        <a href="" class="header-buttons--btn btn-t1">介绍 →</a>
+        <a href="" class="header-buttons--btn btn-t2">快速开始</a>
+        <a href="" class="header-buttons--btn btn-t2">文档</a>
+      </div>
+    </header>
   </body>
 </html>
