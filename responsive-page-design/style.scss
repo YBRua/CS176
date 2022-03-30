@@ -179,6 +179,28 @@ body {
   }
 }
 
+.swiper {
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+
+.swiper-inner {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.swiper-item {
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* tablets */
 @media (max-width: 864px) {
   .hide-unless-large {
