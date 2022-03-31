@@ -204,6 +204,15 @@ body {
   }
 }
 
+.subsec-title {
+  font-size: 2rem;
+  color: transparent;
+  background: linear-gradient(90deg, #60dee8 -2%, #dca1e7 20.54%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  margin: 1rem 0;
+}
+
 .btn-t1 {
   color: rgba(0, 0, 0);
   background-color: var(--color-theme-blue);
@@ -332,6 +341,11 @@ body {
 
 /* tablets */
 @media (max-width: 950px) {
+  .sec-features,
+  .sec-mwa {
+    padding: 70px 25px;
+  }
+
   .hide-unless-large {
     display: none;
   }
