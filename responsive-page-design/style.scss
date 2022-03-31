@@ -480,6 +480,10 @@ body {
       max-width: 49%;
     }
   }
+
+  .pigeon {
+    font-size: 2.5rem;
+  }
 }
 
 /* special */
@@ -494,6 +498,10 @@ body {
 
 /* mobile phones */
 @media (max-width: 700px) {
+  .pigeon {
+    font-size: 1.5rem;
+  }
+
   .title-container {
     padding-top: 4.5vw;
     background-size: 55vw 5vw;
