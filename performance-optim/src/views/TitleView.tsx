@@ -18,7 +18,8 @@ export function TitleView(props: TitleViewPropTypes) {
       <Title></Title>
       <div className="title-button-container">
         <LargeButton
-          text="GO!"
+          text="Click to Start"
+          hoverText="GO!"
           onClick={props.onLargeButtonClick}
         ></LargeButton>
       </div>
