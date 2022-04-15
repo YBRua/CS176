@@ -1,4 +1,5 @@
 const MAX_SWIPER_ITEMS = 7;
+const sidebar = document.getElementById('sidebar');
 
 function updateSwiper() {
   let newWidth = window.innerWidth;
@@ -18,5 +19,17 @@ function updateSwiper() {
   }
 }
 
+function showSideBar() {
+  console.log('showSideBar');
+  sidebar.classList.add('sidebar-show');
+}
+
+function hideSidebar() {
+  sidebar.classList.remove('sidebar-show');
+}
+
 updateSwiper();
 window.onresize = updateSwiper;
+
+document.getElementById('btn-show-sidebar').onclick = showSideBar;
+document.getElementById('btn-hide-sidebar').onclick = hideSidebar;

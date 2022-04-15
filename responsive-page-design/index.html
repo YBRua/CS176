@@ -10,7 +10,7 @@
     <nav class="navbar">
       <div class="navbar-inner">
         <div class="navbar-links">
-          <div class="navbar-links--icon show-unless-large">
+          <div class="navbar-links--icon show-unless-large" id="btn-show-sidebar">
             <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true">
               <path
                 stroke="white"
@@ -59,6 +59,47 @@
           >
           </a>
           <input type="text" class="navbar-links--input" placeholder="搜索" />
+        </div>
+      </div>
+      <div class="navbar-sidebar" id="sidebar">
+        <div class="navbar-side-inner">
+          <div class="navbar-side-header">
+            <div class="navbar-side-header--item">Modern.js</div>
+            <div class="navbar-side-header--btn" id="btn-hide-sidebar">
+              <svg viewBox="0 0 15 15" width="21" height="21">
+                <g stroke-width="1.2">
+                  <path d="M.75.75l13.5 13.5M14.25.75L.75 14.25"></path>
+                </g>
+              </svg>
+            </div>
+          </div>
+          <ul class="navbar-side-links">
+            <li class="navbar-side-item">
+              <a href="" class="navbar-side-item--link">
+                开始
+              </a>
+            </li>
+            <li class="navbar-side-item">
+              <a href="" class="navbar-side-item--link">
+                指南
+              </a>
+            </li>
+            <li class="navbar-side-item">
+              <a href="" class="navbar-side-item--link">
+                API
+              </a>
+            </li>
+            <li class="navbar-side-item">
+              <a href="" class="navbar-side-item--link">
+                博客
+              </a>
+            </li>
+            <li class="navbar-side-item">
+              <a href="" class="navbar-side-item--link">
+                社区
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
@@ -439,7 +480,8 @@
           </a>
         </div>
       </div>
-      <div class="pigeon">对不起 太多了 真的写不动了</div>
+      <div class="pigeon">对不起 太多了 写不动了</div>
+      <div class="pigeon-small">现在就是后悔一开始想简单了没上框架.jpg</div>
     </div>
     <footer class="footer">
       <div class="footer-container">
