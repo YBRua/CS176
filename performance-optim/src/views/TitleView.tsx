@@ -2,15 +2,16 @@ import { Title } from "../components/Title";
 import { LargeButton } from "../components/LargeButton";
 
 import "../common.scss";
+import { Views } from "./view";
 
 type TitleViewPropTypes = {
-  isTitlePage: boolean;
+  currentView: Views;
   onLargeButtonClick: () => void;
 };
 
 export function TitleView(props: TitleViewPropTypes) {
-  const isTitlePage = props.isTitlePage;
-  const viewClassName = isTitlePage
+  const currentView = props.currentView;
+  const viewClassName = currentView === Views.Home
     ? "full-height-container"
     : "full-height-container translate-up";
   return (
