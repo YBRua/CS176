@@ -5,7 +5,7 @@ import { OreoActionType, OreoArtist } from "./oreo";
 import { TitleView } from "./views/TitleView";
 import { EditorView } from "./views/EditorView";
 import { CanvasView } from "./views/CanvasView";
-import { Views } from "./views/view";
+import { getAppClassName, Views } from "./views/view";
 
 let artist: OreoArtist | null = null;
 
@@ -13,17 +13,11 @@ function App() {
   const [currentView, setCurrentView] = useState(Views.Home);
   const [oreo, oreoText, dispatchOreoUpdate] = useOreo();
   const [loading, setLoading] = useState(false);
-
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const canvasEl = <canvas ref={canvasRef}></canvas>;
+  const [artist, setArtist] = useState(new OreoArtist(setLoading));
 
   useEffect(() => {
-    if (!artist) {
-      console.log("Creating artist");
-      artist = new OreoArtist(canvasRef.current!, setLoading);
-      artist._loadImages();
-    }
-  }, [canvasRef]);
+    artist._loadImages();
+  }, [artist]);
 
   function gotoEditor() {
     setCurrentView(Views.Editor);
@@ -33,9 +27,8 @@ function App() {
     setCurrentView(Views.Home);
   }
 
-  function renderCanvas() {
+  function gotoCanvas() {
     setCurrentView(Views.Canvas);
-    artist!.draw(oreo);
   }
 
   function keyDownHandler(e: React.KeyboardEvent<HTMLDivElement>) {
@@ -54,37 +47,55 @@ function App() {
           dispatchOreoUpdate({ type: OreoActionType.AppendEmpty });
           break;
         case "Enter":
-          renderCanvas();
+          gotoCanvas();
       }
     }
   }
 
   function onCompile() {
-    console.log("Compile");
-    renderCanvas();
+    // console.log("Compile");
+    gotoCanvas();
   }
 
+  let PreCompileViews: JSX.Element | null = null;
+  if (currentView === Views.Home || currentView === Views.Editor) {
+    PreCompileViews = (
+      <div>
+        <TitleView
+          currentView={currentView}
+          onLargeButtonClick={() => gotoEditor()}
+          loading={loading}
+        ></TitleView>
+        <EditorView
+          currentView={currentView}
+          onTitleButtonClick={gotoHome}
+          oreo={oreo}
+          oreoText={oreoText}
+          oreoUpdateDispatcher={dispatchOreoUpdate}
+          onCompile={onCompile}
+        ></EditorView>
+      </div>
+    );
+  }
+
+  let PostCompileViews = (
+    <CanvasView
+      currentView={currentView}
+      oreo={oreo}
+      oreoText={oreoText}
+      loading={loading}
+      artist={artist}
+    ></CanvasView>
+  );
+
   return (
-    <div className="App" onKeyDown={keyDownHandler} tabIndex={0}>
-      <TitleView
-        currentView={currentView}
-        onLargeButtonClick={() => gotoEditor()}
-        loading={loading}
-      ></TitleView>
-      <EditorView
-        currentView={currentView}
-        onTitleButtonClick={gotoHome}
-        oreo={oreo}
-        oreoText={oreoText}
-        oreoUpdateDispatcher={dispatchOreoUpdate}
-        onCompile={onCompile}
-      ></EditorView>
-      <CanvasView
-        currentView={currentView}
-        canvasElement={canvasEl}
-        oreoText={oreoText}
-        loading={loading}
-      ></CanvasView>
+    <div
+      className={getAppClassName(currentView)}
+      onKeyDown={keyDownHandler}
+      tabIndex={0}
+    >
+      {PreCompileViews}
+      {currentView === Views.Canvas ? PostCompileViews : null}
     </div>
   );
 }

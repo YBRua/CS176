@@ -25,25 +25,21 @@ interface OreoRenderConfig {
 }
 
 export class OreoArtist {
-  canvas: HTMLCanvasElement;
+  canvas: HTMLCanvasElement | null;
   images: Map<string, HTMLImageElement>;
   configs: OreoRenderConfig[];
   setIsLoading: (isLoading: boolean) => void;
 
   static imageKeys = ["O", "R", "Ob"];
 
-  constructor(
-    canvas: HTMLCanvasElement,
-    setIsLoading: (arg0: boolean) => void
-  ) {
-    this.canvas = canvas;
+  constructor(setIsLoading: (arg0: boolean) => void) {
+    this.canvas = null;
     this.images = new Map();
     this.configs = [];
     this.setIsLoading = setIsLoading;
   }
 
   _loadImages() {
-    this.setIsLoading(true);
     let loaded = 0;
     for (const key of OreoArtist.imageKeys) {
       const image = new Image();
@@ -53,16 +49,14 @@ export class OreoArtist {
         ++loaded;
         this.images.set(key, image);
         if (loaded === OreoArtist.imageKeys.length) {
-          console.log("All image assets loaded.");
-          setTimeout(() => {
-            this.setIsLoading(false);
-          }, 1000);
+          // console.log("All image assets loaded.");
         }
       };
     }
   }
 
-  _generateCanvasCtx() {
+  _generateCanvasCtx(canvas: HTMLCanvasElement) {
+    this.canvas = canvas;
     const ctx = this.canvas.getContext("2d");
     if (!ctx) {
       throw new Error("Could not get canvas context");
@@ -104,23 +98,30 @@ export class OreoArtist {
     }
 
     currentHeight += 160 - 24;
-    this.canvas.height = currentHeight;
-    this.canvas.width = 240;
-    console.log(this.configs);
+    this.canvas!.height = currentHeight;
+    this.canvas!.width = 240;
+    // console.log(this.configs);
   }
 
-  draw(oreo: OreoType[]) {
+  _resetConfigs() {
+    this.configs = [];
+  }
+
+  draw(oreo: OreoType[], canvas: HTMLCanvasElement) {
     this.setIsLoading(true);
+    const ctx = this._generateCanvasCtx(canvas);
+    this._resetConfigs();
     this._generateRenderConfigs(oreo);
-    const ctx = this._generateCanvasCtx();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     if (this.configs.length > 0) {
       this.configs.forEach((cfg) => {
         ctx.drawImage(cfg.image, cfg.x, cfg.y, cfg.width, cfg.height);
       });
     }
-    console.log("Render Done.");
+    // console.log("Render Done.");
     setTimeout(() => {
-      console.log("Post-rendering callback");
+      // console.log("Post-rendering callback");
       this.setIsLoading(false);
     }, 1000);
   }

@@ -12,8 +12,8 @@ export function getViewClassName(view: Views) {
     return "full-height-container translate-up";
   }
   if (view === Views.Canvas) {
-    return "extensible-full-height-container translate-2up";
-    // return "extensible-full-height-container";
+    // return "extensible-full-height-container translate-2up";
+    return "extensible-full-height-container";
   }
 }
 
