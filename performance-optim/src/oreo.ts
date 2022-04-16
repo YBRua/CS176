@@ -76,6 +76,15 @@ export class OreoArtist {
   _generateRenderConfigs(oreo: OreoType[]) {
     let isFirstO = true;
     let currentHeight = 0;
+
+    // remove leading and trailing spaces
+    while (oreo[0] === OreoType.Empty) {
+      oreo.shift();
+    }
+    while (oreo[oreo.length - 1] === OreoType.Empty) {
+      oreo.pop();
+    }
+
     for (const o of oreo) {
       switch (o) {
         case OreoType.O:
@@ -109,7 +118,6 @@ export class OreoArtist {
     currentHeight += 160 - 24;
     this.canvas!.height = currentHeight;
     this.canvas!.width = 240;
-    // console.log(this.configs);
   }
 
   _resetConfigs() {
@@ -117,10 +125,11 @@ export class OreoArtist {
   }
 
   draw(oreo: OreoType[], canvas: HTMLCanvasElement) {
+    const oreo_ = Array.from(oreo);
     this.setCanvasReady(false);
     const ctx = this._generateCanvasCtx(canvas);
     this._resetConfigs();
-    this._generateRenderConfigs(oreo);
+    this._generateRenderConfigs(oreo_);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     if (this.configs.length > 0) {

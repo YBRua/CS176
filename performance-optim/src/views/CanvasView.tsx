@@ -29,7 +29,7 @@ export function CanvasView(props: CanvasViewPropTypes) {
       </div>
       <div className={`result-container ${canvasReady ? "" : "hidden"}`}>
         <div className="result-inner">
-          <h2 className="result-title">Here's Your</h2>
+          <h2 className="result-title">Oreo Compiled Successfully</h2>
           <div className="result-description">{oreoText()}</div>
           <div className="canvas-container">
             <canvas ref={canvasRef}></canvas>
