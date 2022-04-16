@@ -10,13 +10,20 @@ function App() {
     setCurrentView(Views.Editor);
   }
 
+  function gotoHome() {
+    setCurrentView(Views.Home);
+  }
+
   return (
     <div className="App">
       <TitleView
         currentView={currentView}
         onLargeButtonClick={() => gotoEditor()}
       ></TitleView>
-      <EditorView currentView={currentView}></EditorView>
+      <EditorView
+        currentView={currentView}
+        onTitleButtonClick={gotoHome}
+      ></EditorView>
     </div>
   );
 }
