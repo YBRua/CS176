@@ -1,5 +1,5 @@
 import { OreoAction, OreoType, OreoActionType } from "../oreo";
-import { useReducer, useCallback } from "react";
+import { useReducer, useCallback as useMemo } from "react";
 
 function oreoLogicToTextMapper(oreo: OreoType[]) {
   return oreo.map((oreoType) => {
@@ -29,7 +29,7 @@ export function useOreo(initialState: OreoType[] = []) {
   }
 
   const [oreo, updateOreo] = useReducer(oreoReducer, initialState);
-  const oreoText = useCallback(
+  const oreoText = useMemo(
     () => oreoLogicToTextMapper(oreo).join(""),
     [oreo]
   );
