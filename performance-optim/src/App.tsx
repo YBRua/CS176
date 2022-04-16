@@ -12,7 +12,7 @@ let artist: OreoArtist | null = null;
 function App() {
   const [currentView, setCurrentView] = useState(Views.Home);
   const [oreo, oreoText, dispatchOreoUpdate] = useOreo();
-  const [flavor, setFlavor] = useState(OreoFlavor.Strawberry);
+  const [flavor, setFlavor] = useState(OreoFlavor.Vanilla);
 
   const [loading, setLoading] = useState(false);
   const [canvasReady, setCanvasReady] = useState(false);

@@ -6,6 +6,9 @@ import { RoundedButton } from "./RoundedButton";
 import "./styles/EditorButtonSet.scss";
 import "./styles/RoundedButton.scss";
 
+import imgO from "../figs/minified/O.png";
+import imgR from "../figs/minified/R.png";
+
 type EditorButtonSetPropTypes = {
   onAddO: () => void;
   onAddRe: () => void;
@@ -22,7 +25,7 @@ export function EditorButtonSet(props: EditorButtonSetPropTypes) {
     <div className="buttonset-container">
       <div className="editor-set-button-row">
         <OreoButton
-          imgSrc="./src/figs/minified/O.png"
+          imgSrc={imgO}
           imgAlt="Add O"
           imgHeight={41}
           imgWidth={60}
@@ -30,7 +33,7 @@ export function EditorButtonSet(props: EditorButtonSetPropTypes) {
           onClick={props.onAddO}
         ></OreoButton>
         <OreoButton
-          imgSrc="./src/figs/minified/R.png"
+          imgSrc={imgR}
           imgAlt="Add Re"
           imgHeight={41}
           imgWidth={60}

@@ -109,6 +109,7 @@ body {
   flex-direction: column;
   align-items: center;
   margin-top: 3rem;
+  margin-bottom: 2rem;
 
   &.hidden {
     display: none;
@@ -155,6 +156,7 @@ body {
 
       .result-description {
         font-size: 1.75rem;
+        max-width: 70%;
       }
     }
   }

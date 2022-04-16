@@ -1,18 +1,19 @@
 import "./styles/Title.scss";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import minifiedOreoImg from "../figs/minified/oreo.png";
 
 export function Title() {
   return (
     <header className="title-container">
       <div className="main-title-container">
         <LazyLoadImage
-          src="./src/figs/minified/oreo.png"
+          src={minifiedOreoImg}
           alt="I'm Oreo"
           className="title-image"
         ></LazyLoadImage>
         <h1 className="main-title">Unofficial Oreo Compiler</h1>
         <LazyLoadImage
-          src="./src/figs/minified/oreo.png"
+          src={minifiedOreoImg}
           alt="I'm Oreo"
           className="title-image"
         ></LazyLoadImage>

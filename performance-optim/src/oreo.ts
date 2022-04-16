@@ -1,3 +1,19 @@
+import imgO from "./figs/minified/O.png";
+import imgRVanilla from "./figs/minified/R.vanilla.png";
+import imgRStrawberry from "./figs/minified/R.strawberry.png";
+import imgRChocolate from "./figs/minified/R.chocolate.png";
+import imgRMatcha from "./figs/minified/R.matcha.png";
+import imageOb from "./figs/minified/Ob.png";
+
+const imgMapping = new Map([
+  ["O", imgO],
+  ["R.vanilla", imgRVanilla],
+  ["R.strawberry", imgRStrawberry],
+  ["R.chocolate", imgRChocolate],
+  ["R.matcha", imgRMatcha],
+  ["Ob", imageOb],
+]);
+
 export enum OreoType {
   O = "O",
   Re = "R",
@@ -63,8 +79,7 @@ export class OreoArtist {
     let loaded = 0;
     for (const key of OreoArtist.imageKeys) {
       const image = new Image();
-
-      image.src = `src/figs/minified/${key}.png`;
+      image.src = imgMapping.get(key)!;
       image.onload = () => {
         ++loaded;
         this.images.set(key, image);
