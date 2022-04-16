@@ -1,6 +1,6 @@
 import { OreoAction, OreoActionType, OreoType } from "../oreo";
 
-import { Views } from "./view";
+import { getViewClassName, Views } from "./view";
 import { EditorTitle } from "../components/EditorTitle";
 import { EditorButtonSet } from "../components/EditorButtonSet";
 
@@ -10,6 +10,7 @@ import React from "react";
 type CanvasViewPropTypes = {
   currentView: Views;
   onTitleButtonClick: () => void;
+  onCompile: () => void;
   oreo: OreoType[];
   oreoText: () => string;
   oreoUpdateDispatcher: React.Dispatch<OreoAction>;
@@ -18,16 +19,14 @@ type CanvasViewPropTypes = {
 export function EditorView(props: CanvasViewPropTypes) {
   const {
     currentView,
+    onCompile,
     onTitleButtonClick,
     oreo,
     oreoText,
     oreoUpdateDispatcher,
   } = props;
 
-  const viewClassName =
-    currentView === Views.Editor
-      ? "full-height-container translate-up"
-      : "full-height-container";
+  const viewClassName = getViewClassName(currentView);
   const textDisplayClassName = oreo.length ? "color-black" : "color-gray";
 
   return (
@@ -54,6 +53,7 @@ export function EditorView(props: CanvasViewPropTypes) {
         onClearAll={() =>
           oreoUpdateDispatcher({ type: OreoActionType.ClearAll })
         }
+        onCompile={onCompile}
       ></EditorButtonSet>
     </div>
   );

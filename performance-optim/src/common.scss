@@ -24,6 +24,10 @@ body {
   transform: translateY(-100vh);
 }
 
+.translate-2up {
+  transform: translateY(-200vh);
+}
+
 .title-button-container {
   display: flex;
   align-items: center;
@@ -60,6 +64,6 @@ body {
   }
 
   .color-gray {
-    color: #a1a1aa; 
+    color: #a1a1aa;
   }
 }
