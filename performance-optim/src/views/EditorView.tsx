@@ -5,6 +5,7 @@ import { EditorTitle } from "../components/EditorTitle";
 import { EditorButtonSet } from "../components/EditorButtonSet";
 
 import "../common.scss";
+import React from "react";
 
 type CanvasViewPropTypes = {
   currentView: Views;
@@ -22,12 +23,13 @@ export function EditorView(props: CanvasViewPropTypes) {
     oreoText,
     oreoUpdateDispatcher,
   } = props;
+
   const viewClassName =
     currentView === Views.Editor
       ? "full-height-container translate-up"
       : "full-height-container";
-
   const textDisplayClassName = oreo.length ? "color-black" : "color-gray";
+
   return (
     <div className={viewClassName}>
       <EditorTitle onClick={onTitleButtonClick}></EditorTitle>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useOreo } from "./hooks/useOreo";
+import { OreoActionType } from "./oreo";
 
 import { TitleView } from "./views/TitleView";
 import { EditorView } from "./views/EditorView";
@@ -17,8 +18,28 @@ function App() {
     setCurrentView(Views.Home);
   }
 
+  function keyDownHandler(e: React.KeyboardEvent<HTMLDivElement>) {
+    console.log(e.key);
+    if (currentView === Views.Editor) {
+      switch (e.key) {
+        case "o":
+          dispatchOreoUpdate({ type: OreoActionType.AppendO });
+          break;
+        case "r":
+          dispatchOreoUpdate({ type: OreoActionType.AppendRe });
+          break;
+        case "Backspace":
+          dispatchOreoUpdate({ type: OreoActionType.RemoveLast });
+          break;
+        case " ":
+          dispatchOreoUpdate({ type: OreoActionType.AppendEmpty });
+          break;
+      }
+    }
+  }
+
   return (
-    <div className="App">
+    <div className="App" onKeyDown={keyDownHandler}>
       <TitleView
         currentView={currentView}
         onLargeButtonClick={() => gotoEditor()}
