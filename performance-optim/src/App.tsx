@@ -18,6 +18,10 @@ function App() {
     setCurrentView(Views.Home);
   }
 
+  function gotoCanvas() {
+    setCurrentView(Views.Canvas);
+  }
+
   function keyDownHandler(e: React.KeyboardEvent<HTMLDivElement>) {
     if (currentView === Views.Editor) {
       switch (e.key) {
@@ -33,8 +37,15 @@ function App() {
         case " ":
           dispatchOreoUpdate({ type: OreoActionType.AppendEmpty });
           break;
+        case "Enter":
+          gotoCanvas();
       }
     }
+  }
+
+  function onCompile() {
+    console.log("Compile");
+    setCurrentView(Views.Canvas);
   }
 
   return (
@@ -49,6 +60,7 @@ function App() {
         oreo={oreo}
         oreoText={oreoText}
         oreoUpdateDispatcher={dispatchOreoUpdate}
+        onCompile={onCompile}
       ></EditorView>
     </div>
   );
