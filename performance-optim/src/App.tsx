@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useOreo } from "./hooks/useOreo";
 import { OreoActionType } from "./oreo";
 
@@ -19,7 +19,6 @@ function App() {
   }
 
   function keyDownHandler(e: React.KeyboardEvent<HTMLDivElement>) {
-    console.log(e.key);
     if (currentView === Views.Editor) {
       switch (e.key) {
         case "o":
@@ -39,7 +38,7 @@ function App() {
   }
 
   return (
-    <div className="App" onKeyDown={keyDownHandler}>
+    <div className="App" onKeyDown={keyDownHandler} tabIndex={0}>
       <TitleView
         currentView={currentView}
         onLargeButtonClick={() => gotoEditor()}
