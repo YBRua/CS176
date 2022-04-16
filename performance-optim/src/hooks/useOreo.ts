@@ -13,7 +13,7 @@ function oreoLogicToTextMapper(oreo: OreoType[]) {
             return " & ";
         }
       })
-    : ['CLICK THE BUTTONS'];
+    : ['Create Your OREO'];
 }
 
 export function useOreo(
