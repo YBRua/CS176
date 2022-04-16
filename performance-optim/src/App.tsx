@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useOreo } from "./hooks/useOreo";
-import { OreoActionType, OreoArtist } from "./oreo";
+import { OreoActionType, OreoArtist, OreoFlavor } from "./oreo";
 
 import { TitleView } from "./views/TitleView";
 import { EditorView } from "./views/EditorView";
@@ -12,6 +12,8 @@ let artist: OreoArtist | null = null;
 function App() {
   const [currentView, setCurrentView] = useState(Views.Home);
   const [oreo, oreoText, dispatchOreoUpdate] = useOreo();
+  const [flavor, setFlavor] = useState(OreoFlavor.Strawberry);
+
   const [loading, setLoading] = useState(false);
   const [canvasReady, setCanvasReady] = useState(false);
   const [artist, setArtist] = useState(
@@ -75,6 +77,8 @@ function App() {
           oreoText={oreoText}
           oreoUpdateDispatcher={dispatchOreoUpdate}
           onCompile={gotoCanvas}
+          flavor={flavor}
+          setFlavor={setFlavor}
         ></EditorView>
       </div>
     );
@@ -90,6 +94,7 @@ function App() {
         canvasReady={canvasReady}
         artist={artist}
         returnToEditor={returnToEditor}
+        flavor={flavor}
       ></CanvasView>
     );
   }

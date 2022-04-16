@@ -1,4 +1,4 @@
-import { OreoAction, OreoActionType, OreoType } from "../oreo";
+import { OreoAction, OreoActionType, OreoFlavor, OreoType } from "../oreo";
 
 import { getViewClassName, Views } from "./view";
 import { EditorTitle } from "../components/EditorTitle";
@@ -14,6 +14,8 @@ type CanvasViewPropTypes = {
   oreo: OreoType[];
   oreoText: () => string;
   oreoUpdateDispatcher: React.Dispatch<OreoAction>;
+  flavor: OreoFlavor;
+  setFlavor: React.Dispatch<React.SetStateAction<OreoFlavor>>;
 };
 
 export function EditorView(props: CanvasViewPropTypes) {
@@ -24,6 +26,8 @@ export function EditorView(props: CanvasViewPropTypes) {
     oreo,
     oreoText,
     oreoUpdateDispatcher,
+    flavor,
+    setFlavor,
   } = props;
 
   const viewClassName = getViewClassName(currentView);
@@ -54,6 +58,8 @@ export function EditorView(props: CanvasViewPropTypes) {
           oreoUpdateDispatcher({ type: OreoActionType.ClearAll })
         }
         onCompile={onCompile}
+        flavor={flavor}
+        onSetFlavor={setFlavor}
       ></EditorButtonSet>
     </div>
   );

@@ -12,6 +12,13 @@ export enum OreoActionType {
   ClearAll,
 }
 
+export enum OreoFlavor {
+  Vanilla = "vanilla",
+  Chocolate = "chocolate",
+  Strawberry = "strawberry",
+  Matcha = "matcha",
+}
+
 export interface OreoAction {
   type: OreoActionType;
 }
@@ -31,7 +38,14 @@ export class OreoArtist {
   setIsLoading: (isLoading: boolean) => void;
   setCanvasReady: (isReady: boolean) => void;
 
-  static imageKeys = ["O", "R", "Ob"];
+  static imageKeys = [
+    "O",
+    "R.vanilla",
+    "R.strawberry",
+    "R.chocolate",
+    "R.matcha",
+    "Ob",
+  ];
 
   constructor(
     setIsLoading: (arg0: boolean) => void,
@@ -73,7 +87,7 @@ export class OreoArtist {
     return ctx;
   }
 
-  _generateRenderConfigs(oreo: OreoType[]) {
+  _generateRenderConfigs(oreo: OreoType[], flavor: OreoFlavor) {
     let isFirstO = true;
     let currentHeight = 0;
 
@@ -102,7 +116,7 @@ export class OreoArtist {
           break;
         case OreoType.Re:
           this.configs.unshift({
-            image: this.images.get("R")!,
+            image: this.images.get(`R.${flavor}`)!,
             x: 10,
             y: currentHeight,
             width: 220,
@@ -124,12 +138,12 @@ export class OreoArtist {
     this.configs = [];
   }
 
-  draw(oreo: OreoType[], canvas: HTMLCanvasElement) {
+  draw(oreo: OreoType[], flavor: OreoFlavor, canvas: HTMLCanvasElement) {
     const oreo_ = Array.from(oreo);
     this.setCanvasReady(false);
     const ctx = this._generateCanvasCtx(canvas);
     this._resetConfigs();
-    this._generateRenderConfigs(oreo_);
+    this._generateRenderConfigs(oreo_, flavor);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     if (this.configs.length > 0) {

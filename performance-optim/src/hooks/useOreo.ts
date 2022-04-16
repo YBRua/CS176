@@ -1,4 +1,4 @@
-import { OreoAction, OreoType, OreoActionType } from "../oreo";
+import { OreoAction, OreoType, OreoActionType, OreoFlavor } from "../oreo";
 import React, { useReducer, useCallback as useMemo } from "react";
 
 function oreoLogicToTextMapper(oreo: OreoType[]) {
@@ -13,7 +13,7 @@ function oreoLogicToTextMapper(oreo: OreoType[]) {
             return " & ";
         }
       })
-    : ['Create Your OREO'];
+    : ["Create Your OREO"];
 }
 
 export function useOreo(

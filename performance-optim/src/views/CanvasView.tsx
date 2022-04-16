@@ -3,7 +3,7 @@ import { getViewClassName, Views } from "./view";
 
 import "../common.scss";
 import "../components/styles/EditorButtonSet.scss";
-import { OreoArtist, OreoType } from "../oreo";
+import { OreoArtist, OreoFlavor, OreoType } from "../oreo";
 import { RoundedButton } from "../components/RoundedButton";
 
 type CanvasViewPropTypes = {
@@ -11,12 +11,13 @@ type CanvasViewPropTypes = {
   canvasReady: boolean;
   oreo: OreoType[];
   oreoText: () => string;
+  flavor: OreoFlavor
   artist: OreoArtist;
   returnToEditor: () => void;
 };
 
 export function CanvasView(props: CanvasViewPropTypes) {
-  const { currentView, canvasReady, oreo, oreoText, artist, returnToEditor } = props;
+  const { currentView, canvasReady, oreo, oreoText, flavor, artist, returnToEditor } = props;
   const viewClassName = getViewClassName(currentView);
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
 
@@ -30,8 +31,13 @@ export function CanvasView(props: CanvasViewPropTypes) {
   }
 
   useEffect(() => {
-    artist.draw(oreo, canvasRef.current!);
+    artist.draw(oreo, flavor, canvasRef.current!);
   }, [oreo]);
+
+  let flavorDiv: JSX.Element | null = null;
+  if (flavor !== OreoFlavor.Vanilla) {
+    flavorDiv = <div className={`flavor-description desc-${flavor}`}>But in {flavor} flavor</div>
+  }
 
   return (
     <div className={viewClassName}>
@@ -55,6 +61,7 @@ export function CanvasView(props: CanvasViewPropTypes) {
             ></RoundedButton>
           </div>
           <div className="result-description">{oreoText()}</div>
+          {flavorDiv}
           <div className="canvas-container">
             <canvas ref={canvasRef}></canvas>
           </div>
