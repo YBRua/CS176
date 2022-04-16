@@ -8,15 +8,13 @@ export function Title() {
         <LazyLoadImage
           src="./src/figs/minified/oreo.png"
           alt="I'm Oreo"
-          width={50}
-          height={50}
+          className="title-image"
         ></LazyLoadImage>
         <h1 className="main-title">Unofficial Oreo Compiler</h1>
         <LazyLoadImage
           src="./src/figs/minified/oreo.png"
           alt="I'm Oreo"
-          width={50}
-          height={50}
+          className="title-image"
         ></LazyLoadImage>
       </div>
       <h2 className="main-subtitle">An SJTU CS176 Course Assignment</h2>

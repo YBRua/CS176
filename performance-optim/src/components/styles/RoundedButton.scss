@@ -24,6 +24,16 @@
   }
 }
 
+@media (max-width: 748px) {
+  .vanilla,
+  .strawberry,
+  .chocolate,
+  .matcha,
+  .rounded-button {
+    font-size: 1rem;
+  }
+}
+
 .vanilla {
   &.selected {
     color: #fff;
@@ -139,6 +149,13 @@
   height: 50px;
 }
 
+@media (max-width: 748px) {
+  .editor-title-button {
+    width: 80px;
+    height: 40px;
+  }
+}
+
 .editor-set-button,
 .editor-set-button-half,
 .editor-set-button-quarter {
@@ -151,9 +168,24 @@
   text-align: center;
 }
 
+@media (max-width: 748px) {
+  .editor-set-button,
+  .editor-set-button-half,
+  .editor-set-button-quarter {
+    font-size: 1.2rem;
+  }
+}
+
 .editor-set-button {
   height: 65px;
   width: 400px;
+}
+
+@media (max-width: 748px) {
+  .editor-set-button {
+    width: 80vw;
+    height: 40px;
+  }
 }
 
 .editor-set-button-half {
@@ -161,10 +193,25 @@
   width: 190px;
 }
 
+@media (max-width: 748px) {
+  .editor-set-button-half {
+    width: 38vw;
+    height: 40px;
+  }
+}
+
 .editor-set-button-quarter {
   font-size: 1rem;
   height: 45px;
   width: 90px;
+}
+
+@media (max-width: 748px) {
+  .editor-set-button-quarter {
+    width: 18vw;
+    height: 40px;
+    font-size: 0.8rem;
+  }
 }
 
 .editor-set-button-row {
@@ -192,4 +239,15 @@
 .result-button-half {
   height: 40px;
   width: 145px;
+}
+
+@media (max-width: 748px) {
+  .result-button {
+    width: 70vw;
+    font-size: 1rem;
+  }
+  .result-button-half {
+    width: 33vw;
+    font-size: 1rem;
+  }
 }

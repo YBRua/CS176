@@ -35,3 +35,12 @@
     transform: translateX(0);
   }
 }
+
+@media (max-width: 748px) {
+  .large-button {
+    width: 75vw;
+    height: 10vh;
+
+    font-size: 2rem;
+  }
+}

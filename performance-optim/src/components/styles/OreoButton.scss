@@ -33,3 +33,13 @@
 
   padding-left: 1rem;
 }
+
+@media (max-width: 748px) {
+  .oreo-button {
+    width: 38vw;
+  }
+
+  .oreo-button-text {
+    font-size: 1.5rem;
+  }
+}

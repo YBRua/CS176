@@ -83,6 +83,16 @@ body {
   }
 }
 
+@media (max-width: 748px) {
+  .editor-text-container {
+    .editor-textdisplay {
+      width: 70vw;
+      font-size: 1.5rem;
+      line-height: 1.75rem;
+    }
+  }
+}
+
 .flex-center {
   display: flex;
   align-items: center;
@@ -130,6 +140,22 @@ body {
 
     .canvas-container {
       padding: 2rem 50px;
+    }
+  }
+}
+
+@media (max-width: 748px) {
+  .result-container {
+    .result-inner {
+      width: 90vw;
+
+      .result-title {
+        font-size: 1.5rem;
+      }
+
+      .result-description {
+        font-size: 1.75rem;
+      }
     }
   }
 }
@@ -189,4 +215,7 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+
+@media (max-width: 748px) {
 }

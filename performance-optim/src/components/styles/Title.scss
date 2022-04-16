@@ -10,10 +10,10 @@
     align-items: center;
 
     .main-title {
-      font-size: 2.5rem;
+      font-size: 4.5rem;
       font-weight: bold;
 
-      margin: 1rem;
+      padding: 1rem;
 
       font-variant: small-caps;
     }
@@ -22,9 +22,38 @@
   .main-subtitle {
     color: #8c8c8c;
     font-size: 1.5rem;
-    margin-bottom: 1rem;
+    padding-bottom: 1rem;
     font-variant: small-caps;
 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+}
+
+.title-image {
+  height: 50px;
+  width: 50px;
+}
+
+@media (max-width: 748px) {
+  .title-container {
+    padding-top: 30%;
+    .main-title-container {
+      .main-title {
+        font-size: 1.5rem;
+      }
+    }
+
+    .main-subtitle {
+      font-size: 1rem;
+    }
+  }
+
+  .show-if-large {
+    display: hidden;
+  }
+
+  .title-image {
+    height: 25px;
+    width: 25px;
   }
 }
