@@ -34,6 +34,10 @@ function App() {
     setCurrentView(Views.Canvas);
   }
 
+  function returnToEditor() {
+    setCurrentView(Views.Editor);
+  }
+
   function keyDownHandler(e: React.KeyboardEvent<HTMLDivElement>) {
     if (currentView === Views.Editor) {
       switch (e.key) {
@@ -85,6 +89,7 @@ function App() {
         oreoText={oreoText}
         canvasReady={canvasReady}
         artist={artist}
+        returnToEditor={returnToEditor}
       ></CanvasView>
     );
   }

@@ -66,3 +66,22 @@
   justify-content: space-around;
   align-items: center;
 }
+
+.result-button,
+.result-button-half {
+  font-family: inherit;
+  font-size: 1.5rem;
+  font-weight: bold;
+
+  text-align: center;
+}
+
+.result-button {
+  height: 40px;
+  width: 300px;
+}
+
+.result-button-half {
+  height: 40px;
+  width: 145px;
+}
