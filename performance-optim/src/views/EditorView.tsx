@@ -1,6 +1,6 @@
 import { Views } from "./view";
-import { OreoButton } from "../components/OreoButton";
 import { EditorTitle } from "../components/EditorTitle";
+import { EditorButtonSet } from "../components/EditorButtonSet";
 
 import "../common.scss";
 
@@ -18,14 +18,12 @@ export function EditorView(props: CanvasViewPropTypes) {
   return (
     <div className={viewClassName}>
       <EditorTitle onClick={props.onTitleButtonClick}></EditorTitle>
-      <OreoButton
-        imgSrc="./src/figs/minified/O.png"
-        imgAlt="Add O"
-        imgHeight={41}
-        imgWidth={60}
-        buttonText="+O"
-        onClick={() => {}}
-      ></OreoButton>
+      <EditorButtonSet
+        onAddO={() => {}}
+        onAddRe={() => {}}
+        onDelLast={() => {}}
+        onAddEmpty={() => {}}
+      ></EditorButtonSet>
     </div>
   );
 }
