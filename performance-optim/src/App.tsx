@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useOreo } from "./hooks/useOreo";
 import { OreoActionType, OreoArtist } from "./oreo";
 
@@ -13,7 +13,10 @@ function App() {
   const [currentView, setCurrentView] = useState(Views.Home);
   const [oreo, oreoText, dispatchOreoUpdate] = useOreo();
   const [loading, setLoading] = useState(false);
-  const [artist, setArtist] = useState(new OreoArtist(setLoading));
+  const [canvasReady, setCanvasReady] = useState(false);
+  const [artist, setArtist] = useState(
+    new OreoArtist(setLoading, setCanvasReady)
+  );
 
   useEffect(() => {
     artist._loadImages();
@@ -52,11 +55,6 @@ function App() {
     }
   }
 
-  function onCompile() {
-    // console.log("Compile");
-    gotoCanvas();
-  }
-
   let PreCompileViews: JSX.Element | null = null;
   if (currentView === Views.Home || currentView === Views.Editor) {
     PreCompileViews = (
@@ -72,21 +70,24 @@ function App() {
           oreo={oreo}
           oreoText={oreoText}
           oreoUpdateDispatcher={dispatchOreoUpdate}
-          onCompile={onCompile}
+          onCompile={gotoCanvas}
         ></EditorView>
       </div>
     );
   }
 
-  let PostCompileViews = (
-    <CanvasView
-      currentView={currentView}
-      oreo={oreo}
-      oreoText={oreoText}
-      loading={loading}
-      artist={artist}
-    ></CanvasView>
-  );
+  let PostCompileViews: JSX.Element | null = null;
+  if (currentView === Views.Canvas) {
+    PostCompileViews = (
+      <CanvasView
+        currentView={currentView}
+        oreo={oreo}
+        oreoText={oreoText}
+        canvasReady={canvasReady}
+        artist={artist}
+      ></CanvasView>
+    );
+  }
 
   return (
     <div
@@ -95,7 +96,7 @@ function App() {
       tabIndex={0}
     >
       {PreCompileViews}
-      {currentView === Views.Canvas ? PostCompileViews : null}
+      {PostCompileViews}
     </div>
   );
 }

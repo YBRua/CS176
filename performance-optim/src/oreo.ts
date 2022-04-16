@@ -29,14 +29,19 @@ export class OreoArtist {
   images: Map<string, HTMLImageElement>;
   configs: OreoRenderConfig[];
   setIsLoading: (isLoading: boolean) => void;
+  setCanvasReady: (isReady: boolean) => void;
 
   static imageKeys = ["O", "R", "Ob"];
 
-  constructor(setIsLoading: (arg0: boolean) => void) {
+  constructor(
+    setIsLoading: (arg0: boolean) => void,
+    setCanvasReady: (arg0: boolean) => void
+  ) {
     this.canvas = null;
     this.images = new Map();
     this.configs = [];
     this.setIsLoading = setIsLoading;
+    this.setCanvasReady = setCanvasReady;
   }
 
   _loadImages() {
@@ -112,7 +117,7 @@ export class OreoArtist {
   }
 
   draw(oreo: OreoType[], canvas: HTMLCanvasElement) {
-    this.setIsLoading(true);
+    this.setCanvasReady(false);
     const ctx = this._generateCanvasCtx(canvas);
     this._resetConfigs();
     this._generateRenderConfigs(oreo);
@@ -126,7 +131,7 @@ export class OreoArtist {
     // console.log("Render Done.");
     setTimeout(() => {
       // console.log("Post-rendering callback");
-      this.setIsLoading(false);
+      this.setCanvasReady(true);
     }, 1000);
   }
 }
