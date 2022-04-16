@@ -40,6 +40,7 @@ export class OreoArtist {
   }
 
   _loadImages() {
+    this.setIsLoading(true);
     let loaded = 0;
     for (const key of OreoArtist.imageKeys) {
       const image = new Image();
@@ -53,6 +54,9 @@ export class OreoArtist {
         }
       };
     }
+    setTimeout(() => {
+      this.setIsLoading(false);
+    }, 1000);
   }
 
   _generateCanvasCtx(canvas: HTMLCanvasElement) {
