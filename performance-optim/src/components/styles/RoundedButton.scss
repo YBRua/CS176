@@ -25,10 +25,8 @@
   height: 50px;
 }
 
-.editor-set-button {
-  height: 65px;
-  width: 400px;
-
+.editor-set-button,
+.editor-set-button-half {
   margin-top: 0.5rem;
 
   font-family: inherit;
@@ -36,4 +34,22 @@
   font-weight: bold;
 
   text-align: center;
+}
+
+.editor-set-button {
+  height: 65px;
+  width: 400px;
+}
+
+.editor-set-button-half {
+  height: 65px;
+  width: 190px;
+}
+
+.editor-set-button-row {
+  display: flex;
+  gap: 10px;
+
+  justify-content: space-around;
+  align-items: center;
 }

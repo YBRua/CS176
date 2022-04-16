@@ -2,12 +2,14 @@ import { OreoButton } from "./OreoButton";
 import { RoundedButton } from "./RoundedButton";
 
 import "./styles/EditorButtonSet.scss";
+import "./styles/RoundedButton.scss";
 
 type EditorButtonSetPropTypes = {
   onAddO: () => void;
   onAddRe: () => void;
   onAddEmpty: () => void;
   onDelLast: () => void;
+  onClearAll: () => void;
 };
 
 export function EditorButtonSet(props: EditorButtonSetPropTypes) {
@@ -27,18 +29,25 @@ export function EditorButtonSet(props: EditorButtonSetPropTypes) {
         imgHeight={41}
         imgWidth={60}
         buttonText="+Re"
-        onClick={props.onAddO}
+        onClick={props.onAddRe}
       ></OreoButton>
       <RoundedButton
         onClick={props.onAddEmpty}
         buttonText="</> +Space"
         extraClassName="editor-set-button"
       ></RoundedButton>
-      <RoundedButton
-        onClick={props.onDelLast}
-        buttonText="Backspace"
-        extraClassName="editor-set-button"
-      ></RoundedButton>
+      <div className="editor-set-button-row">
+        <RoundedButton
+          onClick={props.onDelLast}
+          buttonText="Backspace"
+          extraClassName="editor-set-button-half"
+        ></RoundedButton>
+        <RoundedButton
+          onClick={props.onClearAll}
+          buttonText="ClearAll"
+          extraClassName="editor-set-button-half"
+        ></RoundedButton>
+      </div>
     </div>
   );
 }

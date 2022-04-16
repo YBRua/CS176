@@ -9,6 +9,7 @@ export enum OreoActionType {
   AppendRe,
   AppendEmpty,
   RemoveLast,
+  ClearAll,
 }
 
 export interface OreoAction {

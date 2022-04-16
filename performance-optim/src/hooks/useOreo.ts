@@ -1,20 +1,24 @@
 import { OreoAction, OreoType, OreoActionType } from "../oreo";
-import { useReducer, useCallback as useMemo } from "react";
+import React, { useReducer, useCallback as useMemo } from "react";
 
 function oreoLogicToTextMapper(oreo: OreoType[]) {
-  return oreo.map((oreoType) => {
-    switch (oreoType) {
-      case OreoType.O:
-        return "O";
-      case OreoType.Re:
-        return "RE";
-      case OreoType.Empty:
-        return " & ";
-    }
-  });
+  return oreo.length
+    ? oreo.map((oreoType) => {
+        switch (oreoType) {
+          case OreoType.O:
+            return "O";
+          case OreoType.Re:
+            return "RE";
+          case OreoType.Empty:
+            return " & ";
+        }
+      })
+    : ['CLICK THE BUTTONS'];
 }
 
-export function useOreo(initialState: OreoType[] = []) {
+export function useOreo(
+  initialState: OreoType[] = []
+): [OreoType[], () => string, React.Dispatch<OreoAction>] {
   function oreoReducer(state: OreoType[], action: OreoAction) {
     switch (action.type) {
       case OreoActionType.AppendO:
@@ -25,14 +29,13 @@ export function useOreo(initialState: OreoType[] = []) {
         return [...state, OreoType.Empty];
       case OreoActionType.RemoveLast:
         return state.slice(0, -1);
+      case OreoActionType.ClearAll:
+        return [];
     }
   }
 
-  const [oreo, updateOreo] = useReducer(oreoReducer, initialState);
-  const oreoText = useMemo(
-    () => oreoLogicToTextMapper(oreo).join(""),
-    [oreo]
-  );
+  const [oreo, dispatchOreoUpdate] = useReducer(oreoReducer, initialState);
+  const oreoText = useMemo(() => oreoLogicToTextMapper(oreo).join(""), [oreo]);
 
-  return [oreo, oreoText, updateOreo];
+  return [oreo, oreoText, dispatchOreoUpdate];
 }
