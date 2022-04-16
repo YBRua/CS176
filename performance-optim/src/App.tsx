@@ -1,14 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useOreo } from "./hooks/useOreo";
-import { OreoActionType } from "./oreo";
+import { OreoActionType, OreoArtist } from "./oreo";
 
 import { TitleView } from "./views/TitleView";
 import { EditorView } from "./views/EditorView";
+import { CanvasView } from "./views/CanvasView";
 import { Views } from "./views/view";
+
+let artist: OreoArtist | null = null;
 
 function App() {
   const [currentView, setCurrentView] = useState(Views.Home);
   const [oreo, oreoText, dispatchOreoUpdate] = useOreo();
+  const [loading, setLoading] = useState(false);
+
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasEl = <canvas ref={canvasRef}></canvas>;
+
+  useEffect(() => {
+    if (!artist) {
+      console.log("Creating artist");
+      artist = new OreoArtist(canvasRef.current!, setLoading);
+      artist._loadImages();
+    }
+  }, [canvasRef]);
 
   function gotoEditor() {
     setCurrentView(Views.Editor);
@@ -18,8 +33,9 @@ function App() {
     setCurrentView(Views.Home);
   }
 
-  function gotoCanvas() {
+  function renderCanvas() {
     setCurrentView(Views.Canvas);
+    artist!.draw(oreo);
   }
 
   function keyDownHandler(e: React.KeyboardEvent<HTMLDivElement>) {
@@ -38,14 +54,14 @@ function App() {
           dispatchOreoUpdate({ type: OreoActionType.AppendEmpty });
           break;
         case "Enter":
-          gotoCanvas();
+          renderCanvas();
       }
     }
   }
 
   function onCompile() {
     console.log("Compile");
-    setCurrentView(Views.Canvas);
+    renderCanvas();
   }
 
   return (
@@ -53,6 +69,7 @@ function App() {
       <TitleView
         currentView={currentView}
         onLargeButtonClick={() => gotoEditor()}
+        loading={loading}
       ></TitleView>
       <EditorView
         currentView={currentView}
@@ -62,6 +79,12 @@ function App() {
         oreoUpdateDispatcher={dispatchOreoUpdate}
         onCompile={onCompile}
       ></EditorView>
+      <CanvasView
+        currentView={currentView}
+        canvasElement={canvasEl}
+        oreoText={oreoText}
+        loading={loading}
+      ></CanvasView>
     </div>
   );
 }
