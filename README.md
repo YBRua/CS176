@@ -9,6 +9,7 @@ Homework and Project repository for *CS176 Modern Frontend Application Developme
 - **Lecture 03 React.js Basics and Frontend Engineering**: Implement a [Todo List](https://todomvc.com/). [Link (Repository)](react-todolist/)
 - **Lecture 04 Introduction to Node.js**: Implement a custom protocol based on TCP APIs. [Link (Repository)](chit-chat-control-protocol/)
 - **Lecture 05 Mobile Web Development**: Responsive CSS page layout. [Link (Repository)](responsive-page-design/)
+- **Lecture 06 Performance Optimization**: Improving user experience. [Link (Repository)](performance-optim/)
 
 ## Project
 
