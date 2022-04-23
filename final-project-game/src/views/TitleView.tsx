@@ -1,5 +1,3 @@
-import { HoverGlowButton } from "../components/HoverGlowButton";
-
 import "../styles/main.css";
 import "../styles/TitleView.css";
 
@@ -12,7 +10,6 @@ export function TitleView() {
       <h2 className="text-xl font-smallcaps font-serif text-zinc-300 p-2">
         CS176 Final Project
       </h2>
-      <HoverGlowButton></HoverGlowButton>
     </div>
   );
 }
