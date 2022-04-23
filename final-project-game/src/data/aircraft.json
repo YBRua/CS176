@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "Interceptor1",
+    "image": "../assets/aircraft/aircraft.png",
+    "description": "Interceptor description",
+    "speed": 10,
+    "hp": 150
+  },
+  {
+    "id": 2,
+    "name": "Fighter1",
+    "image": "../assets/aircraft/aircraft.png",
+    "description": "Fighter description",
+    "speed": 8,
+    "hp": 200
+  }
+]
