@@ -11,7 +11,11 @@ export function HoverGlowLink(props: HoverGlowLinkPropTypes) {
   return (
     <NavLink
       to={props.to}
-      className={`hover-glow-button ${props.extraClassName}`}
+      className={({ isActive }) =>
+        isActive
+          ? `hover-glow-button link-active ${props.extraClassName}`
+          : `hover-glow-button ${props.extraClassName}`
+      }
     >
       {props.btnText}
     </NavLink>
