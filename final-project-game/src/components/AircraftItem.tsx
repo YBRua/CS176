@@ -1,5 +1,5 @@
 import { HoverGlowButton } from "./HoverGlowButton";
-import { Aircraft, resolveAircraftImagePath } from "../data/aircraft";
+import { Aircraft, resolveAircraftImagePath } from "../data/aircraft/aircraft";
 
 import "../styles/AircraftItem.css";
 

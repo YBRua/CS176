@@ -1,5 +1,5 @@
 import { AircraftItem } from "../components/AircraftItem";
-import { loadAircrafts } from "../data/aircraft";
+import { loadAircrafts } from "../data/aircraft/aircraft";
 
 import "../styles/main.css";
 
