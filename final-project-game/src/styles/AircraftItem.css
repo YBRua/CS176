@@ -1,0 +1,10 @@
+.aircraft-image {
+  height: 60px;
+  width: 60px;
+}
+
+.aircraft-item {
+  height: 80px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

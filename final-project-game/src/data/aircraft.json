@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "Interceptor1",
-    "image": "../assets/aircraft/aircraft.png",
+    "image": "Interceptor",
     "description": "Interceptor description",
     "speed": 10,
     "hp": 150
@@ -10,7 +10,7 @@
   {
     "id": 2,
     "name": "Fighter1",
-    "image": "../assets/aircraft/aircraft.png",
+    "image": "Interceptor",
     "description": "Fighter description",
     "speed": 8,
     "hp": 200

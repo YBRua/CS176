@@ -1,3 +1,4 @@
+import "../assets/aircraft/Interceptor.png";
 import AIRCRAFTS from "./aircraft.json";
 
 export interface Aircraft {
@@ -15,4 +16,23 @@ export function loadAircrafts(): Aircraft[] {
 
 export function getAircraftById(id: number): Aircraft | null {
   return AIRCRAFTS.find((aircraft) => aircraft.id === id) || null;
+}
+
+export function loadAircraftImage(
+  aircraft: Aircraft,
+  padding: boolean = false
+): HTMLImageElement {
+  let img = new Image();
+  const imageSrc = `/src/assets/aircraft/${aircraft.image}${
+    padding ? "-boxed" : ""
+  }.png`;
+  img.src = imageSrc;
+  return img;
+}
+
+export function resolveAircraftImagePath(
+  aircraft: Aircraft,
+  padding: boolean = false
+): string {
+  return `/src/assets/aircraft/${aircraft.image}${padding ? "-boxed" : ""}.png`;
 }
