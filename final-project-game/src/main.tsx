@@ -10,6 +10,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
+          <Route index element={<h1>Index</h1>}></Route>
           <Route path="/shop" element={<h1>Shop</h1>}></Route>
         </Route>
         <Route path="*" element={<h1>Not Found 捏</h1>}></Route>

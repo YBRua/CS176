@@ -1,0 +1,32 @@
+.hover-glow-button {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  color: #fff;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.hover-glow-button:hover {
+  animation: glow 2s infinite;
+  animation-timing-function: ease;
+}
+
+.hover-glow-button:active {
+  color: #a1a1aa;
+  animation: none;
+  text-shadow: 0 0 0px #a1a1aa;
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 2px #fff, 0 0 5px #f4f4f5;
+  }
+  50% {
+    text-shadow: 0 0 5px #fff, 0 0 10px #f4f4f5;
+  }
+  100% {
+    text-shadow: 0 0 2px #fff, 0 0 5px #f4f4f5;
+  }
+}
