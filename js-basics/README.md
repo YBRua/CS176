@@ -5,7 +5,7 @@
 ### Getting Started
 
 - The game is available [here](https://game.cs176.ybirua.top/)
-  - Link: <https://game.cs176.ybirua.top/>
+  - Link: <https://game.cs176.ybirua.top/>  
 
 To build the application, clone the repository, and execute
 
