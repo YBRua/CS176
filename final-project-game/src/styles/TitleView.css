@@ -4,6 +4,6 @@
 
 .main-title {
   color: #fff;
-  text-shadow: 0 0 3px #fff, 0 0 10px rgba(255, 255, 255, 0.75),
-    0 0 20px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 0 2px #fff, 0 0 6px rgba(255, 255, 255, 0.75),
+    0 0 10px rgba(255, 255, 255, 0.5);
 }
