@@ -10,6 +10,7 @@ import { AircraftView } from "./views/AircraftView";
 import "./styles/main.css";
 import { WeaponView } from "./views/WeaponView";
 import { HangarIndex } from "./views/HangarIndex";
+import { LevelSelectionView } from "./views/LevelSelectionView";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -26,8 +27,15 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             ></Route>
             <Route path="weaponry" element={<WeaponView></WeaponView>}></Route>
           </Route>
-          <Route path="levels" element={<h1>Level Selection</h1>}></Route>
+          <Route
+            path="levels"
+            element={<LevelSelectionView></LevelSelectionView>}
+          ></Route>
         </Route>
+        <Route
+          path="*"
+          element={<h1 className="text-zinc-700 text-center">?</h1>}
+        ></Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

@@ -14,3 +14,11 @@ body {
 .font-smallcaps {
   font-variant: small-caps;
 }
+
+.rounded-item-outer {
+  @apply flex w-full bg-zinc-700 rounded-md transition-all hover:bg-zinc-600;  
+}
+
+.rounded-item-inner {
+  @apply flex flex-row items-center text-sm gap-4 w-full mx-4;
+}

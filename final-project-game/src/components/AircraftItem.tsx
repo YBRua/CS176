@@ -2,6 +2,7 @@ import { HoverGlowButton } from "./HoverGlowButton";
 import { Aircraft, resolveAircraftImagePath } from "../data/aircraft/aircraft";
 
 import "../styles/AircraftItem.css";
+import "../styles/main.css";
 
 type AircraftItemPropTypes = {
   aircraft: Aircraft;
@@ -13,8 +14,7 @@ export function AircraftItem(props: AircraftItemPropTypes) {
   return (
     <div
       className="
-      aircraft-item flex w-full bg-zinc-700 rounded-md transition-all
-      hover:bg-zinc-600"
+      aircraft-item rounded-item-outer"
     >
       <img
         src={imgSrc}
@@ -23,7 +23,7 @@ export function AircraftItem(props: AircraftItemPropTypes) {
         height={60}
         className="aircraft-image mx-4"
       />
-      <div className="flex items-center text-sm gap-4 w-full mx-4">
+      <div className="rounded-item-inner">
         <div className="w-1/4">
           <div className="text-zinc-400">Name</div>
           <div className="text-zinc-200">{aircraft.name}</div>
