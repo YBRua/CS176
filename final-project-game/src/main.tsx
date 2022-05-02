@@ -8,6 +8,8 @@ import { HangarView } from "./views/HangarView";
 import { AircraftView } from "./views/AircraftView";
 
 import "./styles/main.css";
+import { WeaponView } from "./views/WeaponView";
+import { HangarIndex } from "./views/HangarIndex";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -17,8 +19,12 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route index element={<IndexView />}></Route>
           <Route path="shop" element={<h1>Shop</h1>}></Route>
           <Route path="hangar" element={<HangarView></HangarView>}>
-            <Route path="aircraft" element={<AircraftView></AircraftView>}></Route>
-            <Route path="weaponry" element={<h2>Weapon</h2>}></Route>
+            <Route index element={<HangarIndex></HangarIndex>}></Route>
+            <Route
+              path="aircraft"
+              element={<AircraftView></AircraftView>}
+            ></Route>
+            <Route path="weaponry" element={<WeaponView></WeaponView>}></Route>
           </Route>
           <Route path="levels" element={<h1>Level Selection</h1>}></Route>
         </Route>

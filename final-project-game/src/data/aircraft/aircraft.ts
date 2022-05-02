@@ -1,4 +1,4 @@
-import "../assets/aircraft/Interceptor.png";
+import "../../assets/aircraft/Interceptor.png";
 import AIRCRAFTS from "./aircraft.json";
 
 export interface Aircraft {
