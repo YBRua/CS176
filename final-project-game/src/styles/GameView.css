@@ -1,0 +1,11 @@
+.game-view-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.game-view-title {
+  text-align: center;
+  padding: 1rem 0;
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { IndexView } from "./views/IndexView";
@@ -12,11 +12,30 @@ import { usePlayerConfig } from "./hooks/usePlayerConfig";
 import { getAircraftById } from "./data/aircraft/aircraft";
 import { MainFrame } from "./MainFrame";
 import { getWeaponById } from "./data/weapon/weapon";
+import { GameManager } from "./gaming/gameManager";
+import { GameView } from "./views/GameView";
+
+import "./styles/main.css";
 
 export function App() {
   const [player, setAircraftId, setWeaponId] = usePlayerConfig();
+  const [levelId, setLevelId] = useState<number>(1);
+
   const aircraft = getAircraftById(player.aircraftId)!;
   const weapon = getWeaponById(player.weaponId)!;
+
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvas = (
+    <canvas
+      ref={canvasRef}
+      width={700}
+      height={500}
+      className="game-canvas"
+    ></canvas>
+  );
+
+  const gameManager = new GameManager(canvasRef);
+
   return (
     <React.StrictMode>
       <BrowserRouter>
@@ -42,7 +61,21 @@ export function App() {
             </Route>
             <Route
               path="levels"
-              element={<LevelSelectionView></LevelSelectionView>}
+              element={
+                <LevelSelectionView
+                  setLevelId={setLevelId}
+                ></LevelSelectionView>
+              }
+            ></Route>
+            <Route
+              path="gaming/:id"
+              element={
+                <GameView
+                  levelId={levelId}
+                  canvas={canvas}
+                  gameManager={gameManager}
+                ></GameView>
+              }
             ></Route>
           </Route>
           <Route

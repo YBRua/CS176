@@ -5,10 +5,11 @@ import { HoverGlowButton } from "./HoverGlowButton";
 
 type LevelItemPropTypes = {
   level: Level;
+  onStartGame: () => void;
 };
 
 export function LevelItem(props: LevelItemPropTypes) {
-  const { level } = props;
+  const { level, onStartGame } = props;
   return (
     <div className="level-item rounded-item-outer">
       <div className="rounded-item-inner ">
@@ -22,7 +23,13 @@ export function LevelItem(props: LevelItemPropTypes) {
             {difficultyToString(level.difficulty)}
           </div>
         </div>
-        <HoverGlowButton btnText="Go!" extraClassNames="text-xl w-1/3"></HoverGlowButton>
+        <HoverGlowButton
+          btnText="Go!"
+          extraClassNames="text-xl w-1/3"
+          onClick={() => {
+            onStartGame();
+          }}
+        ></HoverGlowButton>
       </div>
     </div>
   );

@@ -22,3 +22,7 @@ body {
 .rounded-item-inner {
   @apply flex flex-row items-center text-sm gap-4 w-full mx-4;
 }
+
+.game-canvas {
+  border: 1px #e2e8f0 solid;
+}
