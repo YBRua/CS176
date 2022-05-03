@@ -6,10 +6,11 @@ import "../styles/main.css";
 
 type WeaponItemPropTypes = {
   weapon: Weapon;
+  onSelectClick: () => void;
 };
 
 export function WeaponItem(props: WeaponItemPropTypes) {
-  const { weapon } = props;
+  const { weapon, onSelectClick } = props;
   return (
     <div className="weapon-item rounded-item-outer">
       <div className="rounded-item-inner">
@@ -25,7 +26,12 @@ export function WeaponItem(props: WeaponItemPropTypes) {
           <div className="text-zinc-400">CoolDown</div>
           <div className="text-zinc-200">{weapon.cooldown}</div>
         </div>
-        <HoverGlowButton btnText="SELECT"></HoverGlowButton>
+        <HoverGlowButton
+          btnText="SELECT"
+          onClick={() => {
+            onSelectClick();
+          }}
+        ></HoverGlowButton>
         <HoverGlowButton btnText="DETAIL"></HoverGlowButton>
       </div>
     </div>

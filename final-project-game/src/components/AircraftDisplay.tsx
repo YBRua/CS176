@@ -1,13 +1,15 @@
 import { Aircraft, resolveAircraftImagePath } from "../data/aircraft/aircraft";
+import { Weapon } from "../data/weapon/weapon";
 
 import "../styles/AircraftDisplay.css";
 
 type AircraftDisplayPropTypes = {
   aircraft: Aircraft;
+  weapon: Weapon;
 };
 
 export function AircraftDisplay(props: AircraftDisplayPropTypes) {
-  const { aircraft } = props;
+  const { aircraft, weapon } = props;
   const imgSrc = resolveAircraftImagePath(aircraft, true);
   return (
     <div>
@@ -21,7 +23,16 @@ export function AircraftDisplay(props: AircraftDisplayPropTypes) {
         />
       </div>
 
-      <h4 className="display-name">{aircraft.name}</h4>
+      <div className="name-display-container">
+        <div className="name-display">
+          <div className="name-display-key">Aircraft</div>
+          <div className="name-display-value">{aircraft.name}</div>
+        </div>
+        <div className="name-display">
+          <div className="name-display-key">Weapon</div>
+          <div className="name-display-value">{weapon.name}</div>
+        </div>
+      </div>
     </div>
   );
 }

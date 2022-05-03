@@ -4,9 +4,11 @@ import { TitleView } from "./views/TitleView";
 import "./styles/main.css";
 import { AircraftDisplay } from "./components/AircraftDisplay";
 import { Aircraft } from "./data/aircraft/aircraft";
+import { Weapon } from "./data/weapon/weapon";
 
 type MainFramePropTypes = {
   aircraft: Aircraft;
+  weapon: Weapon;
 };
 
 export function MainFrame(props: MainFramePropTypes) {
@@ -26,7 +28,10 @@ export function MainFrame(props: MainFramePropTypes) {
         <Outlet></Outlet>
       </div>
       <div className="w-3/12 bg-midnight h-full">
-        <AircraftDisplay aircraft={props.aircraft}></AircraftDisplay>
+        <AircraftDisplay
+          aircraft={props.aircraft}
+          weapon={props.weapon}
+        ></AircraftDisplay>
       </div>
     </h1>
   );

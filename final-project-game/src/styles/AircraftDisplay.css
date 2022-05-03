@@ -12,12 +12,30 @@
   align-items: center;
 }
 
-.display-name {
-  font-size: 1.5rem;
+.name-display-container {
+  margin-top: 2rem;
+}
+
+.name-display {
+  display: flex;
+  justify-content: space-between;
+}
+
+.name-display-key,
+.name-display-value {
+  font-size: 1rem;
   font-weight: bold;
+  line-height: 1.2;
+
+  padding: 0.25rem 2rem;
+}
+
+.name-display-key {
+  text-align: left;
   color: #fff;
+}
 
-  text-align: center;
-
-  padding: 1rem 0;
+.name-display-value {
+  text-align: right;
+  color: rgba(255, 255, 255, 0.6);
 }

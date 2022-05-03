@@ -11,15 +11,20 @@ import { LevelSelectionView } from "./views/LevelSelectionView";
 import { usePlayerConfig } from "./hooks/usePlayerConfig";
 import { getAircraftById } from "./data/aircraft/aircraft";
 import { MainFrame } from "./MainFrame";
+import { getWeaponById } from "./data/weapon/weapon";
 
 export function App() {
   const [player, setAircraftId, setWeaponId] = usePlayerConfig();
   const aircraft = getAircraftById(player.aircraftId)!;
+  const weapon = getWeaponById(player.weaponId)!;
   return (
     <React.StrictMode>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MainFrame aircraft={aircraft} />}>
+          <Route
+            path="/"
+            element={<MainFrame aircraft={aircraft} weapon={weapon} />}
+          >
             <Route index element={<IndexView />}></Route>
             <Route path="shop" element={<h1>Shop</h1>}></Route>
             <Route path="hangar" element={<HangarView></HangarView>}>
@@ -32,7 +37,7 @@ export function App() {
               ></Route>
               <Route
                 path="weaponry"
-                element={<WeaponView></WeaponView>}
+                element={<WeaponView setWeaponId={setWeaponId}></WeaponView>}
               ></Route>
             </Route>
             <Route
