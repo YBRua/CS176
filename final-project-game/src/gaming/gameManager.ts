@@ -1,40 +1,53 @@
 import React from "react";
+import { GameObject } from "./gameObjects/gameObject";
+import { SpriteGameObject } from "./gameObjects/spriteGameObject";
+import { Vector2D } from "./vector";
+
+import "../assets/aircraft/Interceptor.png";
 
 export class GameManager {
   gameLevelId: number;
   canvasRef: React.RefObject<HTMLCanvasElement>;
   ctx: CanvasRenderingContext2D | null;
   renderingHandler: number;
-  _debugX: number;
-  _debugY: number;
-  dx: number;
+  gameObjects: GameObject[];
 
   constructor(canvasRef: React.RefObject<HTMLCanvasElement>) {
     this.gameLevelId = -1;
     this.canvasRef = canvasRef;
     this.ctx = null;
     this.renderingHandler = -1;
-    this._debugX = 20;
-    this._debugY = 20;
-    this.dx = 5;
+    this.gameObjects = [];
   }
 
   initCtx() {
     this.ctx = this.canvasRef!.current!.getContext("2d");
+    this.gameObjects.push(
+      new SpriteGameObject(
+        new Vector2D(20, this.ctx!.canvas.height - 60),
+        new Vector2D(1, 0),
+        this.ctx,
+        39,
+        45,
+        "../src/assets/aircraft/Interceptor.png"
+      )
+    );
   }
 
-  _debug_draw() {
-    this.ctx!.beginPath();
-    this.ctx!.strokeStyle = "white";
-    this.ctx!.rect(this._debugX, this._debugY, 150, 100);
-    this.ctx!.stroke();
-    if (
-      this._debugX + this.dx + 150 > this.canvasRef!.current!.width ||
-      this._debugX + this.dx < 0
-    ) {
-      this.dx = -this.dx;
-    }
-    this._debugX += this.dx;
+  renderLoop() {
+    this.ctx!.clearRect(0, 0, this.ctx!.canvas.width, this.ctx!.canvas.height);
+
+    this.gameObjects.forEach((gameObject) => {
+      gameObject.update();
+    });
+
+    this.gameObjects.forEach((gameObject) => {
+      gameObject.draw();
+    });
+
+    requestAnimationFrame(() => {
+      this.renderLoop();
+    });
   }
 
   run() {
@@ -42,9 +55,8 @@ export class GameManager {
       console.log("ctx is null");
       this.initCtx();
     }
-    this.renderingHandler = setInterval(() => {
-      this.ctx!.clearRect(0, 0, this.canvasRef!.current!.width, this.canvasRef!.current!.height);
-      this._debug_draw();
-    }, 1000 / 60);
+    requestAnimationFrame(() => {
+      this.renderLoop();
+    });
   }
 }

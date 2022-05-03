@@ -1,14 +1,17 @@
-import { Vector2D } from "./vector";
+import { Vector2D } from "../vector";
 
 export class GameObject {
   position: Vector2D | null;
   velocity: Vector2D;
+  ctx: CanvasRenderingContext2D | null;
 
   constructor(
     position: Vector2D | null = null,
-    velocity: Vector2D | null = null
+    velocity: Vector2D | null = null,
+    ctx: CanvasRenderingContext2D | null = null
   ) {
     this.position = position;
+    this.ctx = ctx;
 
     if (velocity) {
       this.velocity = velocity;
@@ -17,7 +20,7 @@ export class GameObject {
     }
   }
 
-  public draw(ctx: CanvasRenderingContext2D): void {
+  public draw(): void {
     return;
   }
 
