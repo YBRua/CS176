@@ -1,28 +1,51 @@
-import { useState } from "react";
-import { Outlet } from "react-router-dom";
-import { TitleView } from "./views/TitleView";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import "./styles/main.css";
+import { IndexView } from "./views/IndexView";
+import { HangarView } from "./views/HangarView";
+import { AircraftView } from "./views/AircraftView";
 
-function App() {
+import { WeaponView } from "./views/WeaponView";
+import { HangarIndex } from "./views/HangarIndex";
+import { LevelSelectionView } from "./views/LevelSelectionView";
+import { usePlayerConfig } from "./hooks/usePlayerConfig";
+import { getAircraftById } from "./data/aircraft/aircraft";
+import { MainFrame } from "./MainFrame";
+
+export function App() {
+  const [player, setAircraftId, setWeaponId] = usePlayerConfig();
+  const aircraft = getAircraftById(player.aircraftId)!;
   return (
-    <h1 className="text-3xl flex h-screen">
-      <div className="w-3/12 bg-midnight h-full">
-        <TitleView></TitleView>
-      </div>
-      <div
-        className="
-        w-6/12 h-full 
-        bg-midnight
-        border-l-2 border-r-2 border-white
-        shadow-white shadow-lg
-        z-10"
-      >
-        <Outlet></Outlet>
-      </div>
-      <div className="w-3/12 bg-midnight h-full">3</div>
-    </h1>
+    <React.StrictMode>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MainFrame aircraft={aircraft} />}>
+            <Route index element={<IndexView />}></Route>
+            <Route path="shop" element={<h1>Shop</h1>}></Route>
+            <Route path="hangar" element={<HangarView></HangarView>}>
+              <Route index element={<HangarIndex></HangarIndex>}></Route>
+              <Route
+                path="aircraft"
+                element={
+                  <AircraftView setAircraftId={setAircraftId}></AircraftView>
+                }
+              ></Route>
+              <Route
+                path="weaponry"
+                element={<WeaponView></WeaponView>}
+              ></Route>
+            </Route>
+            <Route
+              path="levels"
+              element={<LevelSelectionView></LevelSelectionView>}
+            ></Route>
+          </Route>
+          <Route
+            path="*"
+            element={<h1 className="text-zinc-700 text-center">?</h1>}
+          ></Route>
+        </Routes>
+      </BrowserRouter>
+    </React.StrictMode>
   );
 }
-
-export default App;
