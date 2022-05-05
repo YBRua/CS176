@@ -16,4 +16,23 @@ export class PhysicalGameObject extends GameObject {
     this.width = width;
     this.height = height;
   }
+
+  public setIsCollidable(isCollidable: boolean): void {
+    this.isCollidable = isCollidable;
+  }
+
+  public override isCollidingWith(other: PhysicalGameObject): boolean {
+    if (!this.isCollidable) {
+      return false;
+    }
+    if (
+      this.position.x < other.position.x + other.width &&
+      this.position.x + other.width > other.position.x &&
+      this.position.y < other.position.y + other.height &&
+      this.height + this.position.y > other.position.y
+    ) {
+      return true;
+    }
+    return false;
+  }
 }

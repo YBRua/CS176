@@ -78,7 +78,21 @@ export class GameManager {
     }
   }
 
-  public renderLoop(timestamp: number) {
+  private _collisionDetection() {
+    this.gameObjects.forEach((gameObject) => {
+      if (gameObject.isCollidable) {
+        this.gameObjects.forEach((otherGameObject) => {
+          if (otherGameObject.isCollidable && gameObject !== otherGameObject) {
+            if (gameObject.isCollidingWith(otherGameObject)) {
+              gameObject.onCollision(otherGameObject);
+            }
+          }
+        });
+      }
+    });
+  }
+
+  public eventLoop(timestamp: number) {
     if (this.prevTimeStamp === 0) {
       this.prevTimeStamp = timestamp;
     }
@@ -98,7 +112,7 @@ export class GameManager {
     });
 
     requestAnimationFrame((t) => {
-      this.renderLoop(t);
+      this.eventLoop(t);
     });
     this.prevTimeStamp = timestamp;
   }
@@ -108,7 +122,7 @@ export class GameManager {
       console.error("ctx is null");
     }
     requestAnimationFrame((t) => {
-      this.renderLoop(t);
+      this.eventLoop(t);
     });
   }
 

@@ -2,10 +2,11 @@ import { GameManager } from "../gameManager";
 import { Vector2D } from "../vector";
 
 export class GameObject {
+  id: number;
   position: Vector2D;
   velocity: Vector2D;
+  isCollidable: boolean;
   ctx: CanvasRenderingContext2D;
-  id: number;
 
   static uid: number = 10;
 
@@ -28,6 +29,7 @@ export class GameObject {
     }
 
     this.id = GameObject.uid++;
+    this.isCollidable = false;
   }
 
   public draw(): void {
@@ -41,4 +43,13 @@ export class GameObject {
   public getId(): number {
     return this.id;
   }
+
+  public isCollidingWith(other: GameObject): boolean {
+    return false;
+  }
+
+  public onCollision(other: GameObject): void {
+    return;
+  }
+
 }
