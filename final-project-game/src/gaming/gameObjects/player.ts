@@ -7,7 +7,7 @@ import { SpriteGameObject } from "./spriteGameObject";
 
 const PLAYER_ID = 0;
 
-enum MovementState {
+export enum MovementState {
   Idle = 0,
   Left,
   Right,
@@ -50,11 +50,11 @@ export class Player extends SpriteGameObject {
     this.movementState = MovementState.Right;
   }
 
-  public clearMove(state: string): void {
-    if (state === "a" && this.movementState === MovementState.Left) {
+  public clearMove(state: MovementState): void {
+    if (state === this.movementState) {
       this.movementState = MovementState.Idle;
     }
-    if (state === "d" && this.movementState === MovementState.Right) {
+    if (state === this.movementState) {
       this.movementState = MovementState.Idle;
     }
   }
