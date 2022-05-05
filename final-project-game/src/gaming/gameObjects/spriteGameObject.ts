@@ -1,3 +1,4 @@
+import { GameManager } from "../gameManager";
 import { Vector2D } from "../vector";
 import { PhysicalGameObject } from "./physicalGameObject";
 
@@ -6,12 +7,12 @@ export class SpriteGameObject extends PhysicalGameObject {
   sprite: HTMLImageElement | null;
 
   constructor(
-    position: Vector2D | null = null,
-    velocity: Vector2D | null = null,
-    ctx: CanvasRenderingContext2D | null = null,
+    position: Vector2D,
+    velocity: Vector2D,
+    ctx: CanvasRenderingContext2D,
     width: number = 0,
     height: number = 0,
-    imageSrc: string | null = null
+    imageSrc: string
   ) {
     super(position, velocity, ctx, width, height);
     this.imageSrc = imageSrc;
@@ -35,7 +36,7 @@ export class SpriteGameObject extends PhysicalGameObject {
     }
   }
 
-  public override update(timeDelta: number): void {
+  public override update(timeDelta: number, gameManager: GameManager): void {
     if (this.position && this.velocity) {
       const deltaPos = Vector2D.scale(this.velocity, timeDelta * 0.001);
       if (

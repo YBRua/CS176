@@ -1,8 +1,11 @@
 import { Aircraft, getAircraftById } from "../../data/aircraft/aircraft";
 import { getWeaponById, Weapon } from "../../data/weapon/weapon";
 import { PlayerConfig } from "../../hooks/usePlayerConfig";
-import { SPEED_SCALE } from "../common";
+import { resizeToCanvas, SPEED_SCALE } from "../common";
+import { GameManager } from "../gameManager";
 import { Vector2D } from "../vector";
+import { PathType } from "./pathGameObject";
+import { Projectile } from "./projectile";
 import { SpriteGameObject } from "./spriteGameObject";
 
 const PLAYER_ID = 0;
@@ -18,15 +21,17 @@ export class Player extends SpriteGameObject {
   aircraft: Aircraft;
   weapon: Weapon;
   movementState: MovementState;
+  canFire: boolean;
+  isFiring: boolean;
 
   constructor(
     playerConfig: PlayerConfig,
-    position: Vector2D | null = null,
-    velocity: Vector2D | null = null,
-    ctx: CanvasRenderingContext2D | null = null,
+    position: Vector2D,
+    velocity: Vector2D,
+    ctx: CanvasRenderingContext2D,
     width: number = 0,
     height: number = 0,
-    imageSrc: string | null = null
+    imageSrc: string
   ) {
     super(position, velocity, ctx, width, height, imageSrc);
     this.id = PLAYER_ID;
@@ -36,6 +41,9 @@ export class Player extends SpriteGameObject {
     this.weapon = getWeaponById(playerConfig.weaponId)!;
 
     this.movementState = MovementState.Idle;
+
+    this.canFire = true;
+    this.isFiring = false;
   }
 
   public setVelocity(velocity: Vector2D): void {
@@ -70,7 +78,36 @@ export class Player extends SpriteGameObject {
     }
   }
 
-  public override update(timeDelta: number): void {
+  private _fireProjectile(gameManager: GameManager): void {
+    if (gameManager.playerObject && this.canFire) {
+      const playerObject = gameManager.playerObject;
+      const aircraft = playerObject.aircraft;
+
+      const newProjectile = new Projectile(
+        PathType.Circle,
+        gameManager.playerObject.position.addX(
+          resizeToCanvas(aircraft.canvasWidth / 2)
+        ),
+        new Vector2D(0, -gameManager.playerObject.weapon.projectileSpeed),
+        gameManager.ctx!,
+        10,
+        10
+      );
+
+      gameManager.gameObjects.add(newProjectile);
+      this.canFire = false;
+
+      setTimeout(() => {
+        this.canFire = true;
+      }, gameManager.playerObject.weapon.cooldown * 100);
+    }
+  }
+
+  public setIsFiring(isFiring: boolean): void {
+    this.isFiring = isFiring;
+  }
+
+  public override update(timeDelta: number, gameManager: GameManager): void {
     this.velocity = this._getVelocity();
     if (this.position && this.velocity) {
       const deltaPos = Vector2D.scale(this.velocity, timeDelta * SPEED_SCALE);
@@ -80,6 +117,10 @@ export class Player extends SpriteGameObject {
       ) {
         this.position = Vector2D.add(this.position, deltaPos);
       }
+    }
+
+    if (this.isFiring) {
+      this._fireProjectile(gameManager);
     }
   }
 }

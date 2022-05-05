@@ -51,7 +51,7 @@ export class GameManager {
         this.playerConfig!,
         new Vector2D(this.ctx!.canvas.width / 2, this.ctx!.canvas.height - 60),
         new Vector2D(0, 0),
-        this.ctx,
+        this.ctx!,
         Math.round(aircraft.canvasWidth / 3),
         Math.round(aircraft.canvasHeight / 3),
         resolveAircraftImagePath(aircraft)

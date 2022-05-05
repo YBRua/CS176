@@ -7,28 +7,11 @@ import { Vector2D } from "./vector";
 
 export class PlayerController {
   private gameManager: GameManager;
+  private canFire: boolean;
 
   constructor(gameManager: GameManager) {
     this.gameManager = gameManager;
-  }
-
-  private _fireProjectile() {
-    if (this.gameManager.playerObject) {
-      const playerObject = this.gameManager.playerObject;
-      const aircraft = playerObject.aircraft;
-      const newProjectile = new Projectile(
-        PathType.Circle,
-        this.gameManager.playerObject.position.addX(
-          resizeToCanvas(aircraft.canvasWidth / 2)
-        ),
-        new Vector2D(0, -this.gameManager.playerObject.weapon.projectileSpeed),
-        this.gameManager.ctx!,
-        10,
-        10
-      );
-      console.log("Fire");
-      this.gameManager.gameObjects.add(newProjectile);
-    }
+    this.canFire = true;
   }
 
   public keyDownHandler(event: any) {
@@ -43,7 +26,7 @@ export class PlayerController {
         this.gameManager.playerObject?.moveRight();
         break;
       case " ":
-        this._fireProjectile();
+        this.gameManager.playerObject?.setIsFiring(true);
         break;
     }
   }
@@ -59,6 +42,8 @@ export class PlayerController {
       case "ArrowRight":
         this.gameManager.playerObject?.clearMove(MovementState.Right);
         break;
+      case " ":
+        this.gameManager.playerObject?.setIsFiring(false);
     }
   }
 }
