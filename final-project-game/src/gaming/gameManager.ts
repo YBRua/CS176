@@ -19,6 +19,7 @@ export class GameManager {
   gameObjects: GameObject[];
   playerObject: Player | null;
   playerConfig: PlayerConfig | null;
+  prevTimeStamp: number;
 
   constructor(canvasRef: React.RefObject<HTMLCanvasElement>) {
     this.gameLevelId = -1;
@@ -28,6 +29,7 @@ export class GameManager {
     this.gameObjects = [];
     this.playerObject = null;
     this.playerConfig = null;
+    this.prevTimeStamp = 0;
   }
 
   public setPlayerConfig(playerConfig: PlayerConfig) {
@@ -44,32 +46,43 @@ export class GameManager {
     const aircraft = getAircraftById(this.playerConfig!.aircraftId)!;
     const weapon = getWeaponById(this.playerConfig!.weaponId)!;
 
-    this.playerObject = new Player(
-      this.playerConfig!,
-      new Vector2D(20, this.ctx!.canvas.height - 60),
-      new Vector2D(0, 0),
-      this.ctx,
-      39,
-      45,
-      resolveAircraftImagePath(aircraft)
-    );
-    this.gameObjects.push(this.playerObject);
+    if (!this.playerObject) {
+      this.playerObject = new Player(
+        this.playerConfig!,
+        new Vector2D(this.ctx!.canvas.width / 2, this.ctx!.canvas.height - 60),
+        new Vector2D(0, 0),
+        this.ctx,
+        39,
+        45,
+        resolveAircraftImagePath(aircraft)
+      );
+      this.gameObjects.push(this.playerObject);
+    }
   }
 
-  public renderLoop() {
+  public renderLoop(timestamp: number) {
+    if (this.prevTimeStamp === 0) {
+      this.prevTimeStamp = timestamp;
+    }
+    const elapsed = timestamp - this.prevTimeStamp;
+
+    // force focus the canvas so that key events are captured
+    this.ctx!.canvas.focus();
+
     this.ctx!.clearRect(0, 0, this.ctx!.canvas.width, this.ctx!.canvas.height);
 
     this.gameObjects.forEach((gameObject) => {
-      gameObject.update();
+      gameObject.update(elapsed);
     });
 
     this.gameObjects.forEach((gameObject) => {
       gameObject.draw();
     });
 
-    requestAnimationFrame(() => {
-      this.renderLoop();
+    requestAnimationFrame((t) => {
+      this.renderLoop(t);
     });
+    this.prevTimeStamp = timestamp;
   }
 
   public run() {
@@ -77,8 +90,8 @@ export class GameManager {
       console.log("ctx is null");
       this.initCtx();
     }
-    requestAnimationFrame(() => {
-      this.renderLoop();
+    requestAnimationFrame((t) => {
+      this.renderLoop(t);
     });
   }
 }

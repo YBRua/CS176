@@ -4,7 +4,7 @@
     "name": "Interceptor1",
     "image": "Interceptor",
     "description": "Interceptor description",
-    "speed": 10,
+    "speed": 200,
     "hp": 150
   },
   {
@@ -12,7 +12,7 @@
     "name": "Fighter1",
     "image": "Interceptor",
     "description": "Fighter description",
-    "speed": 8,
+    "speed": 100,
     "hp": 200
   }
 ]

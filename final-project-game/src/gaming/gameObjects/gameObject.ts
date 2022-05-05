@@ -29,7 +29,7 @@ export class GameObject {
     return;
   }
 
-  public update(): void {
+  public update(deltaTime: number): void {
     return;
   }
 

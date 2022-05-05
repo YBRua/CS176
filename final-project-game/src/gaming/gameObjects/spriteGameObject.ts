@@ -35,16 +35,15 @@ export class SpriteGameObject extends PhysicalGameObject {
     }
   }
 
-  public override update(): void {
+  public override update(timeDelta: number): void {
     if (this.position && this.velocity) {
+      const deltaPos = Vector2D.scale(this.velocity, timeDelta * 0.001);
       if (
-        this.position.x + this.velocity.x + this.width >
-          this.ctx!.canvas.width ||
-        this.position.x + this.velocity.x < 0
+        this.position.x + deltaPos.x + this.width < this.ctx!.canvas.width &&
+        this.position.x + deltaPos.x > 0
       ) {
-        this.velocity = new Vector2D(-this.velocity.x, this.velocity.y);
+        this.position = Vector2D.add(this.position, deltaPos);
       }
-      this.position = Vector2D.add(this.position, this.velocity);
     }
   }
 }

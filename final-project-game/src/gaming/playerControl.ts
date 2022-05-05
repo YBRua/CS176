@@ -9,6 +9,7 @@ export class PlayerController {
 
   public keyDownHandler(event: any) {
     event.preventDefault();
+    console.log(this.gameManager.playerObject?.aircraft.speed);
     switch (event.key) {
       case "a":
         this.gameManager.playerObject?.moveLeft();
@@ -21,6 +22,11 @@ export class PlayerController {
 
   public keyUpHandler(event: any) {
     event.preventDefault();
-    this.gameManager.playerObject?.clearMove();
+    switch (event.key) {
+      case "a":
+      case "d":
+        this.gameManager.playerObject?.clearMove(event.key);
+        break;
+    }
   }
 }
