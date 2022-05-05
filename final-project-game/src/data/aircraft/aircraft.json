@@ -5,7 +5,9 @@
     "image": "Interceptor",
     "description": "Interceptor description",
     "speed": 200,
-    "hp": 150
+    "hp": 150,
+    "canvasWidth": 123,
+    "canvasHeight": 152
   },
   {
     "id": 2,
@@ -13,6 +15,8 @@
     "image": "Interceptor",
     "description": "Fighter description",
     "speed": 100,
-    "hp": 200
+    "hp": 200,
+    "canvasWidth": 123,
+    "canvasHeight": 152
   }
 ]

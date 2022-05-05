@@ -8,6 +8,8 @@ export interface Aircraft {
   image: string;
   speed: number;
   hp: number;
+  canvasWidth: number;
+  canvasHeight: number;
 }
 
 export function loadAircrafts(): Aircraft[] {
