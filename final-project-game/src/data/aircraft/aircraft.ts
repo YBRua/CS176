@@ -21,6 +21,10 @@ export function loadEnemyAircrafts(): Aircraft[] {
   return ENEMY_AIRCRAFTS;
 }
 
+export function getEnemyAircraftById(id: number): Aircraft | null {
+  return ENEMY_AIRCRAFTS.find((aircraft) => aircraft.id === id) || null;
+}
+
 export function getAircraftById(id: number): Aircraft | null {
   return AIRCRAFTS.find((aircraft) => aircraft.id === id) || null;
 }

@@ -10,6 +10,7 @@ export enum PathType {
 
 export class PathGameObject extends PhysicalGameObject {
   pathType: PathType;
+  fillColor: string;
 
   constructor(
     pathType: PathType,
@@ -17,10 +18,12 @@ export class PathGameObject extends PhysicalGameObject {
     velocity: Vector2D,
     ctx: CanvasRenderingContext2D,
     width: number = 0,
-    height: number = 0
+    height: number = 0,
+    fillColor: string = "white"
   ) {
     super(position, velocity, ctx, width, height);
     this.pathType = pathType;
+    this.fillColor = fillColor;
   }
 
   public override update(timeDelta: number, gameManager: GameManager): void {
@@ -47,11 +50,9 @@ export class PathGameObject extends PhysicalGameObject {
   }
 
   private _drawCircle(): void {
-    console.log("draw circle");
     if (this.position) {
       this.ctx!.beginPath();
-      this.ctx!.strokeStyle = "white";
-      this.ctx!.fillStyle = "white";
+      this.ctx!.fillStyle = this.fillColor;
       this.ctx!.arc(
         this.position.x + this.width / 2,
         this.position.y + this.width / 2,
@@ -67,7 +68,7 @@ export class PathGameObject extends PhysicalGameObject {
   private _drawRectangle(): void {
     if (this.position) {
       this.ctx!.beginPath();
-      this.ctx!.strokeStyle = "white";
+      this.ctx!.fillStyle = this.fillColor;
       this.ctx!.rect(this.position.x, this.position.y, this.width, this.height);
       this.ctx!.closePath();
     }

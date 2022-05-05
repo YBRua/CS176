@@ -23,7 +23,7 @@ export function App() {
   const [levelId, setLevelId] = useState<number>(1);
 
   const aircraft = getAircraftById(playerConfig.aircraftId)!;
-  const weapon = getWeaponById(playerConfig.weaponId)!;
+  const weapon = getWeaponById(playerConfig.weaponId);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const gameManager = new GameManager(canvasRef);

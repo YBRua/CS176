@@ -1,5 +1,5 @@
 import { Aircraft, getAircraftById } from "../../data/aircraft/aircraft";
-import { getWeaponById, Weapon } from "../../data/weapon/weapon";
+import { Weapon } from "../../data/weapon/weapon";
 import { PlayerConfig } from "../../hooks/usePlayerConfig";
 import { resizeToCanvas, SPEED_SCALE } from "../common";
 import { GameManager } from "../gameManager";
@@ -17,7 +17,6 @@ export enum MovementState {
 }
 
 export class Player extends SpriteGameObject {
-  playerConfig: PlayerConfig;
   aircraft: Aircraft;
   weapon: Weapon;
   movementState: MovementState;
@@ -25,7 +24,8 @@ export class Player extends SpriteGameObject {
   isFiring: boolean;
 
   constructor(
-    playerConfig: PlayerConfig,
+    aircraft: Aircraft,
+    weapon: Weapon,
     position: Vector2D,
     velocity: Vector2D,
     ctx: CanvasRenderingContext2D,
@@ -36,9 +36,8 @@ export class Player extends SpriteGameObject {
     super(position, velocity, ctx, width, height, imageSrc);
     this.id = PLAYER_ID;
 
-    this.playerConfig = playerConfig;
-    this.aircraft = getAircraftById(playerConfig.aircraftId)!;
-    this.weapon = getWeaponById(playerConfig.weaponId)!;
+    this.aircraft = aircraft;
+    this.weapon = weapon;
 
     this.movementState = MovementState.Idle;
 

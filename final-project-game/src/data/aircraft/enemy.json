@@ -4,7 +4,7 @@
     "name": "ImperialFighter",
     "image": "EnemyFighter",
     "description": "Interceptor description",
-    "speed": 200,
+    "speed": 75,
     "hp": 150,
     "canvasWidth": 178,
     "canvasHeight": 166

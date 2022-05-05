@@ -9,15 +9,16 @@ export class Projectile extends PathGameObject {
     velocity: Vector2D,
     ctx: CanvasRenderingContext2D,
     width: number = 0,
-    height: number = 0
+    height: number = 0,
+    fillColor: string = "white",
   ) {
-    super(pathType, position, velocity, ctx, width, height);
+    super(pathType, position, velocity, ctx, width, height, fillColor);
   }
 
   public override update(timeDelta: number, gameManager: GameManager): void {
     super.update(timeDelta, gameManager);
     if (this.position) {
-      if (this.position.y < 0) {
+      if (this.position.y < -15 || this.position.y > this.ctx!.canvas.height + 15) {
         gameManager.destroyGameObject(this);
       }
     }

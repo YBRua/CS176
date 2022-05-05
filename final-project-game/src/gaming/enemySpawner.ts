@@ -1,5 +1,12 @@
+import {
+  getEnemyAircraftById,
+  resolveAircraftImagePath,
+} from "../data/aircraft/aircraft";
 import { SpawnConfigs } from "../data/level/level";
+import { getEnemyWeaponById, getWeaponById } from "../data/weapon/weapon";
+import { resizeToCanvas } from "./common";
 import { GameManager } from "./gameManager";
+import { BasicEnemy } from "./gameObjects/enemy";
 import { GameObject } from "./gameObjects/gameObject";
 import { Vector2D } from "./vector";
 
@@ -55,6 +62,21 @@ export class EnemySpawner extends GameObject {
         this.numSpawned[index]++;
 
         // TODO: spawn an enemy
+        const aircraft = getEnemyAircraftById(1)!;
+        const weapon = getEnemyWeaponById(1);
+        const enemy = new BasicEnemy(
+          spawnConfigs[index].id,
+          aircraft,
+          weapon,
+          new Vector2D(_randInt(50, gameManager.ctx!.canvas.width - 50), -50),
+          new Vector2D(_randInt(-45, 45), aircraft.speed),
+          gameManager.ctx!,
+          resizeToCanvas(aircraft.canvasWidth),
+          resizeToCanvas(aircraft.canvasHeight),
+          resolveAircraftImagePath(aircraft)
+        );
+
+        gameManager.gameObjects.add(enemy);
       }
     });
   }

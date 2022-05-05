@@ -10,6 +10,8 @@ import {
   resolveAircraftImagePath,
 } from "../data/aircraft/aircraft";
 import { getWeaponById } from "../data/weapon/weapon";
+import { EnemySpawner } from "./enemySpawner";
+import { getSpawnScriptById } from "../data/level/level";
 
 export class GameManager {
   gameLevelId: number;
@@ -20,6 +22,7 @@ export class GameManager {
   gameObjects: Set<GameObject>;
   playerObject: Player | null;
   playerConfig: PlayerConfig | null;
+  enemySpawner: EnemySpawner | null;
 
   prevTimeStamp: number;
 
@@ -27,17 +30,20 @@ export class GameManager {
     this.gameLevelId = -1;
     this.canvasRef = canvasRef;
     this.ctx = null;
-    this.gameObjects = new Set();
-    this.playerObject = null;
     this.playerConfig = null;
     this.prevTimeStamp = 0;
+
+    this.gameObjects = new Set();
+    this.playerObject = null;
+    this.enemySpawner = null;
   }
 
   public setPlayerConfig(playerConfig: PlayerConfig) {
     this.playerConfig = playerConfig;
   }
 
-  public initCtx() {
+  public init(levelId: number) {
+    this.gameLevelId = levelId;
     if (!this.playerConfig) {
       console.error("GameManager: PlayerConfig is null");
     }
@@ -45,11 +51,12 @@ export class GameManager {
     this.ctx = this.canvasRef!.current!.getContext("2d");
 
     const aircraft = getAircraftById(this.playerConfig!.aircraftId)!;
-    const weapon = getWeaponById(this.playerConfig!.weaponId)!;
+    const weapon = getWeaponById(this.playerConfig!.weaponId);
 
     if (!this.playerObject) {
       this.playerObject = new Player(
-        this.playerConfig!,
+        aircraft,
+        weapon,
         new Vector2D(this.ctx!.canvas.width / 2, this.ctx!.canvas.height - 60),
         new Vector2D(0, 0),
         this.ctx!,
@@ -58,6 +65,16 @@ export class GameManager {
         resolveAircraftImagePath(aircraft)
       );
       this.gameObjects.add(this.playerObject);
+    }
+
+    if (!this.enemySpawner) {
+      this.enemySpawner = new EnemySpawner(
+        new Vector2D(0, 0),
+        new Vector2D(0, 0),
+        this.ctx!,
+        getSpawnScriptById(this.gameLevelId)!
+      );
+      this.gameObjects.add(this.enemySpawner);
     }
   }
 
@@ -88,8 +105,7 @@ export class GameManager {
 
   public run() {
     if (!this.ctx) {
-      console.log("ctx is null");
-      this.initCtx();
+      console.error("ctx is null");
     }
     requestAnimationFrame((t) => {
       this.renderLoop(t);
