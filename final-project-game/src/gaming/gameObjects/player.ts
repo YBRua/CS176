@@ -1,6 +1,7 @@
 import { Aircraft, getAircraftById } from "../../data/aircraft/aircraft";
 import { getWeaponById, Weapon } from "../../data/weapon/weapon";
 import { PlayerConfig } from "../../hooks/usePlayerConfig";
+import { SPEED_SCALE } from "../common";
 import { Vector2D } from "../vector";
 import { SpriteGameObject } from "./spriteGameObject";
 
@@ -72,7 +73,7 @@ export class Player extends SpriteGameObject {
   public override update(timeDelta: number): void {
     this.velocity = this._getVelocity();
     if (this.position && this.velocity) {
-      const deltaPos = Vector2D.scale(this.velocity, timeDelta * 0.001);
+      const deltaPos = Vector2D.scale(this.velocity, timeDelta * SPEED_SCALE);
       if (
         this.position.x + deltaPos.x + this.width < this.ctx!.canvas.width &&
         this.position.x + deltaPos.x > 0

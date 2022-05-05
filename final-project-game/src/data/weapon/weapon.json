@@ -1,16 +1,18 @@
 [
-    {
-        "id": 1,
-        "name": "Kinetic",
-        "description": "Basic",
-        "cooldown": 500,
-        "damage": 10
-    },
-    {
-        "id": 2,
-        "name": "Plasma",
-        "description": "Baseline",
-        "cooldown": 1000,
-        "damage": 20
-    }
+  {
+    "id": 1,
+    "name": "Kinetic",
+    "description": "Basic",
+    "cooldown": 5,
+    "damage": 10,
+    "projectileSpeed": 1250
+  },
+  {
+    "id": 2,
+    "name": "Plasma",
+    "description": "Baseline",
+    "cooldown": 10,
+    "damage": 20,
+    "projectileSpeed": 750
+  }
 ]

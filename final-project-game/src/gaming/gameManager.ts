@@ -16,7 +16,7 @@ export class GameManager {
   canvasRef: React.RefObject<HTMLCanvasElement>;
   ctx: CanvasRenderingContext2D | null;
   renderingHandler: number;
-  gameObjects: GameObject[];
+  gameObjects: Set<GameObject>;
   playerObject: Player | null;
   playerConfig: PlayerConfig | null;
   prevTimeStamp: number;
@@ -26,7 +26,7 @@ export class GameManager {
     this.canvasRef = canvasRef;
     this.ctx = null;
     this.renderingHandler = -1;
-    this.gameObjects = [];
+    this.gameObjects = new Set();
     this.playerObject = null;
     this.playerConfig = null;
     this.prevTimeStamp = 0;
@@ -56,7 +56,7 @@ export class GameManager {
         Math.round(aircraft.canvasHeight / 3),
         resolveAircraftImagePath(aircraft)
       );
-      this.gameObjects.push(this.playerObject);
+      this.gameObjects.add(this.playerObject);
     }
   }
 
@@ -72,7 +72,7 @@ export class GameManager {
     this.ctx!.clearRect(0, 0, this.ctx!.canvas.width, this.ctx!.canvas.height);
 
     this.gameObjects.forEach((gameObject) => {
-      gameObject.update(elapsed);
+      gameObject.update(elapsed, this);
     });
 
     this.gameObjects.forEach((gameObject) => {
@@ -93,5 +93,9 @@ export class GameManager {
     requestAnimationFrame((t) => {
       this.renderLoop(t);
     });
+  }
+
+  public destroyGameObject(gameObject: GameObject) {
+    this.gameObjects.delete(gameObject);
   }
 }

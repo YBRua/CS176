@@ -6,9 +6,9 @@ export class PhysicalGameObject extends GameObject {
   height: number;
 
   constructor(
-    position: Vector2D | null = null,
-    velocity: Vector2D | null = null,
-    ctx: CanvasRenderingContext2D | null = null,
+    position: Vector2D,
+    velocity: Vector2D,
+    ctx: CanvasRenderingContext2D,
     width: number = 0,
     height: number = 0
   ) {
