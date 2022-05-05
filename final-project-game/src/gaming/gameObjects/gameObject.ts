@@ -4,6 +4,9 @@ export class GameObject {
   position: Vector2D | null;
   velocity: Vector2D;
   ctx: CanvasRenderingContext2D | null;
+  id: number;
+
+  static uid: number = 10;
 
   constructor(
     position: Vector2D | null = null,
@@ -18,6 +21,8 @@ export class GameObject {
     } else {
       this.velocity = new Vector2D(0, 0);
     }
+
+    this.id = GameObject.uid++;
   }
 
   public draw(): void {
@@ -26,5 +31,9 @@ export class GameObject {
 
   public update(): void {
     return;
+  }
+
+  public getId(): number {
+    return this.id;
   }
 }

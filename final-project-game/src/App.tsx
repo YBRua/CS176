@@ -16,25 +16,31 @@ import { GameManager } from "./gaming/gameManager";
 import { GameView } from "./views/GameView";
 
 import "./styles/main.css";
+import { PlayerController } from "./gaming/playerControl";
 
 export function App() {
-  const [player, setAircraftId, setWeaponId] = usePlayerConfig();
+  const [playerConfig, setAircraftId, setWeaponId] = usePlayerConfig();
   const [levelId, setLevelId] = useState<number>(1);
 
-  const aircraft = getAircraftById(player.aircraftId)!;
-  const weapon = getWeaponById(player.weaponId)!;
+  const aircraft = getAircraftById(playerConfig.aircraftId)!;
+  const weapon = getWeaponById(playerConfig.weaponId)!;
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const gameManager = new GameManager(canvasRef);
+  const playerController = new PlayerController(gameManager);
+
   const canvas = (
     <canvas
       ref={canvasRef}
       width={700}
       height={500}
       className="game-canvas"
+      onKeyDown={(e) => {playerController.keyDownHandler(e);}}
+      onKeyUp={(e) => {playerController.keyUpHandler(e);}}
+      tabIndex={0}
     ></canvas>
   );
 
-  const gameManager = new GameManager(canvasRef);
 
   return (
     <React.StrictMode>
@@ -74,6 +80,7 @@ export function App() {
                   levelId={levelId}
                   canvas={canvas}
                   gameManager={gameManager}
+                  playerConfig={playerConfig}
                 ></GameView>
               }
             ></Route>
