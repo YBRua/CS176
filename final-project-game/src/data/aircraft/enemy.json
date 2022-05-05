@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "name": "ImperialFighter",
+    "image": "EnemyFighter",
+    "description": "Interceptor description",
+    "speed": 200,
+    "hp": 150,
+    "canvasWidth": 178,
+    "canvasHeight": 166
+  }
+]

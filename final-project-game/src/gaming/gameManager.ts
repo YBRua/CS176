@@ -13,19 +13,20 @@ import { getWeaponById } from "../data/weapon/weapon";
 
 export class GameManager {
   gameLevelId: number;
+
   canvasRef: React.RefObject<HTMLCanvasElement>;
   ctx: CanvasRenderingContext2D | null;
-  renderingHandler: number;
+
   gameObjects: Set<GameObject>;
   playerObject: Player | null;
   playerConfig: PlayerConfig | null;
+
   prevTimeStamp: number;
 
   constructor(canvasRef: React.RefObject<HTMLCanvasElement>) {
     this.gameLevelId = -1;
     this.canvasRef = canvasRef;
     this.ctx = null;
-    this.renderingHandler = -1;
     this.gameObjects = new Set();
     this.playerObject = null;
     this.playerConfig = null;

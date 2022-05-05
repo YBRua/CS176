@@ -1,5 +1,6 @@
 import "../../assets/aircraft/Interceptor.png";
 import AIRCRAFTS from "./aircraft.json";
+import ENEMY_AIRCRAFTS from "./enemy.json";
 
 export interface Aircraft {
   id: number;
@@ -14,6 +15,10 @@ export interface Aircraft {
 
 export function loadAircrafts(): Aircraft[] {
   return AIRCRAFTS;
+}
+
+export function loadEnemyAircrafts(): Aircraft[] {
+  return ENEMY_AIRCRAFTS;
 }
 
 export function getAircraftById(id: number): Aircraft | null {

@@ -1,4 +1,5 @@
 import LEVELS from "./level.json";
+import SPAWN_CONFIGS from "./spawnConfig.json";
 
 export interface Level {
   id: number;
@@ -6,8 +7,28 @@ export interface Level {
   name: string;
 }
 
+export interface SpawnConfigs {
+  id: number;
+  enemies: SpawnConfig[];
+}
+
+interface SpawnRateRange {
+  low: number;
+  high: number;
+}
+
+interface SpawnConfig {
+  id: number;
+  rate: SpawnRateRange;
+  maxCount: number;
+}
+
 export function loadLevels(): Level[] {
   return LEVELS;
+}
+
+export function getSpawnScriptById(id: number): SpawnConfigs | null {
+  return SPAWN_CONFIGS.find((spawnConfig) => spawnConfig.id === id) || null;
 }
 
 export function getLevelById(id: number): Level | null {
