@@ -25,8 +25,8 @@ const customStyles: Styles = {
     position: "absolute",
     left: "30%",
     right: "30%",
-    top: "20%",
-    bottom: "20%",
+    top: "12%",
+    bottom: "12%",
     border: "2px solid #fff",
     background: "#000",
     overflow: "auto",
@@ -38,6 +38,9 @@ ReactModal.setAppElement("#root");
 
 export function EndModal(props: EndModalPropTypes) {
   const navigate = useNavigate();
+  const highScore = JSON.parse(
+    localStorage.getItem("simple-air-combat-highscore") || "0"
+  );
 
   function returnToMenu() {
     props.gameManager.reset();
@@ -50,12 +53,19 @@ export function EndModal(props: EndModalPropTypes) {
     props.gameManager.run();
   }
 
+  if (props.score >= highScore) {
+    localStorage.setItem("simple-air-combat-highscore", JSON.stringify(props.score));
+  }
+
   return (
     <ReactModal isOpen={props.isEnded} style={customStyles}>
       <h2 className="text-center text-5xl my-16 text-white">GAME OVER</h2>
       <h3 className="text-center text-xl my-8 text-white">
-          Your Score: {props.score}
+        Your Score: {props.score} | High Score: {highScore}
       </h3>
+      {props.score >= highScore ? (
+        <h3 className="text-center text-xl my-8 text-white">NEW HIGH SCORE!</h3>
+      ) : null}
       <div className=" flex flex-col gap-2 justify-center align-middle mt-16">
         <HoverGlowButton
           btnText="Restart"
