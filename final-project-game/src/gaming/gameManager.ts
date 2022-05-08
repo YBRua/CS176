@@ -28,6 +28,7 @@ export class GameManager {
   paused: boolean;
 
   setPlayerHP: (hp: number) => void;
+  togglePauseState: (paused: boolean) => void;
 
   constructor(canvasRef: React.RefObject<HTMLCanvasElement>) {
     this.gameLevelId = -1;
@@ -41,6 +42,7 @@ export class GameManager {
     this.enemySpawner = null;
     this.setPlayerHP = (hp: number) => {};
     this.paused = false;
+    this.togglePauseState = () => {};
   }
 
   public togglePause() {
@@ -51,10 +53,23 @@ export class GameManager {
         this.eventLoop(t);
       });
     }
+    this.togglePauseState(this.paused);
   }
 
   public setPlayerConfig(playerConfig: PlayerConfig) {
     this.playerConfig = playerConfig;
+  }
+
+  public reset(): void {
+    this.gameObjects.forEach((gameObject) => {
+      gameObject.onDestroy();
+    });
+    this.gameObjects.clear();
+    this.playerObject = null;
+    this.enemySpawner = null;
+    this.prevTimeStamp = 0;
+    this.paused = false;
+    this.togglePauseState(false);
   }
 
   public init(levelId: number) {

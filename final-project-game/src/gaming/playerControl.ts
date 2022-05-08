@@ -26,7 +26,7 @@ export class PlayerController {
   }
 
   public keyUpHandler(event: any) {
-    console.log(event.key);
+    // console.log(event.key);
     event.preventDefault();
     if (this.gameManager.playerObject) {
       switch (event.key) {
@@ -43,6 +43,7 @@ export class PlayerController {
           break;
         case "Escape":
           this.gameManager.togglePause();
+          break;
       }
     }
   }
