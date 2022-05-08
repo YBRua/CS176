@@ -159,7 +159,7 @@ export class Player extends SpriteGameObject {
   }
 
   public override update(timeDelta: number): void {
-    this.drawCollider();
+    // this.drawCollider();
     this.velocity = this._getVelocity();
     if (this.position && this.velocity) {
       const deltaPos = Vector2D.scale(this.velocity, timeDelta * SPEED_SCALE);

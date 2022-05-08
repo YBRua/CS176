@@ -74,7 +74,7 @@ export class Enemy extends SpriteGameObject {
   }
 
   public override update(timeDelta: number): void {
-    this.drawCollider();
+    // this.drawCollider();
     this.velocity = this._movementControl.update(timeDelta * SPEED_SCALE);
     this._fireProjectile();
   }

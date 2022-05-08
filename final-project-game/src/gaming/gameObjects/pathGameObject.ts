@@ -30,7 +30,7 @@ export class PathGameObject extends PhysicalGameObject {
   }
 
   public override update(timeDelta: number): void {
-    this.drawCollider();
+    // this.drawCollider();
     if (this.position && this.velocity) {
       const deltaPos = Vector2D.scale(this.velocity, timeDelta * SPEED_SCALE);
       if (
