@@ -2,8 +2,10 @@ import { Aircraft, getAircraftById } from "../../data/aircraft/aircraft";
 import { Weapon } from "../../data/weapon/weapon";
 import { PlayerConfig } from "../../hooks/usePlayerConfig";
 import { resizeToCanvas, SPEED_SCALE } from "../common";
+import { CooldownManager } from "../cooldownManager";
 import { GameManager } from "../gameManager";
 import { Vector2D } from "../vector";
+import { Faction } from "./gameObject";
 import { PathType } from "./pathGameObject";
 import { Projectile } from "./projectile";
 import { SpriteGameObject } from "./spriteGameObject";
@@ -20,8 +22,8 @@ export class Player extends SpriteGameObject {
   aircraft: Aircraft;
   weapon: Weapon;
   movementState: MovementState;
-  canFire: boolean;
   isFiring: boolean;
+  cdManager: CooldownManager;
 
   constructor(
     aircraft: Aircraft,
@@ -29,11 +31,21 @@ export class Player extends SpriteGameObject {
     position: Vector2D,
     velocity: Vector2D,
     ctx: CanvasRenderingContext2D,
-    width: number = 0,
-    height: number = 0,
-    imageSrc: string
+    width: number,
+    height: number,
+    imageSrc: string,
+    gameManager: GameManager
   ) {
-    super(position, velocity, ctx, width, height, imageSrc);
+    super(
+      position,
+      velocity,
+      ctx,
+      width,
+      height,
+      imageSrc,
+      Faction.Player,
+      gameManager
+    );
     this.id = PLAYER_ID;
 
     this.aircraft = aircraft;
@@ -41,8 +53,15 @@ export class Player extends SpriteGameObject {
 
     this.movementState = MovementState.Idle;
 
-    this.canFire = true;
+    this.cdManager = new CooldownManager(
+      this.weapon.cooldown / 4,
+      this.weapon.cooldown,
+      5
+    );
     this.isFiring = false;
+
+    this.hp = this.aircraft.hp;
+    this.isCollidable = true;
   }
 
   public setVelocity(velocity: Vector2D): void {
@@ -77,8 +96,9 @@ export class Player extends SpriteGameObject {
     }
   }
 
-  private _fireProjectile(gameManager: GameManager): void {
-    if (gameManager.playerObject && this.canFire) {
+  private _fireProjectile(): void {
+    const gameManager = this._gameManager;
+    if (gameManager.playerObject && this.cdManager.canFire()) {
       const playerObject = gameManager.playerObject;
       const aircraft = playerObject.aircraft;
 
@@ -88,17 +108,18 @@ export class Player extends SpriteGameObject {
           resizeToCanvas(aircraft.canvasWidth / 2)
         ),
         new Vector2D(0, -gameManager.playerObject.weapon.projectileSpeed),
+        this.weapon.damage,
         gameManager.ctx!,
         10,
-        10
+        10,
+        "white",
+        Faction.Player,
+        this._gameManager
       );
 
       gameManager.gameObjects.add(newProjectile);
-      this.canFire = false;
 
-      setTimeout(() => {
-        this.canFire = true;
-      }, gameManager.playerObject.weapon.cooldown * 100);
+      this.cdManager.step();
     }
   }
 
@@ -106,7 +127,8 @@ export class Player extends SpriteGameObject {
     this.isFiring = isFiring;
   }
 
-  public override update(timeDelta: number, gameManager: GameManager): void {
+  public override update(timeDelta: number): void {
+    this.drawCollider();
     this.velocity = this._getVelocity();
     if (this.position && this.velocity) {
       const deltaPos = Vector2D.scale(this.velocity, timeDelta * SPEED_SCALE);
@@ -119,7 +141,7 @@ export class Player extends SpriteGameObject {
     }
 
     if (this.isFiring) {
-      this._fireProjectile(gameManager);
+      this._fireProjectile();
     }
   }
 }
