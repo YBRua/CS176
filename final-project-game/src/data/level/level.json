@@ -1,12 +1,12 @@
 [
   {
     "id": 1,
-    "name": "Just Rush",
+    "name": "Introduction",
     "difficulty": 1
   },
   {
     "id": 2,
-    "name": "Test",
-    "difficulty": 2
+    "name": "Challenge",
+    "difficulty": 3
   }
 ]

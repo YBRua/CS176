@@ -9,7 +9,6 @@ import "../styles/GameView.css";
 import { EndModal } from "../components/EndModal";
 
 type GameViewPropTypes = {
-  levelId: number;
   canvas: JSX.Element;
   gameManager: GameManager;
   playerConfig: PlayerConfig;
@@ -20,21 +19,14 @@ type GameViewPropTypes = {
 };
 
 export function GameView(props: GameViewPropTypes) {
-  const {
-    levelId,
-    canvas,
-    gameManager,
-    playerConfig,
-    setPlayerHP,
-    score,
-    setScore,
-  } = props;
+  const { canvas, gameManager, playerConfig, setPlayerHP, score, setScore } =
+    props;
   let gameViewMain: JSX.Element;
 
   const [isPaused, setIsPaused] = useState(false);
   const [isEnded, setIsEnded] = useState(false);
 
-  const levelConfig = getLevelById(levelId);
+  const levelConfig = getLevelById(playerConfig.levelId);
   if (!levelConfig) {
     gameViewMain = <h1>The game is not initialized.</h1>;
   } else {
@@ -52,7 +44,7 @@ export function GameView(props: GameViewPropTypes) {
     gameManager.toggleEndState = setIsEnded;
     gameManager.togglePauseState = setIsPaused;
 
-    gameManager.init(levelId);
+    gameManager.init(playerConfig.levelId);
     gameManager.run();
   });
 
@@ -65,7 +57,7 @@ export function GameView(props: GameViewPropTypes) {
         score={score}
       ></EndModal>
 
-      <h2 className="game-view-title">Level {levelId}</h2>
+      <h2 className="game-view-title">Level {playerConfig.levelId}</h2>
       {gameViewMain}
     </div>
   );

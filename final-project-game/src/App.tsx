@@ -19,8 +19,8 @@ import "./styles/main.css";
 import { PlayerController } from "./gaming/playerControl";
 
 export function App() {
-  const [playerConfig, setAircraftId, setWeaponId] = usePlayerConfig();
-  const [levelId, setLevelId] = useState<number>(1);
+  const [playerConfig, setAircraftId, setWeaponId, setLevelId] = usePlayerConfig();
+
   const [playerHP, setPlayerHP] = useState<number>(0);
   const [score, setScore] = useState<number>(0);
 
@@ -99,7 +99,6 @@ export function App() {
               path="gaming/:id"
               element={
                 <GameView
-                  levelId={levelId}
                   canvas={canvas}
                   gameManager={gameManager}
                   playerConfig={playerConfig}

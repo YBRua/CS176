@@ -5,7 +5,7 @@
     "nickname": "Spirit",
     "image": "Interceptor",
     "description": "The Applied Aeronautics I5M3 'Spirit' is a more advanced variant of the I5 high-speed interceptor family in use by the Springfield Federal Cosmic Forces. Its fight control system has been fully overhauled to provide higher maneuverability, making it more capable of interception and air-superiority tasks.",
-    "speed": 250,
+    "speed": 300,
     "hp": 175,
     "canvasWidth": 123,
     "canvasHeight": 152
@@ -16,7 +16,7 @@
     "nickname": "Strike Pheonix",
     "image": "Interceptor",
     "description": "The BeyondX F-168D 'Strike Pheonix' is a multirole tactical fighter based on the BeyondX F-168 'Pheonix' in use by the Nyksia Republican Aegis. The D-model has got improvements in its weapon systems and is capable of various missions.",
-    "speed": 100,
+    "speed": 250,
     "hp": 200,
     "canvasWidth": 123,
     "canvasHeight": 152

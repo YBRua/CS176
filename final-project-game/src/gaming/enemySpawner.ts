@@ -15,11 +15,14 @@ function _randInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+const MAX_TOTAL_SPAWNS = 5;
+
 export class EnemySpawner extends GameObject {
   private spawnConfigs: SpawnConfigs;
   private numSpawned: number[];
   private timers: number[];
   private coolDowns: number[];
+  private totalSpawns: number;
 
   constructor(
     position: Vector2D,
@@ -39,6 +42,8 @@ export class EnemySpawner extends GameObject {
       this.timers.push(0);
       this.coolDowns.push(_randInt(config.rate.low, config.rate.high));
     });
+
+    this.totalSpawns = 0;
   }
 
   public update(deltaTime: number): void {
@@ -51,7 +56,8 @@ export class EnemySpawner extends GameObject {
       // try spawning a new enemy if cooldown is reached
       if (
         this.timers[index] > this.coolDowns[index] &&
-        this.numSpawned[index] < spawnConfigs[index].maxCount
+        this.numSpawned[index] < spawnConfigs[index].maxCount &&
+        this.totalSpawns < MAX_TOTAL_SPAWNS
       ) {
         // refresh cooldown timer
         this.timers[index] = 0;
@@ -62,6 +68,7 @@ export class EnemySpawner extends GameObject {
 
         // update count
         this.numSpawned[index]++;
+        this.totalSpawns++;
 
         const aircraft = getEnemyAircraftById(spawnConfigs[index].aircraftId)!;
         const weapon = getEnemyWeaponById(spawnConfigs[index].weaponId);
@@ -86,5 +93,6 @@ export class EnemySpawner extends GameObject {
 
   public informEnemyDestruction(enemyId: number): void {
     this.numSpawned[enemyId]--;
+    this.totalSpawns--;
   }
 }
