@@ -62,7 +62,8 @@ export class GameManager {
         this.ctx!,
         Math.round(aircraft.canvasWidth / 3),
         Math.round(aircraft.canvasHeight / 3),
-        resolveAircraftImagePath(aircraft)
+        resolveAircraftImagePath(aircraft),
+        this
       );
       this.gameObjects.add(this.playerObject);
     }
@@ -72,7 +73,8 @@ export class GameManager {
         new Vector2D(0, 0),
         new Vector2D(0, 0),
         this.ctx!,
-        getSpawnScriptById(this.gameLevelId)!
+        getSpawnScriptById(this.gameLevelId)!,
+        this
       );
       this.gameObjects.add(this.enemySpawner);
     }
@@ -82,7 +84,11 @@ export class GameManager {
     this.gameObjects.forEach((gameObject) => {
       if (gameObject.isCollidable) {
         this.gameObjects.forEach((otherGameObject) => {
-          if (otherGameObject.isCollidable && gameObject !== otherGameObject) {
+          if (
+            otherGameObject.isCollidable &&
+            gameObject !== otherGameObject &&
+            gameObject.faction !== otherGameObject.faction
+          ) {
             if (gameObject.isCollidingWith(otherGameObject)) {
               gameObject.onCollision(otherGameObject);
             }
@@ -103,8 +109,10 @@ export class GameManager {
 
     this.ctx!.clearRect(0, 0, this.ctx!.canvas.width, this.ctx!.canvas.height);
 
+    this._collisionDetection();
+
     this.gameObjects.forEach((gameObject) => {
-      gameObject.update(elapsed, this);
+      gameObject.update(elapsed);
     });
 
     this.gameObjects.forEach((gameObject) => {
@@ -127,6 +135,7 @@ export class GameManager {
   }
 
   public destroyGameObject(gameObject: GameObject) {
+    gameObject.onDestroy();
     this.gameObjects.delete(gameObject);
   }
 }

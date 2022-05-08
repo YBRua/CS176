@@ -4,7 +4,7 @@
     "name": "Kinetic",
     "description": "Basic",
     "cooldown": 2.5,
-    "damage": 10,
+    "damage": 100,
     "projectileSpeed": 1250
   },
   {

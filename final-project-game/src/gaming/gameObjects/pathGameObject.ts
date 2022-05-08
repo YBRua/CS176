@@ -1,6 +1,7 @@
 import { SPEED_SCALE } from "../common";
 import { GameManager } from "../gameManager";
 import { Vector2D } from "../vector";
+import { Faction } from "./gameObject";
 import { PhysicalGameObject } from "./physicalGameObject";
 
 export enum PathType {
@@ -17,16 +18,19 @@ export class PathGameObject extends PhysicalGameObject {
     position: Vector2D,
     velocity: Vector2D,
     ctx: CanvasRenderingContext2D,
-    width: number = 0,
-    height: number = 0,
-    fillColor: string = "white"
+    width: number,
+    height: number,
+    fillColor: string,
+    faction: Faction,
+    gameManager: GameManager
   ) {
-    super(position, velocity, ctx, width, height);
+    super(position, velocity, ctx, width, height, faction, gameManager);
     this.pathType = pathType;
     this.fillColor = fillColor;
   }
 
-  public override update(timeDelta: number, gameManager: GameManager): void {
+  public override update(timeDelta: number): void {
+    this.drawCollider();
     if (this.position && this.velocity) {
       const deltaPos = Vector2D.scale(this.velocity, timeDelta * SPEED_SCALE);
       if (
@@ -34,6 +38,8 @@ export class PathGameObject extends PhysicalGameObject {
         this.position.x + deltaPos.x > 0
       ) {
         this.position = Vector2D.add(this.position, deltaPos);
+      } else {
+        this.velocity = new Vector2D(0, 0);
       }
     }
   }
