@@ -10,6 +10,9 @@ export interface Weapon {
   longCD: number;
   shortCD: number;
   maxShots: number;
+  width: number;
+  height: number;
+  pathType: string;
 }
 
 export function loadWeapons(): Weapon[] {

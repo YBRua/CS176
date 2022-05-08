@@ -21,16 +21,27 @@ export class BaseFireControl {
 
   public fire(): void {
     const direction = this.getFireDirection();
-    const newProjectile = new Projectile(
-      PathType.Circle,
-      this._enemy.position
+    const weapon = this._enemy.weapon;
+    let projectilePos: Vector2D;
+    if (weapon.pathType === "circle") {
+      projectilePos = this._enemy.position
         .addX(resizeToCanvas(this._enemy.aircraft.canvasWidth / 2))
-        .addY(resizeToCanvas(this._enemy.aircraft.canvasHeight)),
+        .addY(resizeToCanvas(this._enemy.aircraft.canvasHeight));
+    } else {
+      projectilePos = this._enemy.position
+        .addX(resizeToCanvas(this._enemy.aircraft.canvasWidth / 2))
+        .addX(resizeToCanvas(-weapon.width / 2))
+        .addY(resizeToCanvas(this._enemy.aircraft.canvasHeight));
+    }
+
+    const newProjectile = new Projectile(
+      weapon.pathType === "circle" ? PathType.Circle : PathType.Rectangle,
+      projectilePos,
       direction.scale(this._enemy.weapon.projectileSpeed),
       this._enemy.weapon.damage,
       this._gameManager.ctx!,
-      7,
-      7,
+      this._enemy.weapon.width,
+      this._enemy.weapon.height,
       "red",
       Faction.Enemy,
       this._gameManager

@@ -5,6 +5,7 @@ import ENEMY_AIRCRAFTS from "./enemy.json";
 export interface Aircraft {
   id: number;
   name: string;
+  nickname: string;
   description: string;
   image: string;
   speed: number;

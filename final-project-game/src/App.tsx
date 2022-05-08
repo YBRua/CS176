@@ -77,7 +77,9 @@ export function App() {
               <Route
                 path="aircraft"
                 element={
-                  <AircraftView setAircraftId={setAircraftId}></AircraftView>
+                  <AircraftView
+                    setAircraftId={setAircraftId}
+                  ></AircraftView>
                 }
               ></Route>
               <Route

@@ -1,22 +1,28 @@
 [
   {
     "id": 1,
-    "name": "Kinetic",
-    "description": "Basic",
-    "damage": 100,
+    "name": "EMAC-82 Autocannon",
+    "description": "The EMAC-82 32mm autocannon is an electro-magnetic quad-barrel heavy machine cannon that fires 32mm kinetic rounds. The relatively low damage of kinetic shells is compensated by the high rate of fire.",
+    "damage": 15,
     "projectileSpeed": 1250,
-    "longCD": 500,
+    "longCD": 100,
     "shortCD": 0,
-    "maxShots": 1
+    "maxShots": 1,
+    "width": 4,
+    "height": 16,
+    "pathType": "rect"
   },
   {
     "id": 2,
-    "name": "Plasma",
-    "description": "Baseline",
-    "damage": 20,
+    "name": "PLS-100 Plasma Cannon",
+    "description": "The PLS-100 is a plasma cannon that fires a single plasma round. The PLS-100 is a very powerful weapon that can be used to destroy almost any target.",
+    "damage": 35,
     "projectileSpeed": 750,
-    "longCD": 1250,
+    "longCD": 500,
     "shortCD": 0,
-    "maxShots": 1
+    "maxShots": 1,
+    "width": 8,
+    "height": 8,
+    "pathType": "circle"
   }
 ]

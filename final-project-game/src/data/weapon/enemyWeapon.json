@@ -1,12 +1,28 @@
 [
   {
     "id": 1,
-    "name": "Enemy Kinetic",
+    "name": "Enemy SingleShot",
+    "description": "",
+    "damage": 10,
+    "projectileSpeed": 400,
+    "longCD": 1500,
+    "shortCD": 300,
+    "maxShots": 1,
+    "width": 8,
+    "height": 8,
+    "pathType": "circle"
+  },
+  {
+    "id": 2,
+    "name": "Enemy TriShot",
     "description": "",
     "damage": 10,
     "projectileSpeed": 400,
     "longCD": 2500,
     "shortCD": 300,
-    "maxShots": 3
+    "maxShots": 3,
+    "width": 8,
+    "height": 8,
+    "pathType": "circle"
   }
 ]

@@ -2,6 +2,7 @@
   {
     "id": 1,
     "name": "ImperialFighter",
+    "nickname": "ImperialFighter",
     "image": "EnemyFighter",
     "description": "Interceptor description",
     "speed": 75,

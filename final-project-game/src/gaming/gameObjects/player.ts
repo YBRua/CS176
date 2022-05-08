@@ -98,20 +98,28 @@ export class Player extends SpriteGameObject {
 
   private _fireProjectile(): void {
     const gameManager = this._gameManager;
-    if (gameManager.playerObject && this.cdManager.canFire()) {
-      const playerObject = gameManager.playerObject;
-      const aircraft = playerObject.aircraft;
+    const weapon = this.weapon;
+    let projectilePos: Vector2D;
+    if (weapon.pathType === "circle") {
+      projectilePos = this.position.addX(
+        resizeToCanvas(this.aircraft.canvasWidth / 2)
+      );
+    } else {
+      projectilePos = this.position
+        .addX(resizeToCanvas(this.aircraft.canvasWidth / 2))
+        .addX(this.weapon.width / 2)
+        .addY(-this.weapon.height / 4)
+    }
 
+    if (gameManager.playerObject && this.cdManager.canFire()) {
       const newProjectile = new Projectile(
-        PathType.Circle,
-        gameManager.playerObject.position.addX(
-          resizeToCanvas(aircraft.canvasWidth / 2)
-        ),
-        new Vector2D(0, -gameManager.playerObject.weapon.projectileSpeed),
+        weapon.pathType === "circle" ? PathType.Circle : PathType.Rectangle,
+        projectilePos,
+        new Vector2D(0, -this.weapon.projectileSpeed),
         this.weapon.damage,
         gameManager.ctx!,
-        10,
-        10,
+        this.weapon.width,
+        this.weapon.height,
         "white",
         Faction.Player,
         this._gameManager

@@ -7,10 +7,11 @@ import "../styles/main.css";
 type AircraftItemPropTypes = {
   aircraft: Aircraft;
   onSelectClick: () => void;
+  onDetailClick: () => void;
 };
 
 export function AircraftItem(props: AircraftItemPropTypes) {
-  const { aircraft, onSelectClick } = props;
+  const { aircraft, onSelectClick, onDetailClick } = props;
   const imgSrc = resolveAircraftImagePath(aircraft, true);
   return (
     <div
@@ -43,7 +44,12 @@ export function AircraftItem(props: AircraftItemPropTypes) {
             onSelectClick();
           }}
         ></HoverGlowButton>
-        <HoverGlowButton btnText="DETAIL"></HoverGlowButton>
+        <HoverGlowButton
+          btnText="DETAIL"
+          onClick={() => {
+            onDetailClick();
+          }}
+        ></HoverGlowButton>
       </div>
     </div>
   );

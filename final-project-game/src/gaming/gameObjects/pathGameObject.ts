@@ -66,7 +66,6 @@ export class PathGameObject extends PhysicalGameObject {
         0,
         2 * Math.PI
       );
-      this.ctx!.closePath();
       this.ctx!.fill();
     }
   }
@@ -76,7 +75,7 @@ export class PathGameObject extends PhysicalGameObject {
       this.ctx!.beginPath();
       this.ctx!.fillStyle = this.fillColor;
       this.ctx!.rect(this.position.x, this.position.y, this.width, this.height);
-      this.ctx!.closePath();
+      this.ctx!.fill();
     }
   }
 }

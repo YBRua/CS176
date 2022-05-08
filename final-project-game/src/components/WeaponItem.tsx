@@ -7,10 +7,11 @@ import "../styles/main.css";
 type WeaponItemPropTypes = {
   weapon: Weapon;
   onSelectClick: () => void;
+  onDetailClick: () => void;
 };
 
 export function WeaponItem(props: WeaponItemPropTypes) {
-  const { weapon, onSelectClick } = props;
+  const { weapon, onSelectClick, onDetailClick } = props;
   return (
     <div className="weapon-item rounded-item-outer">
       <div className="rounded-item-inner">
@@ -24,7 +25,7 @@ export function WeaponItem(props: WeaponItemPropTypes) {
         </div>
         <div className="w-1/4">
           <div className="text-zinc-400">CoolDown</div>
-          <div className="text-zinc-200">{weapon.cooldown}</div>
+          <div className="text-zinc-200">{weapon.longCD}</div>
         </div>
         <HoverGlowButton
           btnText="SELECT"
@@ -32,7 +33,12 @@ export function WeaponItem(props: WeaponItemPropTypes) {
             onSelectClick();
           }}
         ></HoverGlowButton>
-        <HoverGlowButton btnText="DETAIL"></HoverGlowButton>
+        <HoverGlowButton
+          btnText="DETAIL"
+          onClick={() => {
+            onDetailClick();
+          }}
+        ></HoverGlowButton>
       </div>
     </div>
   );
