@@ -39,8 +39,12 @@ export function getSpawnScriptById(id: number): SpawnConfigs {
   return cfg;
 }
 
-export function getLevelById(id: number): Level | null {
-  return LEVELS.find((level) => level.id === id) || null;
+export function getLevelById(id: number): Level {
+  const level = LEVELS.find((level) => level.id === id);
+  if (!level) {
+    throw new Error(`Level ${id} not found`);
+  }
+  return level;
 }
 
 export function difficultyToString(difficulty: number): string {

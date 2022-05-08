@@ -1,3 +1,4 @@
+import { getLevelById } from "../../data/level/level";
 import { GameManager } from "../gameManager";
 import { Vector2D } from "../vector";
 import { Faction, GameObject } from "./gameObject";
@@ -62,7 +63,9 @@ export class Projectile extends PathGameObject {
 
         if (other.faction === Faction.Enemy) {
           // enemy destroyed, update player's score
-          this._gameManager.playerObject!.score += other.score;
+          const config = getLevelById(this._gameManager.gameLevelId);
+          this._gameManager.playerObject!.score +=
+            other.score * config.difficulty;
           this._gameManager.setScoreState(
             this._gameManager.playerObject!.score
           );
