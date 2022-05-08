@@ -29,7 +29,7 @@ export function MainFrame(props: MainFramePropTypes) {
       >
         <Outlet></Outlet>
       </div>
-      <div className="w-3/12 bg-midnight h-full">
+      <div className="w-3/12 bg-midnight h-full pt-52">
         <AircraftDisplay
           aircraft={props.aircraft}
           weapon={props.weapon}
