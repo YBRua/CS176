@@ -2,7 +2,8 @@ import React from "react";
 import { GameObject } from "./gameObjects/gameObject";
 import { Vector2D } from "./vector";
 
-import "../assets/aircraft/Interceptor.png";
+import "../assets/aircraft/I5M3.png";
+import "../assets/aircraft/F-168.png"
 import { Player } from "./gameObjects/player";
 import { PlayerConfig } from "../hooks/usePlayerConfig";
 import {
@@ -123,7 +124,7 @@ export class GameManager {
       this.playerObject = new Player(
         aircraft,
         weapon,
-        new Vector2D(this.ctx!.canvas.width / 2, this.ctx!.canvas.height - 60),
+        new Vector2D(this.ctx!.canvas.width / 2, this.ctx!.canvas.height - 75),
         new Vector2D(0, 0),
         this.ctx!,
         Math.round(aircraft.canvasWidth / 3),

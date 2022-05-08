@@ -14,10 +14,10 @@ import { MainFrame } from "./MainFrame";
 import { getWeaponById } from "./data/weapon/weapon";
 import { GameManager } from "./gaming/gameManager";
 import { GameView } from "./views/GameView";
-
-import "./styles/main.css";
 import { PlayerController } from "./gaming/playerControl";
 import { HelpView } from "./views/HelpView";
+
+import "./styles/main.css";
 
 export function App() {
   const [playerConfig, setAircraftId, setWeaponId, setLevelId] =

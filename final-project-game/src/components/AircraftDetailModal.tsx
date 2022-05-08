@@ -1,6 +1,5 @@
 import ReactModal from "react-modal";
 import { Styles } from "react-modal";
-import { useNavigate } from "react-router-dom";
 import { Aircraft, resolveAircraftImagePath } from "../data/aircraft/aircraft";
 import { HoverGlowButton } from "./HoverGlowButton";
 
