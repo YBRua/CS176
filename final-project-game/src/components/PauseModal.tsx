@@ -63,12 +63,12 @@ export function PauseModal(props: PauseModalPropTypes) {
           extraClassNames="text-2xl"
         ></HoverGlowButton>
         <HoverGlowButton
-          btnText="Restart Game"
+          btnText="Restart"
           onClick={restartGame}
           extraClassNames="text-2xl"
         ></HoverGlowButton>
         <HoverGlowButton
-          btnText="Return To Menu"
+          btnText="Return to Menu"
           onClick={returnToMenu}
           extraClassNames="text-2xl"
         ></HoverGlowButton>
