@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { getAircraftById } from "../data/aircraft/aircraft";
 import { getLevelById } from "../data/level/level";
 import { GameManager } from "../gaming/gameManager";
 import { PlayerConfig } from "../hooks/usePlayerConfig";
@@ -10,10 +11,11 @@ type GameViewPropTypes = {
   canvas: JSX.Element;
   gameManager: GameManager;
   playerConfig: PlayerConfig;
+  setPlayerHP: (hp: number) => void;
 };
 
 export function GameView(props: GameViewPropTypes) {
-  const { levelId, canvas, gameManager, playerConfig } = props;
+  const { levelId, canvas, gameManager, playerConfig, setPlayerHP } = props;
   let gameViewMain: JSX.Element;
 
   const levelConfig = getLevelById(levelId);
@@ -25,6 +27,8 @@ export function GameView(props: GameViewPropTypes) {
 
   useEffect(() => {
     gameManager.setPlayerConfig(playerConfig);
+  
+    gameManager.setPlayerHP = setPlayerHP;
     gameManager.init(levelId);
     gameManager.run();
   });

@@ -9,6 +9,7 @@ import { Weapon } from "./data/weapon/weapon";
 type MainFramePropTypes = {
   aircraft: Aircraft;
   weapon: Weapon;
+  playerHP: number;
 };
 
 export function MainFrame(props: MainFramePropTypes) {
@@ -31,6 +32,7 @@ export function MainFrame(props: MainFramePropTypes) {
         <AircraftDisplay
           aircraft={props.aircraft}
           weapon={props.weapon}
+          playerHP={props.playerHP}
         ></AircraftDisplay>
       </div>
     </h1>

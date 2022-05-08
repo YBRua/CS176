@@ -47,10 +47,16 @@ export class Projectile extends PathGameObject {
   public override onCollision(other: GameObject): void {
     if (other instanceof Projectile) {
       return;
-    } 
+    }
+
     if (other.faction !== this.faction) {
       other.hp -= this.damage;
-      if (other.hp < 0) {
+
+      if (other.faction === Faction.Player) {
+        this._gameManager.setPlayerHP(other.hp);
+      }
+
+      if (other.hp <= 0) {
         this._gameManager.destroyGameObject(other);
       }
       this._gameManager.destroyGameObject(this);

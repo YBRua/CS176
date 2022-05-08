@@ -21,12 +21,13 @@ import { PlayerController } from "./gaming/playerControl";
 export function App() {
   const [playerConfig, setAircraftId, setWeaponId] = usePlayerConfig();
   const [levelId, setLevelId] = useState<number>(1);
+  const [playerHP, setPlayerHP] = useState<number>(0);
 
   const aircraft = getAircraftById(playerConfig.aircraftId)!;
   const weapon = getWeaponById(playerConfig.weaponId);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const gameManager = new GameManager(canvasRef);
+  const gameManager = React.useMemo<GameManager>(() => new GameManager(canvasRef), [playerConfig]);
   const playerController = new PlayerController(gameManager);
 
   const canvas = (
@@ -48,7 +49,7 @@ export function App() {
         <Routes>
           <Route
             path="/"
-            element={<MainFrame aircraft={aircraft} weapon={weapon} />}
+            element={<MainFrame aircraft={aircraft} weapon={weapon} playerHP={playerHP} />}
           >
             <Route index element={<IndexView />}></Route>
             <Route path="shop" element={<h1>Shop</h1>}></Route>
@@ -81,6 +82,7 @@ export function App() {
                   canvas={canvas}
                   gameManager={gameManager}
                   playerConfig={playerConfig}
+                  setPlayerHP={setPlayerHP}
                 ></GameView>
               }
             ></Route>

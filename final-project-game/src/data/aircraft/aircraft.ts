@@ -21,12 +21,20 @@ export function loadEnemyAircrafts(): Aircraft[] {
   return ENEMY_AIRCRAFTS;
 }
 
-export function getEnemyAircraftById(id: number): Aircraft | null {
-  return ENEMY_AIRCRAFTS.find((aircraft) => aircraft.id === id) || null;
+export function getEnemyAircraftById(id: number): Aircraft {
+  const aircraft = ENEMY_AIRCRAFTS.find((aircraft) => aircraft.id === id);
+  if (!aircraft) {
+    throw new Error(`Aircraft ${id} not found`);
+  }
+  return aircraft;
 }
 
-export function getAircraftById(id: number): Aircraft | null {
-  return AIRCRAFTS.find((aircraft) => aircraft.id === id) || null;
+export function getAircraftById(id: number): Aircraft {
+  const aircraft = AIRCRAFTS.find((aircraft) => aircraft.id === id);
+  if (!aircraft) {
+    throw new Error(`Aircraft ${id} not found`);
+  }
+  return aircraft;
 }
 
 export function loadAircraftImage(

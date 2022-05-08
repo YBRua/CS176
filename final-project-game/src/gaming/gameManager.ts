@@ -25,6 +25,7 @@ export class GameManager {
   enemySpawner: EnemySpawner | null;
 
   prevTimeStamp: number;
+  setPlayerHP: (hp: number) => void;
 
   constructor(canvasRef: React.RefObject<HTMLCanvasElement>) {
     this.gameLevelId = -1;
@@ -36,6 +37,7 @@ export class GameManager {
     this.gameObjects = new Set();
     this.playerObject = null;
     this.enemySpawner = null;
+    this.setPlayerHP = (hp: number) => {};
   }
 
   public setPlayerConfig(playerConfig: PlayerConfig) {
@@ -65,7 +67,9 @@ export class GameManager {
         resolveAircraftImagePath(aircraft),
         this
       );
+
       this.gameObjects.add(this.playerObject);
+      this.setPlayerHP(aircraft.hp);
     }
 
     if (!this.enemySpawner) {
