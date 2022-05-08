@@ -46,6 +46,7 @@ export class Projectile extends PathGameObject {
 
   public override onCollision(other: GameObject): void {
     if (other instanceof Projectile) {
+      // prevent collision event with other projectiles
       return;
     }
 
@@ -53,12 +54,25 @@ export class Projectile extends PathGameObject {
       other.hp -= this.damage;
 
       if (other.faction === Faction.Player) {
-        this._gameManager.setPlayerHP(other.hp);
+        this._gameManager.setPlayerHPState(other.hp);
       }
 
       if (other.hp <= 0) {
+        // when HP of an entity reaches zero
+
+        if (other.faction === Faction.Enemy) {
+          // enemy destroyed, update player's score
+          this._gameManager.playerObject!.score += other.score;
+          this._gameManager.setScoreState(
+            this._gameManager.playerObject!.score
+          );
+        }
+
+        // destroy the eneity
         this._gameManager.destroyGameObject(other);
       }
+
+      // destroy the projectile
       this._gameManager.destroyGameObject(this);
     }
   }

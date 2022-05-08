@@ -13,10 +13,12 @@ type GameViewPropTypes = {
   gameManager: GameManager;
   playerConfig: PlayerConfig;
   setPlayerHP: (hp: number) => void;
+  setScore: (score: number) => void;
 };
 
 export function GameView(props: GameViewPropTypes) {
-  const { levelId, canvas, gameManager, playerConfig, setPlayerHP } = props;
+  const { levelId, canvas, gameManager, playerConfig, setPlayerHP, setScore } =
+    props;
   let gameViewMain: JSX.Element;
 
   const [isPaused, setIsPaused] = useState(false);
@@ -35,7 +37,8 @@ export function GameView(props: GameViewPropTypes) {
   useEffect(() => {
     console.log("Called");
     gameManager.setPlayerConfig(playerConfig);
-    gameManager.setPlayerHP = setPlayerHP;
+    gameManager.setScoreState = setScore;
+    gameManager.setPlayerHPState = setPlayerHP;
     gameManager.togglePauseState = setIsPaused;
 
     gameManager.init(levelId);

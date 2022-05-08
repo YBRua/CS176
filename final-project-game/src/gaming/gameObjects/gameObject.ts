@@ -15,6 +15,7 @@ export class GameObject {
   faction: Faction;
   hp: number;
   damage: number;
+  score: number;
   _gameManager: GameManager;
 
   static uid: number = 10;
@@ -46,6 +47,7 @@ export class GameObject {
     this.faction = faction;
     this.hp = 0;
     this.damage = 0;
+    this.score = 0;
   }
 
   public draw(): void {

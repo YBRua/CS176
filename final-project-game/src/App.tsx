@@ -22,26 +22,38 @@ export function App() {
   const [playerConfig, setAircraftId, setWeaponId] = usePlayerConfig();
   const [levelId, setLevelId] = useState<number>(1);
   const [playerHP, setPlayerHP] = useState<number>(0);
+  const [score, setScore] = useState<number>(0);
 
   const aircraft = getAircraftById(playerConfig.aircraftId)!;
   const weapon = getWeaponById(playerConfig.weaponId);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const gameManager = React.useMemo<GameManager>(() => new GameManager(canvasRef), [playerConfig]);
+
+  // only renew GameManager when player config changes
+  // to prevent canvas from being re-rendered
+  const gameManager = React.useMemo<GameManager>(
+    () => new GameManager(canvasRef),
+    [playerConfig]
+  );
+
   const playerController = new PlayerController(gameManager);
 
+  // where the game will be rendered
   const canvas = (
     <canvas
       ref={canvasRef}
       width={700}
       height={500}
       className="game-canvas"
-      onKeyDown={(e) => {playerController.keyDownHandler(e);}}
-      onKeyUp={(e) => {playerController.keyUpHandler(e);}}
+      onKeyDown={(e) => {
+        playerController.keyDownHandler(e);
+      }}
+      onKeyUp={(e) => {
+        playerController.keyUpHandler(e);
+      }}
       tabIndex={0}
     ></canvas>
   );
-
 
   return (
     <React.StrictMode>
@@ -49,7 +61,14 @@ export function App() {
         <Routes>
           <Route
             path="/"
-            element={<MainFrame aircraft={aircraft} weapon={weapon} playerHP={playerHP} />}
+            element={
+              <MainFrame
+                aircraft={aircraft}
+                weapon={weapon}
+                playerHP={playerHP}
+                score={score}
+              />
+            }
           >
             <Route index element={<IndexView />}></Route>
             <Route path="shop" element={<h1>Shop</h1>}></Route>
@@ -83,6 +102,7 @@ export function App() {
                   gameManager={gameManager}
                   playerConfig={playerConfig}
                   setPlayerHP={setPlayerHP}
+                  setScore={setScore}
                 ></GameView>
               }
             ></Route>

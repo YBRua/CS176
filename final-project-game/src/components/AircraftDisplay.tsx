@@ -7,10 +7,11 @@ type AircraftDisplayPropTypes = {
   aircraft: Aircraft;
   weapon: Weapon;
   playerHP: number;
+  score: number;
 };
 
 export function AircraftDisplay(props: AircraftDisplayPropTypes) {
-  const { aircraft, weapon, playerHP } = props;
+  const { aircraft, weapon, playerHP, score } = props;
   const imgSrc = resolveAircraftImagePath(aircraft, true);
   return (
     <div>
@@ -35,7 +36,13 @@ export function AircraftDisplay(props: AircraftDisplayPropTypes) {
         </div>
         <div className="name-display">
           <div className="name-display-key">HP</div>
-          <div className="name-display-value">{playerHP}/{aircraft.hp}</div>
+          <div className="name-display-value">
+            {playerHP}/{aircraft.hp}
+          </div>
+        </div>
+        <div className="name-display">
+          <div className="name-display-key">Score</div>
+          <div className="name-display-value">{score}</div>
         </div>
       </div>
     </div>

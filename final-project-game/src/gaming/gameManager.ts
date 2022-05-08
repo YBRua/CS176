@@ -24,10 +24,11 @@ export class GameManager {
   playerConfig: PlayerConfig | null;
   enemySpawner: EnemySpawner | null;
 
-  prevTimeStamp: number;
   paused: boolean;
+  prevTimeStamp: number;
 
-  setPlayerHP: (hp: number) => void;
+  setPlayerHPState: (hp: number) => void;
+  setScoreState: (score: number) => void;
   togglePauseState: (paused: boolean) => void;
 
   constructor(canvasRef: React.RefObject<HTMLCanvasElement>) {
@@ -40,8 +41,10 @@ export class GameManager {
     this.gameObjects = new Set();
     this.playerObject = null;
     this.enemySpawner = null;
-    this.setPlayerHP = (hp: number) => {};
     this.paused = false;
+
+    this.setScoreState = (score) => {};
+    this.setPlayerHPState = (hp) => {};
     this.togglePauseState = () => {};
   }
 
@@ -70,6 +73,7 @@ export class GameManager {
     this.prevTimeStamp = 0;
     this.paused = false;
     this.togglePauseState(false);
+    this.setScoreState(0);
   }
 
   public init(levelId: number) {
@@ -97,7 +101,7 @@ export class GameManager {
       );
 
       this.gameObjects.add(this.playerObject);
-      this.setPlayerHP(aircraft.hp);
+      this.setPlayerHPState(aircraft.hp);
     }
 
     if (!this.enemySpawner) {

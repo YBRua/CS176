@@ -52,6 +52,7 @@ export class BasicEnemy extends SpriteGameObject {
 
     this.hp = this.aircraft.hp;
     this.isCollidable = true;
+    this.score = 10;
   }
 
   private _fireProjectile(): void {
