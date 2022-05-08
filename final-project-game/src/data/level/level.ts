@@ -23,14 +23,20 @@ export interface EnemySpawnConfig {
   maxCount: number;
   fireControl: string;
   movement: string;
+  weaponId: number;
+  aircraftId: number;
 }
 
 export function loadLevels(): Level[] {
   return LEVELS;
 }
 
-export function getSpawnScriptById(id: number): SpawnConfigs | null {
-  return SPAWN_CONFIGS.find((spawnConfig) => spawnConfig.id === id) || null;
+export function getSpawnScriptById(id: number): SpawnConfigs {
+  const cfg = SPAWN_CONFIGS.find((spawnConfig) => spawnConfig.id === id);
+  if (!cfg) {
+    throw new Error(`Spawn config ${id} not found`);
+  }
+  return cfg;
 }
 
 export function getLevelById(id: number): Level | null {

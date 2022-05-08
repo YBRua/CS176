@@ -96,37 +96,60 @@ export class Player extends SpriteGameObject {
     }
   }
 
+  private _buildProjectile(position: Vector2D): Projectile {
+    const weapon = this.weapon;
+    const projectile = new Projectile(
+      weapon.pathType === "circle" ? PathType.Circle : PathType.Rectangle,
+      position,
+      new Vector2D(0, -this.weapon.projectileSpeed),
+      this.weapon.damage,
+      this._gameManager.ctx!,
+      this.weapon.width,
+      this.weapon.height,
+      "white",
+      Faction.Player,
+      this._gameManager
+    );
+
+    return projectile;
+  }
+
   private _fireProjectile(): void {
     const gameManager = this._gameManager;
     const weapon = this.weapon;
-    let projectilePos: Vector2D;
-    if (weapon.pathType === "circle") {
-      projectilePos = this.position.addX(
-        resizeToCanvas(this.aircraft.canvasWidth / 2)
-      );
-    } else {
-      projectilePos = this.position
-        .addX(resizeToCanvas(this.aircraft.canvasWidth / 2))
-        .addX(this.weapon.width / 2)
-        .addY(-this.weapon.height / 4)
-    }
-
     if (gameManager.playerObject && this.cdManager.canFire()) {
-      const newProjectile = new Projectile(
-        weapon.pathType === "circle" ? PathType.Circle : PathType.Rectangle,
-        projectilePos,
-        new Vector2D(0, -this.weapon.projectileSpeed),
-        this.weapon.damage,
-        gameManager.ctx!,
-        this.weapon.width,
-        this.weapon.height,
-        "white",
-        Faction.Player,
-        this._gameManager
-      );
-
-      gameManager.gameObjects.add(newProjectile);
-
+      if (weapon.barrels === 1) {
+        let projectilePos: Vector2D;
+        if (weapon.pathType === "circle") {
+          projectilePos = this.position.addX(this.width / 2);
+        } else {
+          projectilePos = this.position
+            .addX(this.width / 2)
+            .addX(- this.weapon.width / 2)
+            .addY(-this.weapon.height / 4);
+        }
+        const projectile = this._buildProjectile(projectilePos);
+        gameManager.gameObjects.add(projectile);
+      } else {
+        let projectilePos1, projectilePos2: Vector2D;
+        if (weapon.pathType === "circle") {
+          projectilePos1 = this.position.addY(this.height / 2);
+          projectilePos2 = this.position
+            .addX(this.width)
+            .addX(-this.weapon.width)
+            .addY(this.height / 2);
+        } else {
+          projectilePos1 = this.position.addY(this.height / 2);
+          projectilePos2 = this.position
+            .addX(this.width)
+            .addX(-this.weapon.width)
+            .addY(this.height / 2);
+        }
+        const projectile1 = this._buildProjectile(projectilePos1);
+        const projectile2 = this._buildProjectile(projectilePos2);
+        gameManager.gameObjects.add(projectile1);
+        gameManager.gameObjects.add(projectile2);
+      }
       this.cdManager.step();
     }
   }

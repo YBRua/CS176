@@ -8,6 +8,7 @@
     "longCD": 1500,
     "shortCD": 300,
     "maxShots": 1,
+    "barrels": 1,
     "width": 8,
     "height": 8,
     "pathType": "circle"
@@ -21,6 +22,7 @@
     "longCD": 2500,
     "shortCD": 300,
     "maxShots": 3,
+    "barrels": 1,
     "width": 8,
     "height": 8,
     "pathType": "circle"

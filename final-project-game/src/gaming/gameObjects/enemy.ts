@@ -6,6 +6,7 @@ import { CooldownManager } from "../cooldownManager";
 import {
   BaseFireControl,
   DirectShootFireControl,
+  getFireControl,
   PlayerTrackingFireControl,
 } from "../enemy/fireControl";
 import { BaseMovementAI, getMovementAI } from "../enemy/movement";
@@ -49,7 +50,7 @@ export class Enemy extends SpriteGameObject {
     this.weapon = weapon;
 
     this.timerIndex = timerIndex;
-    this._fireControl = new PlayerTrackingFireControl(gameManager, this);
+    this._fireControl = getFireControl(this, spawnConfig.fireControl);
     this._cdManager = new CooldownManager(
       this.weapon.shortCD,
       this.weapon.longCD,

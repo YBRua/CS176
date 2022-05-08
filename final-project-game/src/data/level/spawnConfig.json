@@ -5,12 +5,26 @@
       {
         "id": 1,
         "rate": {
-          "low": 4000,
-          "high": 8000
+          "low": 3000,
+          "high": 7000
         },
         "maxCount": 3,
         "fireControl": "Direct",
-        "movement": "XAxis"
+        "movement": "XAxis",
+        "weaponId": 1,
+        "aircraftId": 1
+      },
+      {
+        "id": 2,
+        "rate": {
+          "low": 5000,
+          "high": 8000
+        },
+        "maxCount": 2,
+        "fireControl": "Tracking",
+        "movement": "Direct",
+        "weaponId": 2,
+        "aircraftId": 1
       }
     ]
   }

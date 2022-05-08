@@ -6,6 +6,17 @@ import { PathType } from "../gameObjects/pathGameObject";
 import { Projectile } from "../gameObjects/projectile";
 import { Vector2D } from "../vector";
 
+
+export function getFireControl(enemy: Enemy, fireControlType: string): BaseFireControl {
+  if (fireControlType === "Direct") {
+    return new DirectShootFireControl(enemy._gameManager, enemy);
+  } else if (fireControlType === "Tracking") {
+    return new PlayerTrackingFireControl(enemy._gameManager, enemy);
+  }
+  throw new Error("Unknown fire control type: " + fireControlType);
+}
+
+
 export class BaseFireControl {
   protected _gameManager: GameManager;
   protected _enemy: Enemy;

@@ -10,6 +10,7 @@ export interface Weapon {
   longCD: number;
   shortCD: number;
   maxShots: number;
+  barrels: number;
   width: number;
   height: number;
   pathType: string;

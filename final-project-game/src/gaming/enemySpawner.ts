@@ -63,8 +63,8 @@ export class EnemySpawner extends GameObject {
         // update count
         this.numSpawned[index]++;
 
-        const aircraft = getEnemyAircraftById(1)!;
-        const weapon = getEnemyWeaponById(1);
+        const aircraft = getEnemyAircraftById(spawnConfigs[index].aircraftId)!;
+        const weapon = getEnemyWeaponById(spawnConfigs[index].weaponId);
         const enemy = new Enemy(
           index,
           spawnConfigs[index],
