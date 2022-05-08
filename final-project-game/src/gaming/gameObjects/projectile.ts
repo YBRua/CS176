@@ -68,6 +68,11 @@ export class Projectile extends PathGameObject {
           );
         }
 
+        if (other.faction === Faction.Player) {
+          // player destroyed, game ends
+          this._gameManager.toggleEndGame();
+        }
+
         // destroy the eneity
         this._gameManager.destroyGameObject(other);
       }

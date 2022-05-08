@@ -102,6 +102,7 @@ export function App() {
                   gameManager={gameManager}
                   playerConfig={playerConfig}
                   setPlayerHP={setPlayerHP}
+                  score={score}
                   setScore={setScore}
                 ></GameView>
               }

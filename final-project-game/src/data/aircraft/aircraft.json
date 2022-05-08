@@ -5,7 +5,7 @@
     "image": "Interceptor",
     "description": "Interceptor description",
     "speed": 200,
-    "hp": 150,
+    "hp": 30,
     "canvasWidth": 123,
     "canvasHeight": 152
   },

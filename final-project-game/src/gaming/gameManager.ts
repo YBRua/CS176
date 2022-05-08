@@ -14,22 +14,29 @@ import { EnemySpawner } from "./enemySpawner";
 import { getSpawnScriptById } from "../data/level/level";
 
 export class GameManager {
+  // level config
   gameLevelId: number;
 
+  // render
   canvasRef: React.RefObject<HTMLCanvasElement>;
   ctx: CanvasRenderingContext2D | null;
 
+  // logic
   gameObjects: Set<GameObject>;
   playerObject: Player | null;
   playerConfig: PlayerConfig | null;
   enemySpawner: EnemySpawner | null;
 
+  // Event loop
+  ended: boolean;
   paused: boolean;
   prevTimeStamp: number;
 
+  // these functions are reserved for React state setters
   setPlayerHPState: (hp: number) => void;
   setScoreState: (score: number) => void;
   togglePauseState: (paused: boolean) => void;
+  toggleEndState: (ended: boolean) => void;
 
   constructor(canvasRef: React.RefObject<HTMLCanvasElement>) {
     this.gameLevelId = -1;
@@ -42,13 +49,26 @@ export class GameManager {
     this.playerObject = null;
     this.enemySpawner = null;
     this.paused = false;
+    this.ended = false;
 
     this.setScoreState = (score) => {};
     this.setPlayerHPState = (hp) => {};
     this.togglePauseState = () => {};
+    this.toggleEndState = () => {};
+  }
+
+  public toggleEndGame() {
+    this.ended = !this.ended;
+    this.prevTimeStamp = 0;
+
+    this.toggleEndState(this.ended);
   }
 
   public togglePause() {
+    /**
+     * This function toggles the pause state of the game.
+     * It also updates the pause React state to invoke the PauseModal.
+     */
     this.paused = !this.paused;
     this.prevTimeStamp = 0;
     if (!this.paused) {
@@ -64,6 +84,11 @@ export class GameManager {
   }
 
   public reset(): void {
+    /**
+     * This function resets the game manager to its initial state
+     * and destroys all game objects.
+     * It is called when the game is reset.
+     */
     this.gameObjects.forEach((gameObject) => {
       gameObject.onDestroy();
     });
@@ -72,11 +97,18 @@ export class GameManager {
     this.enemySpawner = null;
     this.prevTimeStamp = 0;
     this.paused = false;
+    this.ended = false;
+
+    this.toggleEndState(false);
     this.togglePauseState(false);
     this.setScoreState(0);
   }
 
   public init(levelId: number) {
+    /**
+     * This function initializes the game manager.
+     * It should be called before calling run().
+     */
     this.gameLevelId = levelId;
     if (!this.playerConfig) {
       console.error("GameManager: PlayerConfig is null");
@@ -135,7 +167,12 @@ export class GameManager {
   }
 
   public eventLoop(timestamp: number) {
-    if (this.paused) {
+    /**
+     * This function is the main event loop.
+     * It is called every frame.
+     * Logic and rendering updates are performed here.
+     */
+    if (this.paused || this.ended) {
       return;
     }
 
@@ -166,6 +203,10 @@ export class GameManager {
   }
 
   public run() {
+    /**
+     * This function starts the game.
+     * It should be called after calling init().
+     */
     if (!this.ctx) {
       console.error("ctx is null");
     }

@@ -6,6 +6,7 @@ import { PlayerConfig } from "../hooks/usePlayerConfig";
 import { PauseModal } from "../components/PauseModal";
 
 import "../styles/GameView.css";
+import { EndModal } from "../components/EndModal";
 
 type GameViewPropTypes = {
   levelId: number;
@@ -13,15 +14,25 @@ type GameViewPropTypes = {
   gameManager: GameManager;
   playerConfig: PlayerConfig;
   setPlayerHP: (hp: number) => void;
+
+  score: number;
   setScore: (score: number) => void;
 };
 
 export function GameView(props: GameViewPropTypes) {
-  const { levelId, canvas, gameManager, playerConfig, setPlayerHP, setScore } =
-    props;
+  const {
+    levelId,
+    canvas,
+    gameManager,
+    playerConfig,
+    setPlayerHP,
+    score,
+    setScore,
+  } = props;
   let gameViewMain: JSX.Element;
 
   const [isPaused, setIsPaused] = useState(false);
+  const [isEnded, setIsEnded] = useState(false);
 
   const levelConfig = getLevelById(levelId);
   if (!levelConfig) {
@@ -39,6 +50,7 @@ export function GameView(props: GameViewPropTypes) {
     gameManager.setPlayerConfig(playerConfig);
     gameManager.setScoreState = setScore;
     gameManager.setPlayerHPState = setPlayerHP;
+    gameManager.toggleEndState = setIsEnded;
     gameManager.togglePauseState = setIsPaused;
 
     gameManager.init(levelId);
@@ -48,6 +60,11 @@ export function GameView(props: GameViewPropTypes) {
   return (
     <div className="game-view-container">
       <PauseModal isPaused={isPaused} gameManager={gameManager}></PauseModal>
+      <EndModal
+        isEnded={isEnded}
+        gameManager={gameManager}
+        score={score}
+      ></EndModal>
 
       <h2 className="game-view-title">Level {levelId}</h2>
       {gameViewMain}
