@@ -17,9 +17,11 @@ import { GameView } from "./views/GameView";
 
 import "./styles/main.css";
 import { PlayerController } from "./gaming/playerControl";
+import { HelpView } from "./views/HelpView";
 
 export function App() {
-  const [playerConfig, setAircraftId, setWeaponId, setLevelId] = usePlayerConfig();
+  const [playerConfig, setAircraftId, setWeaponId, setLevelId] =
+    usePlayerConfig();
 
   const [playerHP, setPlayerHP] = useState<number>(0);
   const [score, setScore] = useState<number>(0);
@@ -71,15 +73,13 @@ export function App() {
             }
           >
             <Route index element={<IndexView />}></Route>
-            <Route path="shop" element={<h1>Shop</h1>}></Route>
+            <Route path="help" element={<HelpView></HelpView>}></Route>
             <Route path="hangar" element={<HangarView></HangarView>}>
               <Route index element={<HangarIndex></HangarIndex>}></Route>
               <Route
                 path="aircraft"
                 element={
-                  <AircraftView
-                    setAircraftId={setAircraftId}
-                  ></AircraftView>
+                  <AircraftView setAircraftId={setAircraftId}></AircraftView>
                 }
               ></Route>
               <Route
