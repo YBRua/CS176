@@ -46,7 +46,6 @@ export function GameView(props: GameViewPropTypes) {
   };
 
   useEffect(() => {
-    console.log("Called");
     gameManager.setPlayerConfig(playerConfig);
     gameManager.setScoreState = setScore;
     gameManager.setPlayerHPState = setPlayerHP;
