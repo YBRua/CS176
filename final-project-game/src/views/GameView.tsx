@@ -27,7 +27,6 @@ export function GameView(props: GameViewPropTypes) {
 
   useEffect(() => {
     gameManager.setPlayerConfig(playerConfig);
-  
     gameManager.setPlayerHP = setPlayerHP;
     gameManager.init(levelId);
     gameManager.run();

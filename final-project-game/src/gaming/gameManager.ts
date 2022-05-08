@@ -25,6 +25,8 @@ export class GameManager {
   enemySpawner: EnemySpawner | null;
 
   prevTimeStamp: number;
+  paused: boolean;
+
   setPlayerHP: (hp: number) => void;
 
   constructor(canvasRef: React.RefObject<HTMLCanvasElement>) {
@@ -38,6 +40,17 @@ export class GameManager {
     this.playerObject = null;
     this.enemySpawner = null;
     this.setPlayerHP = (hp: number) => {};
+    this.paused = false;
+  }
+
+  public togglePause() {
+    this.paused = !this.paused;
+    this.prevTimeStamp = 0;
+    if (!this.paused) {
+      requestAnimationFrame((t) => {
+        this.eventLoop(t);
+      });
+    }
   }
 
   public setPlayerConfig(playerConfig: PlayerConfig) {
@@ -103,6 +116,10 @@ export class GameManager {
   }
 
   public eventLoop(timestamp: number) {
+    if (this.paused) {
+      return;
+    }
+
     if (this.prevTimeStamp === 0) {
       this.prevTimeStamp = timestamp;
     }
