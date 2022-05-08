@@ -1,6 +1,6 @@
 import { resizeToCanvas } from "../common";
 import { GameManager } from "../gameManager";
-import { BasicEnemy } from "../gameObjects/enemy";
+import { Enemy } from "../gameObjects/enemy";
 import { Faction } from "../gameObjects/gameObject";
 import { PathType } from "../gameObjects/pathGameObject";
 import { Projectile } from "../gameObjects/projectile";
@@ -8,9 +8,9 @@ import { Vector2D } from "../vector";
 
 export class BaseFireControl {
   protected _gameManager: GameManager;
-  protected _enemy: BasicEnemy;
+  protected _enemy: Enemy;
 
-  constructor(gameManager: GameManager, enemy: BasicEnemy) {
+  constructor(gameManager: GameManager, enemy: Enemy) {
     this._gameManager = gameManager;
     this._enemy = enemy;
   }
@@ -40,7 +40,7 @@ export class BaseFireControl {
 }
 
 export class DirectShootFireControl extends BaseFireControl {
-  constructor(gameManager: GameManager, enemy: BasicEnemy) {
+  constructor(gameManager: GameManager, enemy: Enemy) {
     super(gameManager, enemy);
   }
 
@@ -50,7 +50,7 @@ export class DirectShootFireControl extends BaseFireControl {
 }
 
 export class PlayerTrackingFireControl extends BaseFireControl {
-  constructor(gameManager: GameManager, enemy: BasicEnemy) {
+  constructor(gameManager: GameManager, enemy: Enemy) {
     super(gameManager, enemy);
   }
 

@@ -26,11 +26,11 @@ export class CooldownManager {
       setTimeout(() => {
         this._canFire = true;
         this._shotsFired = 0;
-      }, this._longCD * 100);
+      }, this._longCD);
     } else {
       setTimeout(() => {
         this._canFire = true;
-      }, this._shortCD * 100);
+      }, this._shortCD);
     }
   }
 }

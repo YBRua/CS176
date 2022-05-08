@@ -6,7 +6,7 @@ import { SpawnConfigs } from "../data/level/level";
 import { getEnemyWeaponById, getWeaponById } from "../data/weapon/weapon";
 import { resizeToCanvas } from "./common";
 import { GameManager } from "./gameManager";
-import { BasicEnemy } from "./gameObjects/enemy";
+import { Enemy } from "./gameObjects/enemy";
 import { Faction, GameObject } from "./gameObjects/gameObject";
 import { Vector2D } from "./vector";
 
@@ -65,13 +65,14 @@ export class EnemySpawner extends GameObject {
 
         const aircraft = getEnemyAircraftById(1)!;
         const weapon = getEnemyWeaponById(1);
-        const enemy = new BasicEnemy(
+        const enemy = new Enemy(
           index,
+          spawnConfigs[index],
           aircraft,
           weapon,
           gameManager,
           new Vector2D(_randInt(50, gameManager.ctx!.canvas.width - 50), -50),
-          new Vector2D(_randInt(-45, 45), aircraft.speed),
+          new Vector2D(0, aircraft.speed),
           gameManager.ctx!,
           resizeToCanvas(aircraft.canvasWidth),
           resizeToCanvas(aircraft.canvasHeight),

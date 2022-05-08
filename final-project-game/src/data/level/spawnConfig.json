@@ -8,7 +8,9 @@
           "low": 4000,
           "high": 8000
         },
-        "maxCount": 3
+        "maxCount": 3,
+        "fireControl": "Direct",
+        "movement": "XAxis"
       }
     ]
   }

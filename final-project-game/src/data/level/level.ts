@@ -9,7 +9,7 @@ export interface Level {
 
 export interface SpawnConfigs {
   id: number;
-  enemies: SpawnConfig[];
+  enemies: EnemySpawnConfig[];
 }
 
 interface SpawnRateRange {
@@ -17,10 +17,12 @@ interface SpawnRateRange {
   high: number;
 }
 
-interface SpawnConfig {
+export interface EnemySpawnConfig {
   id: number;
   rate: SpawnRateRange;
   maxCount: number;
+  fireControl: string;
+  movement: string;
 }
 
 export function loadLevels(): Level[] {

@@ -5,9 +5,11 @@ export interface Weapon {
   id: number;
   name: string;
   description: string;
-  cooldown: number;
   damage: number;
   projectileSpeed: number;
+  longCD: number;
+  shortCD: number;
+  maxShots: number;
 }
 
 export function loadWeapons(): Weapon[] {

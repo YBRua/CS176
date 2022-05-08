@@ -1,28 +1,30 @@
 import { Aircraft } from "../../data/aircraft/aircraft";
+import { EnemySpawnConfig } from "../../data/level/level";
 import { Weapon } from "../../data/weapon/weapon";
-import { resizeToCanvas, SPEED_SCALE } from "../common";
+import { SPEED_SCALE } from "../common";
 import { CooldownManager } from "../cooldownManager";
 import {
   BaseFireControl,
   DirectShootFireControl,
   PlayerTrackingFireControl,
 } from "../enemy/fireControl";
+import { BaseMovementAI, getMovementAI } from "../enemy/movement";
 import { GameManager } from "../gameManager";
 import { Vector2D } from "../vector";
-import { Faction, GameObject } from "./gameObject";
-import { PathType } from "./pathGameObject";
-import { Projectile } from "./projectile";
+import { Faction } from "./gameObject";
 import { SpriteGameObject } from "./spriteGameObject";
 
-export class BasicEnemy extends SpriteGameObject {
+export class Enemy extends SpriteGameObject {
   aircraft: Aircraft;
   weapon: Weapon;
-  spawnConfigId: number;
+  timerIndex: number;
   private _fireControl: BaseFireControl;
   private _cdManager: CooldownManager;
+  private _movementControl: BaseMovementAI;
 
   constructor(
-    spawnConfigId: number,
+    timerIndex: number,
+    spawnConfig: EnemySpawnConfig,
     aircraft: Aircraft,
     weapon: Weapon,
     gameManager: GameManager,
@@ -46,9 +48,14 @@ export class BasicEnemy extends SpriteGameObject {
     this.aircraft = aircraft;
     this.weapon = weapon;
 
-    this.spawnConfigId = spawnConfigId;
+    this.timerIndex = timerIndex;
     this._fireControl = new PlayerTrackingFireControl(gameManager, this);
-    this._cdManager = new CooldownManager(this.weapon.cooldown, this.weapon.cooldown, 1);
+    this._cdManager = new CooldownManager(
+      this.weapon.shortCD,
+      this.weapon.longCD,
+      this.weapon.maxShots
+    );
+    this._movementControl = getMovementAI(this, spawnConfig.movement);
 
     this.hp = this.aircraft.hp;
     this.isCollidable = true;
@@ -67,15 +74,11 @@ export class BasicEnemy extends SpriteGameObject {
 
   public override update(timeDelta: number): void {
     this.drawCollider();
-    const deltaPos = this.velocity.scale(timeDelta * SPEED_SCALE);
-    const border = this.ctx!.canvas.height / 3;
-    if (this.position.y + deltaPos.y + this.height < border) {
-      this.position = Vector2D.add(this.position, deltaPos);
-    }
+    this.velocity = this._movementControl.update(timeDelta * SPEED_SCALE);
     this._fireProjectile();
   }
 
   public onDestroy(): void {
-    this._gameManager.enemySpawner!.informEnemyDestruction(this.spawnConfigId);
+    this._gameManager.enemySpawner!.informEnemyDestruction(this.timerIndex);
   }
 }

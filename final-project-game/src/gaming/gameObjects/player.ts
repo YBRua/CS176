@@ -54,9 +54,9 @@ export class Player extends SpriteGameObject {
     this.movementState = MovementState.Idle;
 
     this.cdManager = new CooldownManager(
-      this.weapon.cooldown / 4,
-      this.weapon.cooldown,
-      5
+      this.weapon.shortCD,
+      this.weapon.longCD,
+      this.weapon.maxShots
     );
     this.isFiring = false;
 

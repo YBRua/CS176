@@ -3,8 +3,10 @@
     "id": 1,
     "name": "Enemy Kinetic",
     "description": "",
-    "cooldown": 10,
     "damage": 10,
-    "projectileSpeed": 400
+    "projectileSpeed": 400,
+    "longCD": 2500,
+    "shortCD": 300,
+    "maxShots": 3
   }
 ]

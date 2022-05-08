@@ -3,16 +3,20 @@
     "id": 1,
     "name": "Kinetic",
     "description": "Basic",
-    "cooldown": 2.5,
     "damage": 100,
-    "projectileSpeed": 1250
+    "projectileSpeed": 1250,
+    "longCD": 500,
+    "shortCD": 0,
+    "maxShots": 1
   },
   {
     "id": 2,
     "name": "Plasma",
     "description": "Baseline",
-    "cooldown": 5,
     "damage": 20,
-    "projectileSpeed": 750
+    "projectileSpeed": 750,
+    "longCD": 1250,
+    "shortCD": 0,
+    "maxShots": 1
   }
 ]
