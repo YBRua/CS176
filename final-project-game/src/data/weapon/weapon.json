@@ -22,7 +22,7 @@
     "longCD": 500,
     "shortCD": 0,
     "maxShots": 1,
-    "barrels":1,
+    "barrels": 1,
     "width": 8,
     "height": 8,
     "pathType": "circle"
@@ -31,7 +31,7 @@
     "id": 3,
     "name": "EMAC-19-2 Reaper",
     "description": "The EMAC-19-2, nickname 'Reaper', is a twin-mounted electromagnetic autocannon. The EMAC-19-2 has been the primary cannon armament of Springfield Federation military fixed-wing aircrafts. It mounts on two separate turret bases on the wings of the aircraft.",
-    "damage": 20,
+    "damage": 15,
     "projectileSpeed": 1250,
     "longCD": 100,
     "shortCD": 0,
@@ -50,7 +50,7 @@
     "longCD": 900,
     "shortCD": 150,
     "maxShots": 3,
-    "barrels":1,
+    "barrels": 1,
     "width": 8,
     "height": 8,
     "pathType": "circle"
@@ -68,5 +68,19 @@
     "width": 8,
     "height": 18,
     "pathType": "rect"
+  },
+  {
+    "id": 6,
+    "name": "IBrs-VI UPG/3",
+    "description": "The IBrs-VI UPG/3 `Shine Blaster` is an advanced burst ion launcher that fires 3 projectiles at a time. The UPG/3 is the latest production model, with upgrades in its hydro-cooling system.",
+    "damage": 50,
+    "projectileSpeed": 950,
+    "longCD": 600,
+    "shortCD": 0,
+    "maxShots": 1,
+    "barrels": 3,
+    "width": 8,
+    "height": 8,
+    "pathType": "circle"
   }
 ]

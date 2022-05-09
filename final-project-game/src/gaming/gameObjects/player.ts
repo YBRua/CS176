@@ -18,12 +18,122 @@ export enum MovementState {
   Right,
 }
 
+class PlayerFireControl {
+  private _player: Player;
+  private _gameManager: GameManager;
+  constructor(player: Player, gameManager: GameManager) {
+    this._player = player;
+    this._gameManager = gameManager;
+  }
+
+  private _buildProjectile(
+    position: Vector2D,
+    initSpeed: Vector2D | null = null
+  ): Projectile {
+    const player = this._player;
+    const weapon = player.weapon;
+    const projectile = new Projectile(
+      weapon.pathType === "circle" ? PathType.Circle : PathType.Rectangle,
+      position,
+      initSpeed ? initSpeed : new Vector2D(0, -weapon.projectileSpeed),
+      weapon.damage,
+      this._gameManager.ctx!,
+      weapon.width,
+      weapon.height,
+      "white",
+      Faction.Player,
+      this._gameManager
+    );
+
+    return projectile;
+  }
+
+  private _singleShot(): Projectile[] {
+    const player = this._player;
+    const weapon = player.weapon;
+    let projectilePos: Vector2D;
+    if (weapon.pathType === "circle") {
+      projectilePos = player.position.addX(player.width / 2);
+    } else {
+      projectilePos = player.position
+        .addX(player.width / 2)
+        .addX(-player.weapon.width / 2)
+        .addY(-player.weapon.height / 4);
+    }
+    const projectile = this._buildProjectile(projectilePos);
+    return [projectile];
+  }
+
+  private _doubleShot(): Projectile[] {
+    const player = this._player;
+    const weapon = player.weapon;
+    let projectilePos1, projectilePos2: Vector2D;
+    if (weapon.pathType === "circle") {
+      projectilePos1 = player.position.addY(player.height / 2);
+      projectilePos2 = player.position
+        .addX(player.width)
+        .addX(-player.weapon.width)
+        .addY(player.height / 2);
+    } else {
+      projectilePos1 = player.position.addY(player.height / 2);
+      projectilePos2 = player.position
+        .addX(player.width)
+        .addX(-player.weapon.width)
+        .addY(player.height / 2);
+    }
+    const projectile1 = this._buildProjectile(projectilePos1);
+    const projectile2 = this._buildProjectile(projectilePos2);
+    return [projectile1, projectile2];
+  }
+
+  private _burstShot(): Projectile[] {
+    const player = this._player;
+    const weapon = player.weapon;
+    let projectilePos: Vector2D;
+    projectilePos = player.position.addX(player.width / 2);
+    return [
+      this._buildProjectile(
+        projectilePos,
+        new Vector2D(-0.2, 1).normalize().scale(-weapon.projectileSpeed)
+      ),
+      this._buildProjectile(projectilePos),
+      this._buildProjectile(
+        projectilePos,
+        new Vector2D(0.2, 1).normalize().scale(-weapon.projectileSpeed)
+      ),
+    ];
+  }
+
+  public tryFiringProjectile(): void {
+    const gameManager = this._gameManager;
+    const player = this._player;
+    const weapon = player.weapon;
+    if (gameManager.playerObject && player.cdManager.canFire()) {
+      let projectiles: Projectile[];
+      if (weapon.barrels === 1) {
+        projectiles = this._singleShot();
+      } else if (weapon.barrels === 2) {
+        projectiles = this._doubleShot();
+      } else if (weapon.barrels === 3) {
+        projectiles = this._burstShot();
+      } else {
+        projectiles = [];
+      }
+      projectiles.forEach((projectile) => {
+        gameManager.gameObjects.add(projectile);
+      });
+      player.cdManager.step();
+    }
+  }
+}
+
 export class Player extends SpriteGameObject {
   aircraft: Aircraft;
   weapon: Weapon;
   movementState: MovementState;
   isFiring: boolean;
   cdManager: CooldownManager;
+  fireControl: PlayerFireControl;
 
   constructor(
     aircraft: Aircraft,
@@ -58,6 +168,7 @@ export class Player extends SpriteGameObject {
       this.weapon.longCD,
       this.weapon.maxShots
     );
+    this.fireControl = new PlayerFireControl(this, gameManager);
     this.isFiring = false;
 
     this.hp = this.aircraft.hp;
@@ -96,64 +207,6 @@ export class Player extends SpriteGameObject {
     }
   }
 
-  private _buildProjectile(position: Vector2D): Projectile {
-    const weapon = this.weapon;
-    const projectile = new Projectile(
-      weapon.pathType === "circle" ? PathType.Circle : PathType.Rectangle,
-      position,
-      new Vector2D(0, -this.weapon.projectileSpeed),
-      this.weapon.damage,
-      this._gameManager.ctx!,
-      this.weapon.width,
-      this.weapon.height,
-      "white",
-      Faction.Player,
-      this._gameManager
-    );
-
-    return projectile;
-  }
-
-  private _fireProjectile(): void {
-    const gameManager = this._gameManager;
-    const weapon = this.weapon;
-    if (gameManager.playerObject && this.cdManager.canFire()) {
-      if (weapon.barrels === 1) {
-        let projectilePos: Vector2D;
-        if (weapon.pathType === "circle") {
-          projectilePos = this.position.addX(this.width / 2);
-        } else {
-          projectilePos = this.position
-            .addX(this.width / 2)
-            .addX(- this.weapon.width / 2)
-            .addY(-this.weapon.height / 4);
-        }
-        const projectile = this._buildProjectile(projectilePos);
-        gameManager.gameObjects.add(projectile);
-      } else {
-        let projectilePos1, projectilePos2: Vector2D;
-        if (weapon.pathType === "circle") {
-          projectilePos1 = this.position.addY(this.height / 2);
-          projectilePos2 = this.position
-            .addX(this.width)
-            .addX(-this.weapon.width)
-            .addY(this.height / 2);
-        } else {
-          projectilePos1 = this.position.addY(this.height / 2);
-          projectilePos2 = this.position
-            .addX(this.width)
-            .addX(-this.weapon.width)
-            .addY(this.height / 2);
-        }
-        const projectile1 = this._buildProjectile(projectilePos1);
-        const projectile2 = this._buildProjectile(projectilePos2);
-        gameManager.gameObjects.add(projectile1);
-        gameManager.gameObjects.add(projectile2);
-      }
-      this.cdManager.step();
-    }
-  }
-
   public setIsFiring(isFiring: boolean): void {
     this.isFiring = isFiring;
   }
@@ -172,7 +225,7 @@ export class Player extends SpriteGameObject {
     }
 
     if (this.isFiring) {
-      this._fireProjectile();
+      this.fireControl.tryFiringProjectile();
     }
   }
 }
