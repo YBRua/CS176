@@ -61,7 +61,7 @@
     "description": "The Super ElectroMagnetic Gun (SEMG) SEMG-128 is a spinal-mounted 128mm coilgun. It is originally designed for attacking gunships and light vessels. It has extremely high damage and high velocity. However, it also requires a long cooldown.",
     "damage": 200,
     "projectileSpeed": 4500,
-    "longCD": 2500,
+    "longCD": 1500,
     "shortCD": 0,
     "maxShots": 1,
     "barrels": 1,
