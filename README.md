@@ -13,4 +13,4 @@ Homework and Project repository for *CS176 Modern Frontend Application Developme
 
 ## Project
 
-- **Final Project**: Final project. Another basic game with React and Typescript. [Link (Repository)](final-project-game/). [Link (Website)]([https://aircombat](https://aircombat.ybirua.top/))
+- **Final Project**: Final project. Another basic game with React and Typescript. [Link (Repository)](final-project-game/). [Link (Website)](https://aircombat.ybirua.top/)
