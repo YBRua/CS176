@@ -6,7 +6,18 @@
     "image": "EnemyFighter",
     "description": "Interceptor description",
     "speed": 75,
-    "hp": 150,
+    "hp": 100,
+    "canvasWidth": 178,
+    "canvasHeight": 166
+  },
+  {
+    "id": 2,
+    "name": "ImperialFighterHeavy",
+    "nickname": "ImperialFighterHeavy",
+    "image": "EnemyFighter",
+    "description": "Interceptor description",
+    "speed": 75,
+    "hp": 175,
     "canvasWidth": 178,
     "canvasHeight": 166
   }

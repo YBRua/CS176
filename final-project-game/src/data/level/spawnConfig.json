@@ -12,7 +12,7 @@
         "fireControl": "Direct",
         "movement": "XAxis",
         "weaponId": 1,
-        "aircraftId": 1
+        "aircraftId": 2
       },
       {
         "id": 2,
@@ -35,9 +35,9 @@
         "id": 1,
         "rate": {
           "low": 1000,
-          "high": 4000
+          "high": 8000
         },
-        "maxCount": 2,
+        "maxCount": 3,
         "fireControl": "Direct",
         "movement": "XAxis",
         "weaponId": 4,
@@ -53,7 +53,7 @@
         "fireControl": "Tracking",
         "movement": "Direct",
         "weaponId": 2,
-        "aircraftId": 1
+        "aircraftId": 2
       },
       {
         "id": 3,
@@ -65,7 +65,7 @@
         "fireControl": "Trishot",
         "movement": "XAxis",
         "weaponId": 1,
-        "aircraftId": 1
+        "aircraftId": 2
       },
       {
         "id": 4,
