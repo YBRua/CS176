@@ -13,7 +13,10 @@ export function HelpView() {
       </div>
       <div className="text-sm py-8 w-10/12">
         <ul className="flex flex-col gap-4">
-          <li>&gt; Use "A" (or LeftArrow) and "D" (or RightArrow) to move your aircraft</li>
+          <li>
+            &gt; Use "A" (or LeftArrow) and "D" (or RightArrow) to move your
+            aircraft
+          </li>
           <li>&gt; Use "SPACE" to fire your weapon</li>
           <li>&gt; Use "ESC" during game to pause the game</li>
           <li></li>
@@ -22,7 +25,27 @@ export function HelpView() {
           <li></li>
           <li>&gt; You can start a new game in LEVELS</li>
           <li>&gt; Destroy enemy aircraft to get high scores</li>
-          <li>&gt; This game does not have an end. Try to survive as long as possible</li>
+          <li>
+            &gt; This game does not have an end. Try to survive as long as
+            possible
+          </li>
+          <li></li>
+          <li className="underline font-bold">CREDITS</li>
+          <li>
+            Free BGM and SFX from{" "}
+            <a className=" underline" href="https://wingless-seraph.net/">
+              Wingless Seraph
+            </a>
+            ,{" "}
+            <a className="underline" href="https://mixkit.co/">
+              Mixkit
+            </a>{" "}
+            and{" "}
+            <a className="underline" href="https://www.fesliyanstudios.com">
+              Fesliyanstudios
+            </a>
+            .
+          </li>
         </ul>
       </div>
     </div>

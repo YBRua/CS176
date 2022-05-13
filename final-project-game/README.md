@@ -41,6 +41,19 @@ yarn install
 yarn dev
 ```
 
+#### 音效与声音文件
+
+由于音效、背景音乐网站的 Liscense 限制，本 Github 仓库中不包含部署时使用的音频和音效源文件，请自行下载并放置在 `./assets/audio/` 目录下。
+
+- [动能武器音效](https://www.fesliyanstudios.com/soundeffects-download.php?id=7255)
+  - From [fesliyanstudios](https://www.fesliyanstudios.com/royalty-free-sound-effects-download/gun-shooting-300)
+- [等离子发射器音效](https://assets.mixkit.co/sfx/download/mixkit-short-laser-gun-shot-1670.wav)
+  - From [mixkit](https://mixkit.co/free-sound-effects/gun/)
+- [重武器音效](https://assets.mixkit.co/sfx/download/mixkit-laser-weapon-shot-1681.wav)
+  - From [mixkit](https://mixkit.co/free-sound-effects/gun/)
+- [BGM](https://wingless-seraph.net/material/Es-STAGE2.mp3)
+  - From [Wingless Seraph](https://wingless-seraph.net/)
+
 ### 特性
 
 #### 框架与依赖库

@@ -1,7 +1,6 @@
-import { Aircraft, getAircraftById } from "../../data/aircraft/aircraft";
+import { Aircraft } from "../../data/aircraft/aircraft";
 import { Weapon } from "../../data/weapon/weapon";
-import { PlayerConfig } from "../../hooks/usePlayerConfig";
-import { resizeToCanvas, SPEED_SCALE } from "../common";
+import { SPEED_SCALE } from "../common";
 import { CooldownManager } from "../cooldownManager";
 import { GameManager } from "../gameManager";
 import { Vector2D } from "../vector";
@@ -9,6 +8,7 @@ import { Faction } from "./gameObject";
 import { PathType } from "./pathGameObject";
 import { Projectile } from "./projectile";
 import { SpriteGameObject } from "./spriteGameObject";
+import { AudioManager, getWeaponSfx } from "../audioManager";
 
 const PLAYER_ID = 0;
 
@@ -21,9 +21,11 @@ export enum MovementState {
 class PlayerFireControl {
   private _player: Player;
   private _gameManager: GameManager;
+  private _sfxManager: AudioManager;
   constructor(player: Player, gameManager: GameManager) {
     this._player = player;
     this._gameManager = gameManager;
+    this._sfxManager = getWeaponSfx(this._player.weapon);
   }
 
   private _buildProjectile(
@@ -123,6 +125,7 @@ class PlayerFireControl {
         gameManager.gameObjects.add(projectile);
       });
       player.cdManager.step();
+      this._sfxManager.play();
     }
   }
 }

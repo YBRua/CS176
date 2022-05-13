@@ -3,7 +3,7 @@ import { GameObject } from "./gameObjects/gameObject";
 import { Vector2D } from "./vector";
 
 import "../assets/aircraft/I5M3.png";
-import "../assets/aircraft/F-168.png"
+import "../assets/aircraft/F-168.png";
 import { Player } from "./gameObjects/player";
 import { PlayerConfig } from "../hooks/usePlayerConfig";
 import {
@@ -13,6 +13,7 @@ import {
 import { getWeaponById } from "../data/weapon/weapon";
 import { EnemySpawner } from "./enemySpawner";
 import { getSpawnScriptById } from "../data/level/level";
+import { AudioManager, getBGMPlayer } from "./audioManager";
 
 export class GameManager {
   // level config
@@ -32,6 +33,9 @@ export class GameManager {
   ended: boolean;
   paused: boolean;
   prevTimeStamp: number;
+
+  // bgm
+  private _bgm: AudioManager;
 
   // these functions are reserved for React state setters
   setPlayerHPState: (hp: number) => void;
@@ -56,6 +60,8 @@ export class GameManager {
     this.setPlayerHPState = (hp) => {};
     this.togglePauseState = () => {};
     this.toggleEndState = () => {};
+
+    this._bgm = getBGMPlayer();
   }
 
   public toggleEndGame() {
@@ -103,6 +109,9 @@ export class GameManager {
     this.toggleEndState(false);
     this.togglePauseState(false);
     this.setScoreState(0);
+
+    this._bgm.pause();
+    this._bgm.reset();
   }
 
   public init(levelId: number) {
@@ -203,7 +212,7 @@ export class GameManager {
     this.prevTimeStamp = timestamp;
   }
 
-  public run() {
+  public async run() {
     /**
      * This function starts the game.
      * It should be called after calling init().
@@ -211,6 +220,9 @@ export class GameManager {
     if (!this.ctx) {
       console.error("ctx is null");
     }
+
+    this._bgm.loop();
+
     requestAnimationFrame((t) => {
       this.eventLoop(t);
     });
