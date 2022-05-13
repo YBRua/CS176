@@ -7,7 +7,6 @@ export interface PlayerConfig {
 }
 
 function save(config: PlayerConfig): void {
-  console.log(config);
   localStorage.setItem("simple-air-combat", JSON.stringify(config));
 }
 
@@ -58,7 +57,6 @@ export function usePlayerConfig(): [
       ...player,
       levelId: id,
     });
-    console.log("setLevelId", id);
     save({
       ...player,
       levelId: id,
