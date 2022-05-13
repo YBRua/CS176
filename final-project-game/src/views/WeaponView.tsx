@@ -15,7 +15,7 @@ export function WeaponView(props: WeaponViewPropTypes) {
   const [openedModalId, setOpenedModalId] = useState(-1);
   return (
     <div className="w-11/12 py-2">
-      <ul className="flex flex-col gap-2">
+      <ul className="flex flex-col gap-2 overflow-y-scroll max-h-list scrollbar-hidden">
         {weapons.map((weapon) => (
           <li key={weapon.id}>
             <WeaponItem

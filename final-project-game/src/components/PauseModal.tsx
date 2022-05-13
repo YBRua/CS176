@@ -24,12 +24,16 @@ const customStyles: Styles = {
     position: "absolute",
     left: "30%",
     right: "30%",
-    top: "20%",
-    bottom: "20%",
+    top: "10%",
+    bottom: "10%",
     border: "2px solid #fff",
     background: "#000",
     overflow: "auto",
     WebkitOverflowScrolling: "touch",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center"
   },
 };
 
@@ -55,7 +59,7 @@ export function PauseModal(props: PauseModalPropTypes) {
 
   return (
     <ReactModal isOpen={props.isPaused} style={customStyles}>
-      <h2 className="text-center text-5xl my-16 text-white">GAME PAUSED</h2>
+      <h2 className="text-center text-5xl my-8 text-white">GAME PAUSED</h2>
       <div className=" flex flex-col gap-2 justify-center align-middle mt-16">
         <HoverGlowButton
           btnText="Resume"

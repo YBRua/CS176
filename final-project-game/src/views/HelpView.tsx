@@ -4,15 +4,32 @@ export function HelpView() {
   return (
     <div className="flex items-center flex-col">
       <h3 className="py-8 w-11/12 text-center">Help</h3>
-      <div className="flex flex-row w-11/12 items-center justify-center py-2 border-y-2 border-zinc-100">
+      <div className="flex flex-row w-11/12 items-center justify-center py-1 border-y-2 border-zinc-100">
         <HoverGlowLink
           to="/"
           btnText="Back"
           extraClassName="text-xl"
         ></HoverGlowLink>
       </div>
-      <div className="text-sm py-8 w-10/12">
-        <ul className="flex flex-col gap-4">
+      <div className="text-sm py-4 w-10/12">
+        <ul className="flex flex-col gap-4 scrollbar-hidden max-h-list overflow-y-scroll">
+          <li className="underline font-bold">CREDITS</li>
+          <li>
+            Free BGM and SFX from{" "}
+            <a className=" underline" href="https://wingless-seraph.net/">
+              Wingless Seraph
+            </a>
+            ,{" "}
+            <a className="underline" href="https://mixkit.co/">
+              Mixkit
+            </a>{" "}
+            and{" "}
+            <a className="underline" href="https://www.fesliyanstudios.com">
+              Fesliyanstudios
+            </a>
+            .
+          </li>
+          <li className="underline font-bold">HELP</li>
           <li>
             &gt; Use "A" (or LeftArrow) and "D" (or RightArrow) to move your
             aircraft
@@ -30,22 +47,6 @@ export function HelpView() {
             possible
           </li>
           <li></li>
-          <li className="underline font-bold">CREDITS</li>
-          <li>
-            Free BGM and SFX from{" "}
-            <a className=" underline" href="https://wingless-seraph.net/">
-              Wingless Seraph
-            </a>
-            ,{" "}
-            <a className="underline" href="https://mixkit.co/">
-              Mixkit
-            </a>{" "}
-            and{" "}
-            <a className="underline" href="https://www.fesliyanstudios.com">
-              Fesliyanstudios
-            </a>
-            .
-          </li>
         </ul>
       </div>
     </div>

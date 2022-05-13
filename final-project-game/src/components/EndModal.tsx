@@ -31,6 +31,10 @@ const customStyles: Styles = {
     background: "#000",
     overflow: "auto",
     WebkitOverflowScrolling: "touch",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center"
   },
 };
 
@@ -59,14 +63,14 @@ export function EndModal(props: EndModalPropTypes) {
 
   return (
     <ReactModal isOpen={props.isEnded} style={customStyles}>
-      <h2 className="text-center text-5xl my-16 text-white">GAME OVER</h2>
-      <h3 className="text-center text-xl my-8 text-white">
+      <h2 className="text-center text-5xl my-8 text-white">GAME OVER</h2>
+      <h3 className="text-center text-xl my-4 text-white">
         Your Score: {props.score} | High Score: {highScore}
       </h3>
       {props.score >= highScore ? (
-        <h3 className="text-center text-xl my-8 text-white">NEW HIGH SCORE!</h3>
+        <h3 className="text-center text-xl my-4 text-white">NEW HIGH SCORE!</h3>
       ) : null}
-      <div className=" flex flex-col gap-2 justify-center align-middle mt-16">
+      <div className=" flex flex-col gap-2 justify-center align-middle mt-8">
         <HoverGlowButton
           btnText="Restart"
           onClick={restartGame}
