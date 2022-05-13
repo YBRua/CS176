@@ -24,3 +24,8 @@ dist-ssr
 *.sw?
 
 .VSCodeCounter/
+
+# sfx and bgm
+*.mp3
+*.wav
+*.ogg
